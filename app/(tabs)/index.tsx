@@ -1,5 +1,4 @@
-import {Text, View, Pressable} from 'react-native';
-import { styles } from '@/components/styles';
+import {Text, View, Pressable, StyleSheet} from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 
 export default function(){
@@ -19,7 +18,7 @@ export default function(){
                 <View style={styles.SensorsContainer}><Text>S</Text></View>
             </View>
             <View style={styles.container3}>
-              <Pressable style={styles.roomButton}><Text> Habitación</Text></Pressable>
+              <Pressable style={styles.roomButton}><Text style={styles.roomButton}> Habitación</Text></Pressable>
               <View>
                   <View>
                       <View  style={styles.triggerContainer}>
@@ -43,3 +42,81 @@ export default function(){
         
     );
 }
+
+
+const styles = StyleSheet.create ({
+    Title: {
+        fontSize: 28,
+        color: 'green',
+    },
+    mainContainer: {
+        marginVertical: 0,
+        marginHorizontal:0,
+        flex: 1,
+        padding: 5,
+        borderColor: 'red',
+        borderWidth: 2,
+        backgroundColor: "#0B2447"
+
+    },
+    container1:{
+        borderColor: "#007AA2",
+        borderWidth: 2,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        
+        
+       
+        
+
+    },
+    container2:{
+        flexDirection: 'row',
+        justifyContent: 'center',
+        borderColor: 'black',
+        borderWidth: 2,
+        
+
+    },
+    SensorsContainer:{
+        margin: 5,
+        padding: 5,
+        justifyContent: 'center',
+        height: 65,
+        borderWidth: 2,
+        borderRadius: 5,
+        flex: 1,
+        backgroundColor: "#A5D7E8",
+
+    },
+    container3:{
+        borderColor: 'blue',
+        borderWidth: 2,
+        justifyContent: 'center',
+
+    },
+    roomButton:{
+        fontSize: 28,
+        justifyContent:'center',
+        backgroundColor: "#19376D",
+        textAlign: 'center',
+        paddingVertical: 5,
+        marginBottom: 10,
+        borderRadius: 5,
+        
+        
+
+    },
+    triggerContainer:{
+        justifyContent:'center',
+        borderWidth: 2,
+        borderColor: 'orange',
+        textAlign: 'center',
+        paddingVertical: 15,
+        backgroundColor: "#576CBC"
+    },
+    triggerContainerText:{
+        justifyContent:'center',
+        textAlign: 'center',
+    }
+})
