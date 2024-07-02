@@ -2,7 +2,8 @@
 import { Text,View,TextInput,StyleSheet, Pressable  } from "react-native";
 import React, { useState } from "react";
 import {LinearGradient} from 'expo-linear-gradient';
-
+import { createStackNavigator } from "@react-navigation/stack";
+import { Stack } from "expo-router";
 
 
 export default function(){
@@ -12,6 +13,10 @@ export default function(){
 
     return(
         <View style={styles.loginContainer} >
+            <Stack.Screen
+                options={{ headerShown: false }}
+            />        
+            
             <LinearGradient 
                 colors={['#0B2447', '#576CBC']} 
                 start={{

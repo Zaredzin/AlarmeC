@@ -1,9 +1,16 @@
 import {Text, View, Pressable, StyleSheet} from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
+import { Stack } from 'expo-router';
+
 
 export default function(){
     return(
+        
         <View style={styles.mainContainer}>
+            <Stack.Screen
+
+                options={{ headerShown: false }}
+            />
             <View style={styles.container1}>
 
                 <AntDesign name="check" size={28} color="green" />
