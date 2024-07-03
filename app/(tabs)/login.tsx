@@ -69,7 +69,10 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         backgroundColor: 'rgba(0,0,0,0.6)',
 
-        marginHorizontal: "auto",
+        width: "94%",
+        height: "90%",
+
+        alignSelf:"center",
         borderStartColor: 'rgba(0,112,255,0.5)',
         borderTopColor: 'rgba(0,112,255,0.5)',
         borderEndColor: 'rgba(0,112,255,0.2)',
@@ -119,7 +122,7 @@ const styles = StyleSheet.create({
 
     },
     inputText:{
-        borderColor: 'black',
+        borderColor: '#19376D',
         fontSize:20,
         borderRadius: 5,
         borderBottomWidth: 2,
@@ -128,6 +131,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 20,
         marginVertical: 10,
         paddingHorizontal: 80   ,
+        paddingVertical: 4,
         backgroundColor: 'rgba(0,0,0,0.5)',
         color: "#fff"
         
@@ -143,14 +147,13 @@ const styles = StyleSheet.create({
         textAlign: "center",
         justifyContent: "center",
         fontSize: 28,
-        borderWidth: 1,
-        borderColor: "#fff",
+
         marginHorizontal: "auto",
         marginTop: 30,
         paddingVertical: 5,
         paddingHorizontal: 30,
         borderRadius: 5,
-        backgroundColor: 'rgba(0, 197, 255,1)'
+        backgroundColor: '#576CBC'
     },
     
 })

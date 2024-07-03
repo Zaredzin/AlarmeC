@@ -70,11 +70,7 @@ const styles = StyleSheet.create ({
         borderColor: "#007AA2",
         borderWidth: 2,
         flexDirection: 'row',
-        justifyContent: 'center',
-        
-        
-       
-        
+        justifyContent: 'center',  
 
     },
     container2:{
@@ -83,7 +79,6 @@ const styles = StyleSheet.create ({
         borderColor: 'black',
         borderWidth: 2,
         
-
     },
     SensorsContainer:{
         margin: 5,
@@ -111,8 +106,6 @@ const styles = StyleSheet.create ({
         marginBottom: 10,
         borderRadius: 5,
         
-        
-
     },
     triggerContainer:{
         justifyContent:'center',
