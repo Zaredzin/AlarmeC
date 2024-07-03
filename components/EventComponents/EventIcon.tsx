@@ -13,6 +13,7 @@ export default function EventIcon({icon, colorI}){
 const styles = StyleSheet.create({
     iconStyle:{
         marginHorizontal: 10,
+        alignSelf:"center"
         
     }
 })

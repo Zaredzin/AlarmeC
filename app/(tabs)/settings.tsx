@@ -1,16 +1,15 @@
-import {Text} from "react-native";
-import { View } from "react-native";
-import { Stack } from "expo-router";
+import {Text, View, Pressable, StyleSheet} from 'react-native';
+import { AntDesign } from '@expo/vector-icons';
+import { Stack } from 'expo-router';
 export default function(){
-  return(
-    <View>
-      <Stack.Screen options={{ headerShown: false }}/>
-      <View>
-        <Text>PITOOOO</Text>
-      </View>       
-
-    </View>
-    
-
-  );
+    return(
+        <View>
+            <Stack.Screen
+                options={{ headerShown: false }}
+            />        
+            <Text>Pito</Text>
+        </View>
+        
+        
+    )
 }
