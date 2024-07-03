@@ -1,4 +1,4 @@
-import { Text,View } from "react-native";
+import { Pressable, Text,View } from "react-native";
 import { Stack } from "expo-router";
 import EventView from "@/components/EventComponents/EventView";
 import { StyleSheet } from "react-native";
@@ -7,67 +7,148 @@ import EventIcon from "@/components/EventComponents/EventIcon";
 
 export default function (){
     return(
-
-    <View style={styles.mainContainer}>
-      <Stack.Screen options={{ headerShown: false }}/>
-      <EventView>
-        <View style={styles.container}>
-            <EventHeader>
-              <EventIcon icon="warning" colorI='orange'/>
-              
-              Low oxygen level
-              
-            </EventHeader>
-            <View>
-              <Text>
-                Date: 12/07/2024
-                Hour: 20:38
-              </Text>
-            </View>
-            
+      <View>
+        <Stack.Screen options={{ headerShown: false }}/>
+        <View style={styles.monthView}>
+          <Pressable>
+            <Text style={{fontSize: 32, textAlign:"center",fontWeight:"bold", color:"white"}}>Noviembre</Text>
+          </Pressable>
+          
         </View>
-      </EventView>
-      <EventView>
-        <View style={styles.container}>
-            <EventHeader>
-              <EventIcon icon="checkcircleo" colorI="green"/>
-              
-              Low oxygen level
-              
-            </EventHeader>
-            <View>
-              <Text>
-                Date: 12/07/2024
-                Hour: 20:38
-              </Text>
-            </View>
-            
-        </View>
-      </EventView>
+          <View style={styles.mainContainer}>
+              <View>
+                <Pressable style={styles.dayContainer}>
+                  <Text style={styles.day}>Martes 17</Text>
+                  <EventIcon icon="down" colorI="gray" ></EventIcon>
+                </Pressable>
+                
+                <View style={styles.eventContainer}>
+                  <Text style={styles.timeContainer}>10:00 am</Text>
+                  <View style={styles.alertMainContainer}>
+                    <View style={styles.line}></View>
+                    <View style={styles.alertContainer}>
+                    <Text>pito</Text>
+                    </View>
+                    
+                    <View style={styles.line}></View>
 
-    </View>
+                  </View>
+                  
+                </View>
+                <View style={styles.eventContainer}>
+                  <Text style={styles.timeContainer}>10:00 am</Text>
+                  <View style={styles.alertMainContainer}>
+                    <View style={styles.line}></View>
+                    <View style={styles.alertContainer}>
+                    <Text>pito</Text>
+                    </View>
+                    
+                    <View style={styles.line}></View>
 
+                  </View>
+                  
+                </View>
+                <View style={styles.eventContainer}>
+                  <Text style={styles.timeContainer}>10:00 am</Text>
+                  <View style={styles.alertMainContainer}>
+                    <View style={styles.line}></View>
+                    <View style={styles.alertContainer}>
+                    <Text>pito</Text>
+                    </View>
+                    
+                    <View style={styles.line}></View>
+
+                  </View>
+                  
+                </View>
+                <View style={styles.eventContainer}>
+                  <Text style={styles.timeContainer}>10:00 am</Text>
+                  <View style={styles.alertMainContainer}>
+                    <View style={styles.line}></View>
+                    <View style={styles.alertContainer}>
+                    <Text>pito</Text>
+                    </View>
+                    
+                    <View style={styles.line}></View>
+
+                  </View>
+                  
+                </View>
+                <View style={styles.eventContainer}>
+                  <Text style={styles.timeContainer}>10:00 am</Text>
+                  <View style={styles.alertMainContainer}>
+                    <View style={styles.line}></View>
+                    <View style={styles.alertContainer}>
+                    <Text>pito</Text>
+                    </View>
+                    
+                    <View style={styles.line}></View>
+
+                  </View>
+                  
+                </View>
+                
+
+              </View>
+          </View>
+      </View>
     )
-}
-
-const styles = StyleSheet.create ({
-  mainContainer:{
-    borderColor:"red",
-    borderWidth: 2,
-    borderRadius: 10,
-    height: "90%",
-    marginVertical: "auto",
-    alignContent:"center",
-    alignSelf:"center",
-    padding: 30,
-    backgroundColor:"#0B2447"
-
-  },
-  container:{
-    marginHorizontal: "auto",
-
-  },
-  eventText:{
-    fontSize: 18,
   }
-})
+
+  const styles =StyleSheet.create({
+    monthView:{
+      backgroundColor: "black",
+      borderBottomRightRadius: 8,
+      borderBottomLeftRadius: 8,
+      paddingVertical:5,
+    },
+    dayContainer:{
+      flexDirection: "row",
+      //borderColor:"red",
+      //borderWidth: 2,
+      
+    },
+    day:{
+      fontSize: 24,
+      fontWeight: "bold",
+      marginBottom: 10,
+      marginTop: 15,
+    },
+
+    mainContainer:{
+      marginHorizontal: 10,
+      //borderColor: "black",
+      //borderWidth: 2,
+    },
+    eventContainer:{
+      //borderWidth: 2,
+      //borderColor: "blue",
+      paddingHorizontal: 10,
+      flexDirection: "row"
+    },
+    timeContainer:{
+      //borderColor: "red",
+      //borderWidth: 2,
+      height:100,
+
+    },
+    alertMainContainer:{
+      //borderColor: "black",
+      //borderWidth: 1,
+      flex:1,
+      paddingHorizontal: 10,
+    },
+    alertContainer:{
+      backgroundColor: "orange",
+      padding: 8,
+      borderRadius: 15,
+      flex:1,
+    },
+    line:{
+      borderBottomColor: "gray",
+      borderBottomWidth:1,
+      marginVertical: 5,
+    }
+    
+  })
+    

@@ -21,8 +21,6 @@ export default function(){
                 <View style={styles.SensorsContainer}><Text>Temp</Text></View>
                 <View style={styles.SensorsContainer}><Text>Oxygen</Text></View>
                 <View style={styles.SensorsContainer}><Text>Humidity</Text></View>
-                <View style={styles.SensorsContainer}><Text>Temp</Text></View>
-                <View style={styles.SensorsContainer}><Text>S</Text></View>
             </View>
             <View style={styles.container3}>
               <Pressable style={styles.roomButton}><Text style={styles.roomButton}> Habitación</Text></Pressable>
@@ -86,7 +84,7 @@ const styles = StyleSheet.create ({
         justifyContent: 'center',
         height: 65,
         borderWidth: 2,
-        borderRadius: 5,
+        borderRadius: 12,
         flex: 1,
         backgroundColor: "#A5D7E8",
 

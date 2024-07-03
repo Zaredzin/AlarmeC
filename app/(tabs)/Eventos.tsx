@@ -101,6 +101,7 @@ export default function (){
       borderBottomRightRadius: 8,
       borderBottomLeftRadius: 8,
       paddingVertical:5,
+      elevation: 3,
     },
     dayContainer:{
       flexDirection: "row",
@@ -113,6 +114,12 @@ export default function (){
       fontWeight: "bold",
       marginBottom: 10,
       marginTop: 15,
+
+      textShadowColor: "gray",
+      textShadowOffset: {
+        width: 1, height: 1
+      },
+      textShadowRadius: 3
     },
 
     mainContainer:{
@@ -130,6 +137,12 @@ export default function (){
       //borderColor: "red",
       //borderWidth: 2,
       height:100,
+      textShadowColor: "gray",
+      textShadowOffset: {
+        width: 1, height: 1
+      },
+      textShadowRadius: 3
+
 
     },
     alertMainContainer:{
@@ -142,12 +155,14 @@ export default function (){
       backgroundColor: "orange",
       padding: 8,
       borderRadius: 15,
-      flex:1
+      flex:1,
+      elevation: 5,
     },
     line:{
       borderBottomColor: "gray",
       borderBottomWidth:1,
       marginVertical: 5,
+      elevation: 2,
     }
     
   })
