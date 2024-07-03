@@ -15,12 +15,22 @@ const styles = StyleSheet.create ({
     eventContainer:{
 
         justifyContent: "center",
+        backgroundColor: "white",
         borderWidth: 2,
+        borderRadius: 10,
+        marginBottom: 5,
         borderColor: "black",
         marginHorizontal: "auto",
         paddingHorizontal: 20,
         paddingVertical:20,
         marginVertical: 5,
+        shadowColor: "black",
+        shadowOffset: {
+            width: 1,
+            height: 5
+        },
+        shadowRadius: 10,
+        shadowOpacity: 0.8,
         
     }
 })
