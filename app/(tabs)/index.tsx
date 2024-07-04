@@ -1,6 +1,8 @@
 import {Text, View, Pressable, StyleSheet} from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import { Stack } from 'expo-router';
+import EventIcon from '@/components/EventComponents/EventIcon';
+import TriggerIcon from '@/components/indexComponents/TriggerIcon';
 
 
 export default function(){
@@ -18,29 +20,42 @@ export default function(){
 
             </View>
             <View style={styles.container2}>
-                <View style={styles.SensorsContainer}><Text>Temp</Text></View>
-                <View style={styles.SensorsContainer}><Text>Oxygen</Text></View>
-                <View style={styles.SensorsContainer}><Text>Humidity</Text></View>
+                <View style={styles.container2e}>
+                    <View style={styles.SensorsContainer}><Text>Temp</Text></View>
+                    <View style={styles.SensorsContainer}><Text>Oxygen</Text></View>
+                </View>
+                <View style={styles.container2e}>
+                    <View style={styles.SensorsContainer}><Text>Humidity</Text></View>
+                    <EventIcon icon="frown" size={44} colorI="orange" />
+                </View>
+                
+                
             </View>
+            
             <View style={styles.container3}>
               <Pressable style={styles.roomButton}><Text style={styles.roomButton}> Habitación</Text></Pressable>
               <View>
                   <View>
                       <View  style={styles.triggerContainer}>
                           <Text style={styles.triggerContainerText}>Puerta cocina</Text>
+                          <Pressable style={styles.triggerButton}>
+                            <TriggerIcon icon={"door-closed"} size={54} colorI={"black"}/>
+                            <Text style={styles.iconText}>Cerrar</Text>
+                          </Pressable>
+                          
                       </View>
                       <View  style={styles.triggerContainer}>
                           <Text style={styles.triggerContainerText}>Ventana cocina</Text>
+                          <Pressable style={[styles.triggerButton,]}>
+                            <TriggerIcon icon={"door-open"} size={54} colorI={"black"}/>
+                            <Text style={styles.iconText}>Abrir</Text>
+                          </Pressable>
+                          
                       </View>
                   </View>
               </View>
             </View>
-            <View>
-                <Text>
-                    pito
-                </Text>
-            </View>
-            
+
 
 
         </View>
@@ -61,7 +76,7 @@ const styles = StyleSheet.create ({
         padding: 5,
         borderColor: 'red',
         borderWidth: 2,
-        backgroundColor: "#f5f7fa"
+        backgroundColor: "#d7dbdd" ,
 
     },
     container1:{
@@ -69,52 +84,89 @@ const styles = StyleSheet.create ({
         borderWidth: 2,
         flexDirection: 'row',
         justifyContent: 'center',  
+        borderRadius: 15,
+        backgroundColor: "#f5f7fa",
 
     },
     container2:{
+        marginTop: 10,
         flexDirection: 'row',
         justifyContent: 'center',
-        borderColor: 'black',
-        borderWidth: 2,
+        backgroundColor: "#f5f7fa",
+        //borderColor: 'black',
+        //borderWidth: 2,
+        borderRadius: 15,
+        paddingHorizontal:16,
+        paddingVertical: 12,
         
+    },
+    container2e:{
+        flex:1
+
     },
     SensorsContainer:{
         margin: 5,
         padding: 5,
         justifyContent: 'center',
         height: 65,
-        borderWidth: 2,
+        //borderWidth: 2,
         borderRadius: 12,
-        flex: 1,
+    
         backgroundColor: "#A5D7E8",
+        elevation:5,
 
     },
     container3:{
-        borderColor: 'blue',
-        borderWidth: 2,
+        marginTop:8,
+        //borderColor: 'blue',
+        //borderWidth: 2,
         justifyContent: 'center',
+        borderRadius: 15,
+        backgroundColor:"#f5f7fa",
+        paddingBottom:6,
+    
 
     },
     roomButton:{
-        fontSize: 28,
+        fontSize: 24,
         justifyContent:'center',
+        color:"white",
         backgroundColor: "#19376D",
         textAlign: 'center',
-        paddingVertical: 5,
+        paddingVertical: 2,
         marginBottom: 10,
-        borderRadius: 5,
+        borderRadius: 12,
         
     },
     triggerContainer:{
         justifyContent:'center',
-        borderWidth: 2,
-        borderColor: 'orange',
+        flexDirection: "row",
+        //borderWidth: 2,
+        borderRadius: 12,
+        //borderColor: 'orange',
         textAlign: 'center',
         paddingVertical: 15,
-        backgroundColor: "#576CBC"
+        marginHorizontal:8,
+        elevation:3,
+        marginVertical: 3,
+        backgroundColor: "#576CBC",
     },
     triggerContainerText:{
+        fontSize:18,
         justifyContent:'center',
         textAlign: 'center',
+        alignSelf:"center",
+        marginHorizontal:"auto",
+    },
+    triggerButton:{
+        borderRadius:15,
+        backgroundColor:"white",
+        marginHorizontal:"auto",
+        paddingHorizontal:"5%",
+    },
+    iconText:{
+        borderTopWidth:1,
+        borderTopColor: "gray",
+        textAlign:"center",
     }
 })
