@@ -1,6 +1,6 @@
 
 
-import { Text,View,TextInput,StyleSheet, Pressable,Platform  } from "react-native";
+import { Text,View,TextInput,StyleSheet, Pressable,Platform,Image  } from "react-native";
 import React, { useState } from "react";
 import {LinearGradient} from 'expo-linear-gradient';
 import { createStackNavigator } from "@react-navigation/stack";
@@ -34,11 +34,13 @@ export default function(){
                 style={styles.box}>
 
                     <View style={styles.mainContainer} >
-                        <View style={styles.image}><Text style={styles.imageText}>ImagenLogo</Text></View>
+                        <View style={styles.logoContainer}>
+                            <Image source={require('../../assets/images/logo.png')} style={styles.image}/>
+                        </View>
                         <Text style={styles.title}>Iniciar Sesion</Text>
                         <View style={styles.inputContainer}>
-                            <TextInput style={styles.inputText} placeholder="Usuario" placeholderTextColor={"gray"} onChangeText={setText} value={text}></TextInput>
-                            <TextInput style={styles.inputText} placeholder="Contraseña" placeholderTextColor={"gray"} onChangeText={setPass} value={pass}></TextInput>
+                            <TextInput style={styles.inputText} placeholder="Usuario" placeholderTextColor={"black"} onChangeText={setText} value={text}></TextInput>
+                            <TextInput style={styles.inputText} placeholder="Contraseña" placeholderTextColor={"black"} onChangeText={setPass} value={pass}></TextInput>
                             <Pressable><Text style={styles.loginButton}>Iniciar</Text></Pressable>
                         </View>
                         <Pressable style={styles.noAccount}>
@@ -62,13 +64,13 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         justifyContent:'center',
         textAlign:'center',
-        color: "#fff",
+        color: "black",
 
         
     },
     mainContainer:{
         justifyContent: "center",
-        backgroundColor: 'rgba(0,0,0,0.6)',
+        backgroundColor: '#f5f7fa',
 
         width: "94%",
         height: "90%",
@@ -103,16 +105,14 @@ const styles = StyleSheet.create({
         backgroundColor: "#0B2447",
         flex: 1,
     },
+    logoContainer:{
+        height: 160,
+        alignSelf:"center",
+        justifyContent:"center"
+    },
     image:{
-
-        //borderWidth: 2,
-        //borderColor: 'red',
-        justifyContent:'center',
-        textAlign:'center',
-        marginBottom: 10,
-        marginTop:10,
-        height:100
-
+        height:220,
+        width:220,
     },
     imageText:{
         textAlign:'center',
@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
     },
     inputContainer:{
         marginTop: 60,
-
+        borderWidth:2,
     },
     inputText:{
         borderColor: '#19376D',
@@ -135,8 +135,6 @@ const styles = StyleSheet.create({
         paddingVertical: 4,
         backgroundColor: 'rgba(0,0,0,0.5)',
         color: "#fff"
-        
-
     },
     noAccount:{
         marginTop: 50,
