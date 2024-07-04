@@ -33,11 +33,11 @@ export default function(){
                 }}
                 style={styles.box}>
 
-                    <View style={styles.mainContainer} >
                         <View style={styles.logoContainer}>
                             <Image source={require('../../assets/images/logo.png')} style={styles.image}/>
+                            <Text style={styles.title}>Iniciar Sesion</Text>
                         </View>
-                        <Text style={styles.title}>Iniciar Sesion</Text>
+                    <View style={styles.mainContainer} >
                         <View style={styles.inputContainer}>
                             <TextInput style={styles.inputText} placeholder="Usuario" placeholderTextColor={"black"} onChangeText={setText} value={text}></TextInput>
                             <TextInput style={styles.inputText} placeholder="Contraseña" placeholderTextColor={"black"} onChangeText={setPass} value={pass}></TextInput>
@@ -60,28 +60,24 @@ export default function(){
 
 const styles = StyleSheet.create({
     title:{
-        fontSize: 30,
+        fontSize: 38,
         fontWeight: "bold",
         justifyContent:'center',
         textAlign:'center',
         color: "black",
-
+        margin:10
         
     },
     mainContainer:{
         justifyContent: "center",
         backgroundColor: '#f5f7fa',
-
         width: "94%",
-        height: "90%",
-
+        height: "50%",
+        flex:1,
         alignSelf:"center",
-        borderStartColor: 'rgba(0,112,255,0.5)',
-        borderTopColor: 'rgba(0,112,255,0.5)',
-        borderEndColor: 'rgba(0,112,255,0.2)',
-        borderBottomColor: 'rgba(0,112,255,0.3)',
-        borderWidth: 2,
-        borderRadius: 15,
+        //borderWidth: 2,
+        borderTopStartRadius:12,
+        borderTopEndRadius:12,
         marginVertical: "auto",
         shadowColor: "black",
         shadowOffset: {
@@ -100,19 +96,24 @@ const styles = StyleSheet.create({
     loginContainer:{
         justifyContent:'center',
         textAlign: 'center',
-        borderWidth: 2,
+        //borderWidth: 2,
         borderColor: 'blue',
         backgroundColor: "#0B2447",
         flex: 1,
+        
     },
     logoContainer:{
-        height: 160,
         alignSelf:"center",
-        justifyContent:"center"
+        justifyContent:"center",
+        //borderWidth: 2,
+        margin:10,
+    
     },
     image:{
-        height:220,
-        width:220,
+        height:320,
+        width:320,
+        //borderWidth:5,
+        margin: -30
     },
     imageText:{
         textAlign:'center',
@@ -120,21 +121,25 @@ const styles = StyleSheet.create({
     },
     inputContainer:{
         marginTop: 60,
-        borderWidth:2,
+        //borderWidth:2,
+        flex: 1,
     },
     inputText:{
+        height:30,
         borderColor: '#19376D',
         fontSize:20,
-        borderRadius: 5,
-        borderBottomWidth: 2,
+        borderRadius: 15,
         justifyContent:'center',
         textAlign:'center',
         marginHorizontal: 20,
         marginVertical: 10,
         paddingHorizontal: 80   ,
         paddingVertical: 4,
-        backgroundColor: 'rgba(0,0,0,0.5)',
-        color: "#fff"
+        color: "#ffffff",
+        elevation:12,
+        backgroundColor:"#fff",
+        borderBottomColor:"#000",
+        borderBottomWidth:1,
     },
     noAccount:{
         marginTop: 50,
