@@ -3,19 +3,35 @@ import { AntDesign } from '@expo/vector-icons';
 import { Stack } from 'expo-router';
 import EventIcon from '@/components/EventComponents/EventIcon';
 import TriggerIcon from '@/components/indexComponents/TriggerIcon';
-
+import { LinearGradient } from 'expo-linear-gradient';
 
 export default function(){
     return(
+
         
-        <View style={styles.mainContainer}>
+        
+        <LinearGradient style={styles.mainContainer}
+        colors={['#0B2447', '#576CBC','#19376D', '#0B2447']} 
+        start={{
+            x: 0,
+            y: 0
+        }}
+        end={{
+            x: 1,
+            y: 1
+        }}
+        
+        
+        >
             <Stack.Screen
 
                 options={{ headerShown: false }}
             />
             <View style={styles.container1}>
-
-                <AntDesign name="check" size={28} color="green" />
+                <View style={{alignContent:"center", alignSelf:"center",  flex:1, alignItems: "center"}}>
+                    <AntDesign name="check" size={36} color="green" />
+                </View>
+                
                 <Text style={styles.Title}>No se han registrado eventos</Text>
 
             </View>
@@ -26,7 +42,7 @@ export default function(){
                 </View>
                 <View style={styles.container2e}>
                     <View style={styles.SensorsContainer}><Text>Humidity</Text></View>
-                    <EventIcon icon="frown" size={44} colorI="orange" />
+                    <EventIcon icon="frown" size={56} colorI="orange" />
                 </View>
                 
                 
@@ -58,7 +74,7 @@ export default function(){
 
 
 
-        </View>
+        </LinearGradient>
         
     );
 }
@@ -69,23 +85,31 @@ const styles = StyleSheet.create ({
         fontSize: 28,
         color: 'green',
     },
+    box:{
+        width: "100%",
+        height: "100%"
+    },
     mainContainer: {
         marginVertical: 0,
         marginHorizontal:0,
         flex: 1,
         padding: 5,
-        borderColor: 'red',
-        borderWidth: 2,
+        //borderColor: 'red',
+        //borderWidth: 2,
         backgroundColor: "#d7dbdd" ,
 
     },
     container1:{
-        borderColor: "#007AA2",
-        borderWidth: 2,
+        //borderColor: "#007AA2",
+        //borderWidth: 2,
+        marginTop: 8,
+        marginHorizontal:8,
         flexDirection: 'row',
         justifyContent: 'center',  
         borderRadius: 15,
         backgroundColor: "#f5f7fa",
+        padding:15,
+        elevation:5,
 
     },
     container2:{
@@ -93,11 +117,13 @@ const styles = StyleSheet.create ({
         flexDirection: 'row',
         justifyContent: 'center',
         backgroundColor: "#f5f7fa",
+        marginHorizontal:8,
         //borderColor: 'black',
         //borderWidth: 2,
         borderRadius: 15,
         paddingHorizontal:16,
         paddingVertical: 12,
+        elevation:5,
         
     },
     container2e:{
@@ -114,6 +140,7 @@ const styles = StyleSheet.create ({
     
         backgroundColor: "#A5D7E8",
         elevation:5,
+        
 
     },
     container3:{
@@ -124,6 +151,8 @@ const styles = StyleSheet.create ({
         borderRadius: 15,
         backgroundColor:"#f5f7fa",
         paddingBottom:6,
+        marginHorizontal:8,
+        elevation:5,
     
 
     },
@@ -136,6 +165,7 @@ const styles = StyleSheet.create ({
         paddingVertical: 2,
         marginBottom: 10,
         borderRadius: 12,
+        elevation: 20,
         
     },
     triggerContainer:{
@@ -149,20 +179,28 @@ const styles = StyleSheet.create ({
         marginHorizontal:8,
         elevation:3,
         marginVertical: 3,
-        backgroundColor: "#576CBC",
+        backgroundColor: "#0B2447",
     },
     triggerContainerText:{
-        fontSize:18,
+        fontSize:20,
+        color: "white",
+        fontWeight: "500",
         justifyContent:'center',
         textAlign: 'center',
         alignSelf:"center",
         marginHorizontal:"auto",
+        textShadowColor: 'rgba(0,0,0,0.2)',
+        textShadowRadius:3,
+        textShadowOffset:{
+            width:2,height:1,
+        }
     },
     triggerButton:{
         borderRadius:15,
         backgroundColor:"white",
         marginHorizontal:"auto",
         paddingHorizontal:"5%",
+        elevation: 5,
     },
     iconText:{
         borderTopWidth:1,

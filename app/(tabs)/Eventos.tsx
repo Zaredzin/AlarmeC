@@ -19,7 +19,7 @@ export default function (){
               <View>
                 <Pressable style={styles.dayContainer}>
                   <Text style={styles.day}>Martes 17</Text>
-                  <EventIcon icon="down" colorI="gray" ></EventIcon>
+                  <EventIcon icon="down" colorI="gray" size={16} ></EventIcon>
                 </Pressable>
                 
                 <View style={styles.eventContainer}>
@@ -103,6 +103,10 @@ export default function (){
       paddingVertical:5,
       elevation: 3,
     },
+    box:{
+      width: "100%",
+      height: "100%"
+  },
     dayContainer:{
       flexDirection: "row",
       //borderColor:"red",
