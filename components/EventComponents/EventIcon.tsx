@@ -17,5 +17,6 @@ const styles = StyleSheet.create({
         marginVertical: "auto",
         
         
+        
     }
 })
