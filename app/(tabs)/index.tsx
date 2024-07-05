@@ -38,7 +38,7 @@ export default function(){
             <View style={styles.container2}>
                 <View style={styles.container2e}>
                     <View style={styles.SensorsContainer}><Text>Temp</Text></View>
-                    <View style={styles.SensorsContainer}><Text>Oxygen</Text></View>
+                    <View style={styles.SensorsContainer}><Text style={styles.sensorsText}>Oxygen</Text></View>
                 </View>
                 <View style={styles.container2e}>
                     <View style={styles.SensorsContainer}><Text>Humidity</Text></View>
@@ -84,6 +84,11 @@ const styles = StyleSheet.create ({
     Title: {
         fontSize: 28,
         color: 'green',
+        textShadowColor: 'rgba(0,0,0,0.2)',
+        textShadowRadius:3,
+        textShadowOffset:{
+            width:2,height:1,
+        }
     },
     box:{
         width: "100%",
@@ -110,6 +115,7 @@ const styles = StyleSheet.create ({
         backgroundColor: "#f5f7fa",
         padding:15,
         elevation:5,
+        
 
     },
     container2:{
@@ -132,16 +138,24 @@ const styles = StyleSheet.create ({
     },
     SensorsContainer:{
         margin: 5,
-        padding: 5,
+        padding: 10,
         justifyContent: 'center',
         height: 65,
-        //borderWidth: 2,
+        //borderWidth: 0.8,
         borderRadius: 12,
     
-        backgroundColor: "#A5D7E8",
+        backgroundColor: "white",
         elevation:5,
         
 
+    },
+    sensorsText:{
+        fontSize: 14,
+        textShadowColor: 'rgba(0,0,0,0.2)',
+        textShadowRadius:3,
+        textShadowOffset:{
+            width:2,height:1,
+        }
     },
     container3:{
         marginTop:8,

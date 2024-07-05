@@ -97,11 +97,12 @@ export default function (){
 
   const styles =StyleSheet.create({
     monthView:{
-      backgroundColor: "black",
+      backgroundColor: "#0B2447",
       borderBottomRightRadius: 8,
       borderBottomLeftRadius: 8,
       paddingVertical:5,
       elevation: 3,
+      
     },
     box:{
       width: "100%",
