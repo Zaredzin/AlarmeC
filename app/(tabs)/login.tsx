@@ -1,6 +1,6 @@
 
 
-import { Text,View,TextInput,StyleSheet, Pressable,Platform  } from "react-native";
+import { Text,View,TextInput,StyleSheet, Pressable,Platform,Image  } from "react-native";
 import React, { useState } from "react";
 import {LinearGradient} from 'expo-linear-gradient';
 import { createStackNavigator } from "@react-navigation/stack";
@@ -33,12 +33,14 @@ export default function(){
                 }}
                 style={styles.box}>
 
+                        <View style={styles.logoContainer}>
+                            <Image source={require('../../assets/images/logo.png')} style={styles.image}/>
+                            <Text style={styles.title}>Iniciar Sesion</Text>
+                        </View>
                     <View style={styles.mainContainer} >
-                        <View style={styles.image}><Text style={styles.imageText}>ImagenLogo</Text></View>
-                        <Text style={styles.title}>Iniciar Sesion</Text>
                         <View style={styles.inputContainer}>
-                            <TextInput style={styles.inputText} placeholder="Usuario" placeholderTextColor={"gray"} onChangeText={setText} value={text}></TextInput>
-                            <TextInput style={styles.inputText} placeholder="Contraseña" placeholderTextColor={"gray"} onChangeText={setPass} value={pass}></TextInput>
+                            <TextInput style={styles.inputText} placeholder="Usuario" placeholderTextColor={"black"} onChangeText={setText} value={text}></TextInput>
+                            <TextInput style={styles.inputText} placeholder="Contraseña" placeholderTextColor={"black"} onChangeText={setPass} value={pass}></TextInput>
                             <Pressable><Text style={styles.loginButton}>Iniciar</Text></Pressable>
                         </View>
                         <Pressable style={styles.noAccount}>
@@ -58,28 +60,24 @@ export default function(){
 
 const styles = StyleSheet.create({
     title:{
-        fontSize: 30,
+        fontSize: 38,
         fontWeight: "bold",
         justifyContent:'center',
         textAlign:'center',
-        color: "#fff",
-
+        color: "black",
+        margin:10
         
     },
     mainContainer:{
         justifyContent: "center",
-        backgroundColor: 'rgba(0,0,0,0.6)',
-
+        backgroundColor: '#f5f7fa',
         width: "94%",
-        height: "90%",
-
+        height: "50%",
+        flex:1,
         alignSelf:"center",
-        borderStartColor: 'rgba(0,112,255,0.5)',
-        borderTopColor: 'rgba(0,112,255,0.5)',
-        borderEndColor: 'rgba(0,112,255,0.2)',
-        borderBottomColor: 'rgba(0,112,255,0.3)',
-        borderWidth: 2,
-        borderRadius: 15,
+        //borderWidth: 2,
+        borderTopStartRadius:12,
+        borderTopEndRadius:12,
         marginVertical: "auto",
         shadowColor: "black",
         shadowOffset: {
@@ -98,21 +96,24 @@ const styles = StyleSheet.create({
     loginContainer:{
         justifyContent:'center',
         textAlign: 'center',
-        borderWidth: 2,
+        //borderWidth: 2,
         borderColor: 'blue',
         backgroundColor: "#0B2447",
         flex: 1,
+        
+    },
+    logoContainer:{
+        alignSelf:"center",
+        justifyContent:"center",
+        //borderWidth: 2,
+        margin:10,
+    
     },
     image:{
-
-        //borderWidth: 2,
-        //borderColor: 'red',
-        justifyContent:'center',
-        textAlign:'center',
-        marginBottom: 10,
-        marginTop:10,
-        height:100
-
+        height:320,
+        width:320,
+        //borderWidth:5,
+        margin: -30
     },
     imageText:{
         textAlign:'center',
@@ -120,23 +121,25 @@ const styles = StyleSheet.create({
     },
     inputContainer:{
         marginTop: 60,
-
+        //borderWidth:2,
+        flex: 1,
     },
     inputText:{
+        height:30,
         borderColor: '#19376D',
         fontSize:20,
-        borderRadius: 5,
-        borderBottomWidth: 2,
+        borderRadius: 15,
         justifyContent:'center',
         textAlign:'center',
         marginHorizontal: 20,
         marginVertical: 10,
         paddingHorizontal: 80   ,
         paddingVertical: 4,
-        backgroundColor: 'rgba(0,0,0,0.5)',
-        color: "#fff"
-        
-
+        color: "#ffffff",
+        elevation:12,
+        backgroundColor:"#fff",
+        borderBottomColor:"#000",
+        borderBottomWidth:1,
     },
     noAccount:{
         marginTop: 50,
