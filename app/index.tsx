@@ -1,30 +1,30 @@
-
-
-import { Text,View,TextInput,StyleSheet, Pressable,Platform,Image  } from "react-native";
+import { Text, View, TextInput, StyleSheet, Pressable, Platform, Image } from "react-native";
 import React, { useState } from "react";
-import {LinearGradient} from 'expo-linear-gradient';
-import { createStackNavigator } from "@react-navigation/stack";
-import { Stack, Tabs} from "expo-router";
-import TabLayout from "./(tabs)/_layout";
+import { LinearGradient } from 'expo-linear-gradient';
+import { useRouter } from 'expo-router';
+import { Stack } from "expo-router";
 
+export default function LoginScreen() {
+    const [text, setText] = useState('');
+    const [pass, setPass] = useState('');
+    const router = useRouter();
 
+    const handleLogin = () => {
+        if (text === 'hola' && pass === 'hola') {
+            router.push('/(tabs)/home');
+        } else {
+            alert('Credenciales incorrectas');
+        }
+    };
 
-
-
-
-export default function(){
-        const [text, setText] = useState('');
-        const [pass, setPass] = useState('');
-    
-
-    return(
-        <View style={styles.loginContainer} >
+    return (
+        <View style={styles.loginContainer}>
             <Stack.Screen
-                options={{ headerShown: false, }}
-            />        
-            
-            <LinearGradient 
-                colors={['#0B2447', '#576CBC','#19376D', '#0B2447']} 
+                options={{ headerShown: false }}
+            />
+
+            <LinearGradient
+                colors={['#0B2447', '#576CBC', '#19376D', '#0B2447']}
                 start={{
                     x: 0,
                     y: 0
@@ -35,52 +35,43 @@ export default function(){
                 }}
                 style={styles.box}>
 
-                        <View style={styles.logoContainer}>
-                            <Image source={require('../assets/images/logo.png')} style={styles.image}/>
-                            <Text style={styles.title}>Iniciar Sesion</Text>
-                        </View>
-                    <View style={styles.mainContainer} >
-                        <View style={styles.inputContainer}>
-                            <TextInput style={styles.inputText} placeholder="Usuario" placeholderTextColor={"black"} onChangeText={setText} value={text}></TextInput>
-                            <TextInput style={styles.inputText} placeholder="Contraseña" placeholderTextColor={"black"} onChangeText={setPass} value={pass}></TextInput>
-                            <Pressable><Text style={styles.loginButton}>Iniciar</Text></Pressable>
-                        </View>
-                        <Pressable style={styles.noAccount}>
-                            <Text style={styles.noAccount} >¿No tienes cuenta?</Text>
-                        </Pressable>
-                    </View>    
-
-                
+                <View style={styles.logoContainer}>
+                    <Image source={require('../assets/images/logo.png')} style={styles.image} />
+                    <Text style={styles.title}>Iniciar Sesion</Text>
+                </View>
+                <View style={styles.mainContainer}>
+                    <View style={styles.inputContainer}>
+                        <TextInput style={styles.inputText} placeholder="Usuario" placeholderTextColor={"black"} onChangeText={setText} value={text}></TextInput>
+                        <TextInput style={styles.inputText} placeholder="Contraseña" placeholderTextColor={"black"} onChangeText={setPass} value={pass} secureTextEntry></TextInput>
+                        <Pressable onPress={handleLogin}><Text style={styles.loginButton}>Iniciar</Text></Pressable>
+                    </View>
+                    <Pressable style={styles.noAccount}>
+                        <Text style={styles.noAccount}>¿No tienes cuenta?</Text>
+                    </Pressable>
+                </View>
             </LinearGradient>
-
-    
-            
         </View>
     )
 }
 
-
 const styles = StyleSheet.create({
-    title:{
+    title: {
         fontSize: 38,
         fontWeight: "bold",
-        justifyContent:'center',
-        textAlign:'center',
+        justifyContent: 'center',
+        textAlign: 'center',
         color: "black",
-        margin:10
-        
+        margin: 10
     },
-    mainContainer:{
+    mainContainer: {
         justifyContent: "center",
         backgroundColor: '#f5f7fa',
         width: "94%",
         height: "50%",
-        flex:1,
-        alignSelf:"center",
-        //borderWidth: 2,
-        borderTopStartRadius:12,
-        borderTopEndRadius:12,
-        marginVertical: "auto",
+        flex: 1,
+        alignSelf: "center",
+        borderTopStartRadius: 12,
+        borderTopEndRadius: 12,
         shadowColor: "black",
         shadowOffset: {
             width: 1,
@@ -88,72 +79,62 @@ const styles = StyleSheet.create({
         },
         shadowRadius: 10,
         shadowOpacity: 0.8,
-
-        
     },
-    box:{
+    box: {
         width: "100%",
         height: "100%"
     },
-    loginContainer:{
-        justifyContent:'center',
+    loginContainer: {
+        justifyContent: 'center',
         textAlign: 'center',
-        //borderWidth: 2,
-        borderColor: 'blue',
         backgroundColor: "#0B2447",
         flex: 1,
-        
     },
-    logoContainer:{
-        alignSelf:"center",
-        justifyContent:"center",
-        //borderWidth: 2,
-        margin:10,
-    
+    logoContainer: {
+        alignSelf: "center",
+        justifyContent: "center",
+        margin: 10,
     },
-    image:{
-        height:320,
-        width:320,
-        //borderWidth:5,
+    image: {
+        height: 320,
+        width: 320,
         margin: -30
     },
-    imageText:{
-        textAlign:'center',
-        justifyContent:'center'
+    imageText: {
+        textAlign: 'center',
+        justifyContent: 'center'
     },
-    inputContainer:{
+    inputContainer: {
         marginTop: 60,
-        //borderWidth:2,
         flex: 1,
     },
-    inputText:{
-        height:30,
+    inputText: {
+        height: 30,
         borderColor: '#19376D',
-        fontSize:20,
+        fontSize: 20,
         borderRadius: 15,
-        justifyContent:'center',
-        textAlign:'center',
+        justifyContent: 'center',
+        textAlign: 'center',
         marginHorizontal: 20,
         marginVertical: 10,
-        paddingHorizontal: 80   ,
+        paddingHorizontal: 80,
         paddingVertical: 4,
         color: "#000",
-        elevation:12,
-        backgroundColor:"#fff",
-        borderBottomColor:"#000",
-        borderBottomWidth:1,
+        elevation: 12,
+        backgroundColor: "#fff",
+        borderBottomColor: "#000",
+        borderBottomWidth: 1,
     },
-    noAccount:{
+    noAccount: {
         marginTop: 50,
         color: '#fff',
-        textAlign:'center',
-        marginBottom:6,
+        textAlign: 'center',
+        marginBottom: 6,
     },
-    loginButton:{
+    loginButton: {
         textAlign: "center",
         justifyContent: "center",
         fontSize: 28,
-
         marginHorizontal: "auto",
         marginTop: 30,
         paddingVertical: 5,
@@ -161,5 +142,4 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         backgroundColor: '#576CBC'
     },
-    
-})
+});
