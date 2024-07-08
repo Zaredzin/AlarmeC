@@ -4,7 +4,9 @@ import { Text,View,TextInput,StyleSheet, Pressable,Platform,Image  } from "react
 import React, { useState } from "react";
 import {LinearGradient} from 'expo-linear-gradient';
 import { createStackNavigator } from "@react-navigation/stack";
-import { Stack } from "expo-router";
+import { Stack, Tabs} from "expo-router";
+import TabLayout from "./(tabs)/_layout";
+
 
 
 
@@ -18,7 +20,7 @@ export default function(){
     return(
         <View style={styles.loginContainer} >
             <Stack.Screen
-                options={{ headerShown: false }}
+                options={{ headerShown: false, }}
             />        
             
             <LinearGradient 
@@ -34,7 +36,7 @@ export default function(){
                 style={styles.box}>
 
                         <View style={styles.logoContainer}>
-                            <Image source={require('../../assets/images/logo.png')} style={styles.image}/>
+                            <Image source={require('../assets/images/logo.png')} style={styles.image}/>
                             <Text style={styles.title}>Iniciar Sesion</Text>
                         </View>
                     <View style={styles.mainContainer} >
@@ -135,7 +137,7 @@ const styles = StyleSheet.create({
         marginVertical: 10,
         paddingHorizontal: 80   ,
         paddingVertical: 4,
-        color: "#ffffff",
+        color: "#000",
         elevation:12,
         backgroundColor:"#fff",
         borderBottomColor:"#000",
