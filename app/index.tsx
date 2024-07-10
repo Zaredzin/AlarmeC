@@ -1,8 +1,16 @@
-import { Text, View, TextInput, StyleSheet, Pressable, Platform, Image } from "react-native";
-import React, { useState } from "react";
+import { Text, View, TextInput,Button, StyleSheet, Pressable,ScrollView, Platform, Image, TouchableOpacity } from "react-native";
+import React, { useState, useEffect } from "react";
 import { LinearGradient } from 'expo-linear-gradient';
+import * as SplashScreen from 'expo-splash-screen';
 import { useRouter } from 'expo-router';
 import { Stack } from "expo-router";
+import {BlurView} from 'expo-blur'
+import EventIcon from "@/components/EventComponents/EventIcon";
+import {useFonts} from 'expo-font';
+import * as Font from 'expo-font';
+
+
+
 
 export default function LoginScreen() {
     const [text, setText] = useState('');
@@ -17,14 +25,43 @@ export default function LoginScreen() {
         }
     };
 
+
+    SplashScreen.preventAutoHideAsync();
+
+
+    const [fontsLoaded] = useFonts({
+        'Outfit': require('../assets/fonts/Outfit-Medium.ttf')
+    });
+    
+    useEffect(() => {
+        async function prepare() {
+            await SplashScreen.preventAutoHideAsync	();
+            
+        }
+        prepare();
+    }, [])
+
+    if (!fontsLoaded){
+        return undefined;
+    } else {
+        SplashScreen.hideAsync();
+    }
+    
+
+
+    
+
+
+
+    
     return (
         <View style={styles.loginContainer}>
             <Stack.Screen
                 options={{ headerShown: false }}
             />
-
+            
             <LinearGradient
-                colors={['#0B2447', '#576CBC', '#19376D', '#0B2447']}
+                colors={['#121532', '#203457', '#6c8294', '#506275', '#3483b0']}
                 start={{
                     x: 0,
                     y: 0
@@ -34,44 +71,70 @@ export default function LoginScreen() {
                     y: 1
                 }}
                 style={styles.box}>
+                <View style={{width:100,height:100, backgroundColor: "#264a71", position: "absolute",}}></View>
+                <ScrollView contentContainerStyle={{flex:1, width:"100%",height:"100%", }}>
+                    
+                    <View style={styles.labelT}>
+                        <Text style={styles.title}>Iniciar Sesion</Text>
+                    </View>         
+                    
+                    
+                    <BlurView experimentalBlurMethod="dimezisBlurView" intensity={60} style={styles.blurContainer} >
 
-                <View style={styles.logoContainer}>
-                    <Image source={require('../assets/images/logo.png')} style={styles.image} />
-                    <Text style={styles.title}>Iniciar Sesion</Text>
-                </View>
-                <View style={styles.mainContainer}>
-                    <View style={styles.inputContainer}>
-                        <TextInput style={styles.inputText} placeholder="Usuario" placeholderTextColor={"black"} onChangeText={setText} value={text}></TextInput>
-                        <TextInput style={styles.inputText} placeholder="Contraseña" placeholderTextColor={"black"} onChangeText={setPass} value={pass} secureTextEntry></TextInput>
-                        <Pressable onPress={handleLogin}><Text style={styles.loginButton}>Iniciar</Text></Pressable>
-                    </View>
-                    <Pressable style={styles.noAccount}>
-                        <Text style={styles.noAccount}>¿No tienes cuenta?</Text>
-                    </Pressable>
-                </View>
+                        <View style={styles.mainContainer}>
+                            <View style={styles.inputContainer}>
+                                <TextInput style={styles.inputText} placeholder="Usuario"  onChangeText={setText} value={text}></TextInput>
+                                <TextInput style={styles.inputText} placeholder="Contraseña"  onChangeText={setPass} value={pass} secureTextEntry></TextInput>
+                                <TouchableOpacity onPress={handleLogin}><Text style={styles.loginButton}>Iniciar<EventIcon  colorI={"#fff"} icon="arrowright" size={24}></EventIcon></Text>
+                                    
+                                </TouchableOpacity>
+                            </View>
+                            <Pressable style={styles.noAccount}>
+                                <Text style={styles.noAccount}>I don't know my password</Text>
+                            </Pressable>
+                        </View>
+
+                    </BlurView>
+                </ScrollView>
+
+                
             </LinearGradient>
+            
         </View>
     )
 }
 
 const styles = StyleSheet.create({
+    blurContainer:{
+        borderRadius: 15,
+        overflow:'hidden',
+        width: 300,
+        height:400,
+    },
     title: {
         fontSize: 38,
         fontWeight: "bold",
-        justifyContent: 'center',
-        textAlign: 'center',
-        color: "black",
-        margin: 10
+        
+        textAlign: 'left',
+        color: "white",
+        fontFamily:'Outfit'
+        
+        
     },
     mainContainer: {
         justifyContent: "center",
-        backgroundColor: '#f5f7fa',
-        width: "94%",
-        height: "50%",
-        flex: 1,
+       // backgroundColor: '#f5f7fa',
+       width:"100%",
+       height:"100%",
+
+       
         alignSelf: "center",
-        borderTopStartRadius: 12,
-        borderTopEndRadius: 12,
+        
+        borderRadius: 15,
+        borderWidth:2,
+        borderColor: "#fff",
+       // borderTopStartRadius: 12,
+        //borderTopEndRadius: 12,
         shadowColor: "black",
         shadowOffset: {
             width: 1,
@@ -82,48 +145,44 @@ const styles = StyleSheet.create({
     },
     box: {
         width: "100%",
-        height: "100%"
+        height: "100%",
+        flex:1,
+        justifyContent:"center",
+        alignItems:"center",
+
     },
     loginContainer: {
         justifyContent: 'center',
         textAlign: 'center',
-        backgroundColor: "#0B2447",
-        flex: 1,
+        alignItems:"center",
+        flex:1,
+        
+       // backgroundColor: "#0B2447",
+        //flex: 1,
     },
-    logoContainer: {
-        alignSelf: "center",
-        justifyContent: "center",
-        margin: 10,
+    labelT: {
+        marginTop:85,
+        marginBottom:40,
+        textAlign:"left",
+        
+
+
     },
-    image: {
-        height: 320,
-        width: 320,
-        margin: -30
-    },
-    imageText: {
-        textAlign: 'center',
-        justifyContent: 'center'
-    },
+    
     inputContainer: {
-        marginTop: 60,
-        flex: 1,
+        alignItems:"center"
     },
     inputText: {
-        height: 30,
-        borderColor: '#19376D',
-        fontSize: 20,
-        borderRadius: 15,
-        justifyContent: 'center',
-        textAlign: 'center',
-        marginHorizontal: 20,
-        marginVertical: 10,
-        paddingHorizontal: 80,
-        paddingVertical: 4,
-        color: "#000",
-        elevation: 12,
-        backgroundColor: "#fff",
-        borderBottomColor: "#000",
-        borderBottomWidth: 1,
+        justifyContent:"center",
+        width:250,
+        height:40,
+        borderColor:"#fff",
+        borderWidth:2,
+        borderRadius:10,
+        padding:10,
+        marginVertical:10,
+        backgroundColor:"#ffffff50",
+        marginBottom:20,
     },
     noAccount: {
         marginTop: 50,
@@ -132,14 +191,20 @@ const styles = StyleSheet.create({
         marginBottom: 6,
     },
     loginButton: {
-        textAlign: "center",
-        justifyContent: "center",
-        fontSize: 28,
-        marginHorizontal: "auto",
-        marginTop: 30,
-        paddingVertical: 5,
-        paddingHorizontal: 30,
-        borderRadius: 5,
-        backgroundColor: '#576CBC'
+        width:250,
+        height:40,
+        borderRadius:10,
+        backgroundColor: "#82d8e980",
+        alignItems:"center",
+        justifyContent:"center",
+        textAlign:"center",
+        alignSelf:"center",
+        fontSize:28,
+        marginVertical:10,
+        borderWidth:1,
+        borderColor:"#fff",
+        color:"#fff",
+        fontWeight:"500",
+
     },
 });
