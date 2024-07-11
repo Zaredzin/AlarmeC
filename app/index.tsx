@@ -8,6 +8,8 @@ import {BlurView} from 'expo-blur'
 import EventIcon from "@/components/EventComponents/EventIcon";
 import {useFonts} from 'expo-font';
 import * as Font from 'expo-font';
+import { StatusBar } from 'expo-status-bar';
+
 
 
 
@@ -17,13 +19,21 @@ export default function LoginScreen() {
     const [pass, setPass] = useState('');
     const router = useRouter();
 
+    
     const handleLogin = () => {
-        if (text === 'hola' && pass === 'hola') {
+ 
+        if (text === 'h' && pass === 'h') {
             router.push('/(tabs)/home');
         } else {
             alert('Credenciales incorrectas');
         }
     };
+
+    const amonos = () => {
+        router.push('/(tabs)/home');
+    }
+    
+   
 
 
     SplashScreen.preventAutoHideAsync();
@@ -55,7 +65,11 @@ export default function LoginScreen() {
 
     
     return (
+        
+        
         <View style={styles.loginContainer}>
+            <StatusBar style="light"  backgroundColor="#121532" />
+            
             <Stack.Screen
                 options={{ headerShown: false }}
             />
@@ -85,7 +99,7 @@ export default function LoginScreen() {
                             <View style={styles.inputContainer}>
                                 <TextInput style={styles.inputText} placeholder="Usuario"  onChangeText={setText} value={text}></TextInput>
                                 <TextInput style={styles.inputText} placeholder="Contraseña"  onChangeText={setPass} value={pass} secureTextEntry></TextInput>
-                                <TouchableOpacity onPress={handleLogin}><Text style={styles.loginButton}>Iniciar<EventIcon  colorI={"#fff"} icon="arrowright" size={24}></EventIcon></Text>
+                                <TouchableOpacity  onPress={amonos}><Text style={styles.loginButton}>Iniciar<EventIcon  colorI={"#fff"} icon="arrowright" size={24}></EventIcon></Text>
                                     
                                 </TouchableOpacity>
                             </View>

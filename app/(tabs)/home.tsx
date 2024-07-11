@@ -1,12 +1,19 @@
-import {Text, View, Pressable, StyleSheet} from 'react-native';
-import { AntDesign } from '@expo/vector-icons';
+import {Text, View, Pressable, StyleSheet, ScrollView, SafeAreaView, TouchableOpacity} from 'react-native';
+import { AntDesign, FontAwesome6 } from '@expo/vector-icons';
 import { Stack } from 'expo-router';
 import EventIcon from '@/components/EventComponents/EventIcon';
 import TriggerIcon from '@/components/indexComponents/TriggerIcon';
 import { LinearGradient } from 'expo-linear-gradient';
+import IndexIcon from "@/components/EventComponents/IndexIcon";
+import IndexIconEntypo from '@/components/EventComponents/IndexIconEntypo';
+import { StatusBar } from 'expo-status-bar';
+
+
+
 
 export default function(){
     return(
+        
 
         
         
@@ -23,6 +30,8 @@ export default function(){
         
         
         >
+            <StatusBar style="light"  backgroundColor="#121532" />
+            
             <Stack.Screen
 
                 options={{ headerShown: false }}
@@ -36,40 +45,59 @@ export default function(){
 
             </View>
             <View style={styles.container2}>
-                <View style={styles.container2e}>
-                    <View style={styles.SensorsContainer}><Text>Temp</Text></View>
-                    <View style={styles.SensorsContainer}><Text style={styles.sensorsText}>Oxygen</Text></View>
-                </View>
-                <View style={styles.container2e}>
-                    <View style={styles.SensorsContainer}><Text>Humidity</Text></View>
-                    <EventIcon icon="frown" size={56} colorI="orange" />
-                </View>
+                    <View style={styles.SensorsContainer}>
+                        <IndexIcon icon={"temperature-empty"} colorI={"#000"} size={28}/>
+                    </View>
+                    <View style={styles.SensorsContainer}>
+                        <IndexIconEntypo icon={"air"} colorI={"gray"} size={28} style={"marginHorizontal: 20,"}/>
+                    </View>
+                    <View style={styles.SensorsContainer}>
+                        <IndexIconEntypo icon={"water"} colorI={"#00f"} size={28}/>
+                    </View>
+                
                 
                 
             </View>
             
             <View style={styles.container3}>
-              <Pressable style={styles.roomButton}><Text style={styles.roomButton}> Habitación</Text></Pressable>
-              <View>
-                  <View>
+              <TouchableOpacity  style={styles.roomButton}>
+                <Text style={styles.roomButtonText}> Habitación</Text>
+              </TouchableOpacity>
+              <ScrollView style={{flex:1}} >  
                       <View  style={styles.triggerContainer}>
                           <Text style={styles.triggerContainerText}>Puerta cocina</Text>
-                          <Pressable style={styles.triggerButton}>
+                          <TouchableOpacity style={styles.triggerButton}>
                             <TriggerIcon icon={"door-closed"} size={54} colorI={"black"}/>
                             <Text style={styles.iconText}>Cerrar</Text>
-                          </Pressable>
+                          </TouchableOpacity>
                           
                       </View>
                       <View  style={styles.triggerContainer}>
-                          <Text style={styles.triggerContainerText}>Ventana cocina</Text>
-                          <Pressable style={[styles.triggerButton,]}>
-                            <TriggerIcon icon={"door-open"} size={54} colorI={"black"}/>
-                            <Text style={styles.iconText}>Abrir</Text>
-                          </Pressable>
+                          <Text style={styles.triggerContainerText}>Puerta cocina</Text>
+                          <TouchableOpacity style={styles.triggerButton}>
+                            <TriggerIcon icon={"door-closed"} size={54} colorI={"black"}/>
+                            <Text style={styles.iconText}>Cerrar</Text>
+                          </TouchableOpacity>
                           
                       </View>
-                  </View>
-              </View>
+                      <View  style={styles.triggerContainer}>
+                          <Text style={styles.triggerContainerText}>Puerta cocina</Text>
+                          <TouchableOpacity style={styles.triggerButton}>
+                            <TriggerIcon icon={"door-closed"} size={54} colorI={"black"}/>
+                            <Text style={styles.iconText}>Cerrar</Text>
+                          </TouchableOpacity>
+                          
+                      </View>
+                      <View  style={styles.triggerContainer}>
+                          <Text style={styles.triggerContainerText}>Puerta cocina</Text>
+                          <TouchableOpacity style={styles.triggerButton}>
+                            <TriggerIcon icon={"door-closed"} size={54} colorI={"black"}/>
+                            <Text style={styles.iconText}>Cerrar</Text>
+                          </TouchableOpacity>
+                          
+                      </View>
+ 
+              </ScrollView>
             </View>
 
 
@@ -102,6 +130,7 @@ const styles = StyleSheet.create ({
         //borderColor: 'red',
         //borderWidth: 2,
         backgroundColor: "#d7dbdd" ,
+        zIndex:3
 
     },
     container1:{
@@ -122,6 +151,8 @@ const styles = StyleSheet.create ({
         marginTop: 10,
         flexDirection: 'row',
         justifyContent: 'center',
+       
+        alignItems:"center",
         backgroundColor: "#f5f7fa",
         marginHorizontal:8,
         //borderColor: 'black',
@@ -130,13 +161,12 @@ const styles = StyleSheet.create ({
         paddingHorizontal:16,
         paddingVertical: 12,
         elevation:5,
+        height:80,
         
     },
-    container2e:{
-        flex:1
 
-    },
     SensorsContainer:{
+        width:95,
         margin: 5,
         padding: 10,
         justifyContent: 'center',
@@ -162,27 +192,44 @@ const styles = StyleSheet.create ({
         //borderColor: 'blue',
         //borderWidth: 2,
         justifyContent: 'center',
-        borderRadius: 15,
         backgroundColor:"#f5f7fa",
         paddingBottom:6,
         marginHorizontal:8,
         elevation:5,
+        
+        alignItems:"center",
+        height:330,
+        borderTopWidth:2,
+        borderTopColor: "#2ad",
+        borderColor:"#2ad",
+        borderWidth:1,
+        borderRadius: 15,
+        borderCurve:"continuous",
+       
+        
     
 
     },
     roomButton:{
-        fontSize: 24,
+        
+        width:335,
         justifyContent:'center',
-        color:"white",
-        backgroundColor: "#19376D",
+        
+        backgroundColor: "#2ad",
         textAlign: 'center',
         paddingVertical: 2,
         marginBottom: 10,
         borderRadius: 12,
         elevation: 20,
-        
+    },
+    roomButtonText:{
+        fontSize: 24,
+        color:"white",
+        textAlign: 'center',
     },
     triggerContainer:{
+        height:110,
+        width:300,
         justifyContent:'center',
         flexDirection: "row",
         //borderWidth: 2,
@@ -191,7 +238,7 @@ const styles = StyleSheet.create ({
         textAlign: 'center',
         paddingVertical: 15,
         marginHorizontal:8,
-        elevation:3,
+        elevation:5,
         marginVertical: 3,
         backgroundColor: "#0B2447",
     },
