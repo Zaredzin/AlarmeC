@@ -10,7 +10,7 @@ export default function IndexIconEntypo({icon, colorI, size, style}){
 
 
         
-        <Entypo style={[styles.iconStyle, {style}]} name={icon} size={size} color={colorI}/>
+        <Entypo style={[styles.iconStyle, style]} name={icon} size={size} color={colorI}/>
 
     )
 }
@@ -19,7 +19,7 @@ export default function IndexIconEntypo({icon, colorI, size, style}){
 
 const styles = StyleSheet.create({
     iconStyle:{
-        
+        marginHorizontal: 5,
         justifyContent:"flex-start",
         marginVertical: "auto",
         
