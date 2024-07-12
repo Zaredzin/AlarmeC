@@ -29,29 +29,34 @@ export default function (){
         <BlurView style={styles.monthView}>
           <EventMonth month={"November"}/>
         </BlurView>
-            <BlurView experimentalBlurMethod="dimezisBlurView" style={styles.containerContainer}>
+            <View style={styles.containerContainer}>
               <View style={styles.mainContainer}>
                 <View>
                   <EventDay day={"Martes"}/>
-                  <ScrollView  style={styles.scrollContainer}>
-                    <EventView time={"10:00"} description={"The oxygen level has decreased to a critical value."}/>
-                    <EventView time={"10:00"} description={"The oxygen level has decreased to a critical value."}/>
-                    <EventView time={"10:00"} description={"The oxygen level has decreased to a critical value."}/>
-                    <EventView time={"10:00"} description={"The oxygen level has decreased to a critical value."}/>
-                    <EventView time={"10:00"} description={"The oxygen level has decreased to a critical value."}/>
-                    <EventView time={"10:00"} description={"The oxygen level has decreased to a critical value."}/>
-                    <EventView time={"10:00"} description={"The oxygen level has decreased to a critical value."}/>
+                  <View style={styles.scrollContainer}
+                   
+                  
+                  
+                  >
+                    <ScrollView>
+                      <EventView time={"10:00 am"} description={"The oxygen level has decreased to a critical value."}/>
+                      <EventView time={"10:00 am"} description={"The oxygen level has decreased to a critical value."}/>
+                      <EventView time={"10:00 am"} description={"The oxygen level has decreased to a critical value."}/>
+                      <EventView time={"10:00 am"} description={"The oxygen level has decreased to a critical value."}/>
+                      <EventView time={"10:00 am" } description={"The oxygen level has decreased to a critical value."}/>
+                      <EventView time={"10:00 am"} description={"The oxygen level has decreased to a critical value."}/>
+                      <EventView time={"10:00 am"} description={"The oxygen level has decreased to a critical value."}/>
                   
 
 
-                  </ScrollView>
-                
+                    </ScrollView>
+                  </View>
                 
                 
 
                 </View>
               </View>
-            </BlurView>
+            </View>
 
       </LinearGradient>
     )
@@ -60,18 +65,17 @@ export default function (){
   const styles =StyleSheet.create({
 
   containerContainer:{
-  overflow:"hidden",
     alignSelf:"center",
     marginTop:8,
     width:"95%",
     height:"89%",
-    //backgroundColor:"#f5f7fa",
+    backgroundColor:"#f5f7fa",
     paddingBottom:6,
     elevation:5,
-    borderTopWidth:2,
-    borderTopColor: "#2ad",
+    //borderTopWidth:2,
+    //borderTopColor: "#2ad",
     borderColor:"#2ad",
-    borderWidth:1,
+    //borderWidth:1,
     borderRadius: 15,
     borderCurve:"continuous",
     borderBottomLeftRadius:30,
@@ -96,13 +100,13 @@ export default function (){
     monthView:{
 
       height:60,
-      marginTop: 8,
+      marginTop:8,
       marginHorizontal:8,
       flexDirection: 'row',
       justifyContent: 'center',  
       padding:15,
       borderColor:"#2ad",
-      borderWidth:1,
+      //borderWidth:1,
       borderRadius: 15,
       borderCurve:"continuous",
       overflow:"hidden",
@@ -110,20 +114,23 @@ export default function (){
 
   },
     scrollContainer:{
-      
       marginTop:8,
-      backgroundColor:"#f5f7fa",
-      paddingBottom:6,
-      elevation:5,
+      //backgroundColor:"#f5f7fa",
+      //paddingBottom:6,
+      //paddingTop:6,
+      //elevation:5,
       width:320,
       height:480,
-      borderTopWidth:2,
-      borderTopColor: "#2ad",
+      //borderTopWidth:2,
+      //borderTopColor: "#2ad",
       borderColor:"#2ad",
-      borderWidth:1,
+      borderTopWidth:1,
+      borderBottomWidth:1,
       borderRadius: 15,
       borderCurve:"continuous",
-      flex:1
+      flex:1,
+      
+      //backgroundColor:"#0B2447"
 
   },
     dayContainer:{

@@ -62,21 +62,13 @@ export default function(){
                 
                 </View>
             
-                <LinearGradient  style={styles.container3}
-                colors={['#0B2447', '#576CBC','#19376D', '#0B2447']} 
-                start={{
-                    x: 0,
-                    y: 0
-                }}
-                end={{
-                    x: 1,
-                    y: 1
-                }}
+                <View  style={styles.container3}
+                
                 
                 >
                     
-                    <ScrollView style={{flex:1}} >
-                        <View style={styles.line}/>
+                    <ScrollView style={{}} >
+                        
                       <BlurView  style={styles.triggerContainer}>
                           <Text style={styles.triggerContainerText}>Puerta cocina</Text>
                           <TouchableOpacity style={styles.triggerButton}>
@@ -85,7 +77,7 @@ export default function(){
                           </TouchableOpacity>
                           
                       </BlurView>
-                      <View style={styles.line}/>
+                     
                       <BlurView  style={styles.triggerContainer}>
                           <Text style={styles.triggerContainerText}>Puerta cocina</Text>
                           <TouchableOpacity style={styles.triggerButton}>
@@ -94,7 +86,7 @@ export default function(){
                           </TouchableOpacity>
                           
                       </BlurView>
-                      <View style={styles.line}/>
+                      
                       <BlurView  style={styles.triggerContainer}>
                           <Text style={styles.triggerContainerText}>Puerta cocina</Text>
                           <TouchableOpacity style={styles.triggerButton}>
@@ -103,7 +95,7 @@ export default function(){
                           </TouchableOpacity>
                           
                       </BlurView>
-                      <View style={styles.line}/>
+                      
                       <BlurView  style={styles.triggerContainer}>
                           <Text style={styles.triggerContainerText}>Puerta cocina</Text>
                           <TouchableOpacity style={styles.triggerButton}>
@@ -112,7 +104,7 @@ export default function(){
                           </TouchableOpacity>
                           
                       </BlurView>
-                      <View style={styles.line}/>
+                    
                       <BlurView  style={styles.triggerContainer}>
                           <Text style={styles.triggerContainerText}>Puerta cocina</Text>
                           <TouchableOpacity style={styles.triggerButton}>
@@ -121,13 +113,13 @@ export default function(){
                           </TouchableOpacity>
                           
                       </BlurView>
-                      <View style={styles.line}/>
+                    
                       
 
                       
  
                     </ScrollView>
-                </LinearGradient>
+                </View>
             </View>
 
 
@@ -150,11 +142,11 @@ const styles = StyleSheet.create ({
         fontSize: 20,
         color: 'white',
         textShadowColor: 'rgba(0,0,0,0.2)',
-        elevation:5,
-        textShadowRadius:3,
-        textShadowOffset:{
-            width:2,height:1,
-        }
+        //elevation:5,
+        //textShadowRadius:3,
+        //textShadowOffset:{
+        //    width:2,height:1,
+        //}
     },
     box:{
         width: "100%",
@@ -181,8 +173,8 @@ const styles = StyleSheet.create ({
         //backgroundColor: "#f5f7fa",
         padding:15,
         //elevation:5,
-        borderColor:"#2ad",
-        borderWidth:1,
+        //borderColor:"#2ad",
+        //borderWidth:1,
         borderRadius: 15,
         borderCurve:"continuous",
         overflow:"hidden",
@@ -211,15 +203,15 @@ const styles = StyleSheet.create ({
         paddingVertical: 12,
         //elevation:5,*/
         height:80,
-        borderBottomWidth:2,
-        borderBottomColor: "#2ad",
-        borderTopWidth:0,
-        borderTopLeftRadius:0,
-        borderTopRightRadius:0,
-        borderStartWidth:0,
-        borderEndWidth:0,
-        borderColor:"#2ad",
-        borderWidth:1,
+        //borderBottomWidth:2,
+        //borderBottomColor: "#2ad",
+        //borderTopWidth:0,
+        //borderTopLeftRadius:0,
+        //borderTopRightRadius:0,
+        //borderStartWidth:0,
+        //borderEndWidth:0,
+        //borderColor:"#2ad",
+        //borderWidth:1,
         borderRadius: 15,
         borderCurve:"continuous",
 
@@ -234,9 +226,9 @@ const styles = StyleSheet.create ({
         padding: 10,
         justifyContent: 'center',
         height: 65,
-        borderWidth: 0.8,
+        //borderWidth: 0.8,
         borderRadius: 12,
-        borderColor:"#2ad",
+        //borderColor:"#2ad",
     
         backgroundColor: "white",
         elevation:5,
@@ -254,22 +246,26 @@ const styles = StyleSheet.create ({
     },
     container3:{
         marginTop:8,
-        width:320,
+        width:300,
+        
         //borderColor: 'blue',
         //borderWidth: 2,
         justifyContent: 'center',
-        backgroundColor:"#0B2447",
+        backgroundColor:"#d7dbdd",
         paddingBottom:6,
         marginHorizontal:8,
-        elevation:5,
+        //elevation:5,
         
         alignItems:"center",
         //height:330,
         height:420,
-        borderTopWidth:2,
-        borderTopColor: "#2ad",
+        //borderTopWidth:2,
+        //borderTopColor: "#2ad",
+        //borderColor:"#2ad",
+        //borderWidth:1,
         borderColor:"#2ad",
-        borderWidth:1,
+        borderTopWidth:1,
+        borderBottomWidth:1,
         borderRadius: 15,
         borderCurve:"continuous",
         overflow:"hidden"
@@ -280,6 +276,7 @@ const styles = StyleSheet.create ({
     },
     containerContainer:{
         alignSelf:"center",
+        marginHorizontal:8,
         marginTop:8,
         width:"95%",
         height:"89%",
@@ -293,10 +290,10 @@ const styles = StyleSheet.create ({
         
         alignItems:"center",
         
-        borderTopWidth:2,
-        borderTopColor: "#2ad",
-        borderColor:"#2ad",
-        borderWidth:1,
+        //borderTopWidth:2,
+        //borderTopColor: "#2ad",
+        //borderColor:"#2ad",
+        //borderWidth:1,
         borderRadius: 15,
         borderCurve:"continuous",
         borderBottomLeftRadius:30,
@@ -321,34 +318,39 @@ const styles = StyleSheet.create ({
     },
     triggerContainer:{
         height:80,
-        width:300,
+        alignSelf:"center",
+        width:280,
         justifyContent:'center',
         flexDirection: "row",
         overflow:"hidden",
         
-        borderWidth: 1,
+        //borderWidth: 1,
         borderRadius: 12,
-        borderColor: '#2ad',
+        //borderColor: '#2ad',
         textAlign: 'center',
         paddingVertical: 15,
         marginHorizontal:8,
         //elevation:5,
         marginVertical: 3,
-        //backgroundColor: "#dedede",
+
+        
+
+
+        backgroundColor: "#00447c",
     },
     triggerContainerText:{
         fontSize:22,
         color: "#f5f7fa",
-        fontWeight: "500",
+        fontWeight: "400",
         justifyContent:'center',
         textAlign: 'center',
         alignSelf:"center",
         marginHorizontal:"auto",
-        textShadowColor: 'rgba(0,0,0,0.2)',
-        textShadowRadius:3,
-        textShadowOffset:{
-            width:2,height:1,
-        }
+        //textShadowColor: 'rgba(0,0,0,0.2)',
+        //textShadowRadius:3,
+        //textShadowOffset:{
+        //    width:2,height:1,
+        //}
         //textShadowColor: 'rgba(0,0,0,0.2)',
         //textShadowRadius:3,
         //textShadowOffset:{
@@ -363,8 +365,8 @@ const styles = StyleSheet.create ({
         marginHorizontal:"auto",
         paddingHorizontal:"5%",
         elevation: 5,
-        borderWidth:1,
-        borderColor:"#0B2447",
+        //borderWidth:1,
+        //borderColor:"#0B2447",
         height:65
     },
     iconText:{

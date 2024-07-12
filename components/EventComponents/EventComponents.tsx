@@ -3,17 +3,18 @@ import { AntDesign } from '@expo/vector-icons';
 import { Stack } from 'expo-router';
 import React from 'react';
 import EventIcon from './EventIcon';
+import { BlurView } from 'expo-blur';
 
 export  function EventView({time,description}){
     return(
         <View style={styles.eventContainer}>
-            <Text style={styles.timeContainer}>{time}</Text>
+            
             <View style={styles.alertMainContainer}>
-                <View style={styles.line}/>
-                <View style={styles.alertContainer}>
+                <BlurView style={styles.alertContainer}>
                     <Text style={styles.eventText}>{description}</Text>
-                </View>
-                <View style={styles.line}/>
+                    <Text style={styles.timeContainer}>{time}</Text>
+                </BlurView>
+      
             </View>
         </View>
     );
@@ -44,17 +45,18 @@ const styles = StyleSheet.create ({
         //borderColor: "blue",
         paddingHorizontal: 10,
         flexDirection: "row",
+        height:90,
+        
         
       },
       timeContainer:{
         //borderColor: "red",
         //borderWidth: 2,
+        textAlign:"right",
+        color:"#000",
+        fontWeight:"500",
         height:100,
-        textShadowColor: "gray",
-        textShadowOffset: {
-          width: 1, height: 1
-        },
-        textShadowRadius: 3
+       
   
   
       },
@@ -63,17 +65,30 @@ const styles = StyleSheet.create ({
         //borderWidth: 1,
         flex:1,
         paddingHorizontal: 10,
+        backgroundColor:"#00000010",
+      
       },
       eventText:{
         elevation:5,
-        fontSize:16
+        fontSize:16,
+        color:"#fff",
+        fontWeight:"400"
       },
       alertContainer:{
-        backgroundColor: "orange",
+        alignSelf:"center",
+        width:280,
+        backgroundColor: "#00447c",
         padding: 8,
-        borderRadius: 15,
         flex:1,
         elevation: 5,
+        //borderWidth: 1,
+        borderRadius: 12,
+        //borderColor: '#2ad',
+        overflow:"hidden",
+        height:80,
+        marginVertical:4,
+        
+        
       },
       line:{
         borderBottomColor: "gray",
@@ -90,7 +105,7 @@ const styles = StyleSheet.create ({
         
       },
       day:{
-        color:"#fff",
+        color:"#00",
         fontSize: 24,
         fontWeight: "bold",
         marginBottom: 10,
