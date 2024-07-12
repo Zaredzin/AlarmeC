@@ -7,6 +7,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import IndexIcon from "@/components/EventComponents/IndexIcon";
 import IndexIconEntypo from '@/components/EventComponents/IndexIconEntypo';
 import { StatusBar } from 'expo-status-bar';
+import { BlurView } from 'expo-blur';
 
 
 
@@ -36,38 +37,38 @@ export default function(){
 
                 options={{ headerShown: false }}
             />
-            <View style={styles.container1}>
-                <View style={{alignContent:"center", alignSelf:"center",  flex:1, alignItems: "center"}}>
-                    <AntDesign name="check" size={36} color="green" />
-                </View>
-                
-                <Text style={styles.Title}>No se han registrado eventos</Text>
-
-            </View>
-            <View style={styles.container2}>
-                    <View style={styles.SensorsContainer}>
-                        <IndexIcon icon={"temperature-empty"} colorI={"#000"} size={28}/>
-                    </View>
-                    <View style={styles.SensorsContainer}>
-                        <IndexIconEntypo icon={"air"} colorI={"gray"} size={28} style={"marginHorizontal: 20,"}/>
-                    </View>
-                    <View style={styles.SensorsContainer}>
-                        <IndexIconEntypo icon={"water"} colorI={"#00f"} size={28}/>
-                    </View>
-                
-                
-                
-            </View>
             
-            <View style={styles.container3}>
-              <TouchableOpacity  style={styles.roomButton}>
-                <Text style={styles.roomButtonText}> Habitación</Text>
-              </TouchableOpacity>
-              <ScrollView style={{flex:1}} >  
+                <BlurView style={styles.container1}>
+                
+                    <Text style={styles.Title}>No se han registrado eventos</Text>
+
+                </BlurView>
+            <View style={styles.containerContainer}>
+                <TouchableOpacity  style={styles.roomButton}>
+                        <Text style={styles.roomButtonText}> Habitación</Text>
+                </TouchableOpacity>
+                <View style={styles.container2}>
+                        <View style={styles.SensorsContainer}>
+                            <IndexIcon icon={"temperature-empty"} colorI={"#000"} size={26}/>
+                        </View>
+                        <View style={styles.SensorsContainer}>
+                            <IndexIconEntypo icon={"air"} colorI={"gray"} size={26} />
+                        </View>
+                        <View style={styles.SensorsContainer}>
+                            <IndexIconEntypo icon={"water"} colorI={"#2ad"} size={26}/>
+                        </View>
+                
+                
+                
+                </View>
+            
+                <View style={styles.container3}>
+                    
+                    <ScrollView style={{flex:1}} >  
                       <View  style={styles.triggerContainer}>
                           <Text style={styles.triggerContainerText}>Puerta cocina</Text>
                           <TouchableOpacity style={styles.triggerButton}>
-                            <TriggerIcon icon={"door-closed"} size={54} colorI={"black"}/>
+                            <TriggerIcon icon={"door-closed"} size={50} colorI={"black"}/>
                             <Text style={styles.iconText}>Cerrar</Text>
                           </TouchableOpacity>
                           
@@ -75,7 +76,15 @@ export default function(){
                       <View  style={styles.triggerContainer}>
                           <Text style={styles.triggerContainerText}>Puerta cocina</Text>
                           <TouchableOpacity style={styles.triggerButton}>
-                            <TriggerIcon icon={"door-closed"} size={54} colorI={"black"}/>
+                            <TriggerIcon icon={"door-open"} size={50} colorI={"black"}/>
+                            <Text style={styles.iconText}>Abrir</Text>
+                          </TouchableOpacity>
+                          
+                      </View>
+                      <View  style={styles.triggerContainer}>
+                          <Text style={styles.triggerContainerText}>Puerta cocina</Text>
+                          <TouchableOpacity style={styles.triggerButton}>
+                            <TriggerIcon icon={"door-closed"} size={50} colorI={"black"}/>
                             <Text style={styles.iconText}>Cerrar</Text>
                           </TouchableOpacity>
                           
@@ -83,23 +92,15 @@ export default function(){
                       <View  style={styles.triggerContainer}>
                           <Text style={styles.triggerContainerText}>Puerta cocina</Text>
                           <TouchableOpacity style={styles.triggerButton}>
-                            <TriggerIcon icon={"door-closed"} size={54} colorI={"black"}/>
-                            <Text style={styles.iconText}>Cerrar</Text>
-                          </TouchableOpacity>
-                          
-                      </View>
-                      <View  style={styles.triggerContainer}>
-                          <Text style={styles.triggerContainerText}>Puerta cocina</Text>
-                          <TouchableOpacity style={styles.triggerButton}>
-                            <TriggerIcon icon={"door-closed"} size={54} colorI={"black"}/>
+                            <TriggerIcon icon={"door-closed"} size={50} colorI={"black"}/>
                             <Text style={styles.iconText}>Cerrar</Text>
                           </TouchableOpacity>
                           
                       </View>
  
-              </ScrollView>
+                    </ScrollView>
+                </View>
             </View>
-
 
 
         </LinearGradient>
@@ -110,9 +111,10 @@ export default function(){
 
 const styles = StyleSheet.create ({
     Title: {
-        fontSize: 28,
-        color: 'green',
+        fontSize: 20,
+        color: 'white',
         textShadowColor: 'rgba(0,0,0,0.2)',
+        elevation:5,
         textShadowRadius:3,
         textShadowOffset:{
             width:2,height:1,
@@ -126,7 +128,7 @@ const styles = StyleSheet.create ({
         marginVertical: 0,
         marginHorizontal:0,
         flex: 1,
-        padding: 5,
+        
         //borderColor: 'red',
         //borderWidth: 2,
         backgroundColor: "#d7dbdd" ,
@@ -140,28 +142,53 @@ const styles = StyleSheet.create ({
         marginHorizontal:8,
         flexDirection: 'row',
         justifyContent: 'center',  
-        borderRadius: 15,
-        backgroundColor: "#f5f7fa",
+        //backgroundColor: "#f5f7fa",
         padding:15,
-        elevation:5,
+        //elevation:5,
+        borderColor:"#2ad",
+        borderWidth:1,
+        borderRadius: 15,
+        borderCurve:"continuous",
+        overflow:"hidden",
+        height:60
         
 
     },
     container2:{
         marginTop: 10,
         flexDirection: 'row',
-        justifyContent: 'center',
+        justifyContent: 'space-between',
+        alignContent:"center",
        
         alignItems:"center",
-        backgroundColor: "#f5f7fa",
+       // backgroundColor: "#f5f7fa",
         marginHorizontal:8,
         //borderColor: 'black',
         //borderWidth: 2,
-        borderRadius: 15,
-        paddingHorizontal:16,
+        
+        /*borderBottomWidth: 2,
+        borderBottomColor: "#2ad",
+        
+        borderBottomStartRadius:12,
+        borderBottomEndRadius:12,
+        borderCurve:"continuous",
         paddingVertical: 12,
-        elevation:5,
+        //elevation:5,*/
         height:80,
+        borderBottomWidth:2,
+        borderBottomColor: "#2ad",
+        borderTopWidth:0,
+        borderTopLeftRadius:0,
+        borderTopRightRadius:0,
+        borderStartWidth:0,
+        borderEndWidth:0,
+        borderColor:"#2ad",
+        borderWidth:1,
+        borderRadius: 15,
+        borderCurve:"continuous",
+
+
+
         
     },
 
@@ -171,11 +198,13 @@ const styles = StyleSheet.create ({
         padding: 10,
         justifyContent: 'center',
         height: 65,
-        //borderWidth: 0.8,
+        borderWidth: 0.8,
         borderRadius: 12,
+        borderColor:"#2ad",
     
         backgroundColor: "white",
         elevation:5,
+        
         
 
     },
@@ -189,6 +218,7 @@ const styles = StyleSheet.create ({
     },
     container3:{
         marginTop:8,
+        width:320,
         //borderColor: 'blue',
         //borderWidth: 2,
         justifyContent: 'center',
@@ -198,29 +228,57 @@ const styles = StyleSheet.create ({
         elevation:5,
         
         alignItems:"center",
-        height:330,
+        //height:330,
+        height:420,
         borderTopWidth:2,
         borderTopColor: "#2ad",
         borderColor:"#2ad",
         borderWidth:1,
         borderRadius: 15,
         borderCurve:"continuous",
+        overflow:"hidden"
        
         
     
 
     },
+    containerContainer:{
+        alignSelf:"center",
+        marginTop:8,
+        width:"95%",
+        height:"89%",
+        //borderColor: 'blue',
+        //borderWidth: 2,
+       
+        backgroundColor:"#f5f7fa",
+        paddingBottom:6,
+        
+        elevation:5,
+        
+        alignItems:"center",
+        
+        borderTopWidth:2,
+        borderTopColor: "#2ad",
+        borderColor:"#2ad",
+        borderWidth:1,
+        borderRadius: 15,
+        borderCurve:"continuous",
+        borderBottomLeftRadius:30,
+        borderBottomRightRadius:30,
+    },
     roomButton:{
         
-        width:335,
+        width:"100%",
         justifyContent:'center',
         
-        backgroundColor: "#2ad",
+        backgroundColor: "#0B2447",
         textAlign: 'center',
         paddingVertical: 2,
-        marginBottom: 10,
+        
         borderRadius: 12,
-        elevation: 20,
+        borderBottomStartRadius:0,
+        borderBottomEndRadius:0,
+        elevation: 5,
     },
     roomButtonText:{
         fontSize: 24,
@@ -228,10 +286,11 @@ const styles = StyleSheet.create ({
         textAlign: 'center',
     },
     triggerContainer:{
-        height:110,
+        height:101,
         width:300,
         justifyContent:'center',
         flexDirection: "row",
+        
         //borderWidth: 2,
         borderRadius: 12,
         //borderColor: 'orange',
@@ -240,21 +299,21 @@ const styles = StyleSheet.create ({
         marginHorizontal:8,
         elevation:5,
         marginVertical: 3,
-        backgroundColor: "#0B2447",
+        backgroundColor: "orange",
     },
     triggerContainerText:{
-        fontSize:20,
-        color: "white",
+        fontSize:22,
+        color: "black",
         fontWeight: "500",
         justifyContent:'center',
         textAlign: 'center',
         alignSelf:"center",
         marginHorizontal:"auto",
-        textShadowColor: 'rgba(0,0,0,0.2)',
-        textShadowRadius:3,
-        textShadowOffset:{
-            width:2,height:1,
-        }
+        //textShadowColor: 'rgba(0,0,0,0.2)',
+        //textShadowRadius:3,
+        //textShadowOffset:{
+        //    width:2,height:1,
+        //}
     },
     triggerButton:{
         borderRadius:15,
@@ -262,6 +321,8 @@ const styles = StyleSheet.create ({
         marginHorizontal:"auto",
         paddingHorizontal:"5%",
         elevation: 5,
+        borderWidth:1,
+        borderColor:"#0B2447"
     },
     iconText:{
         borderTopWidth:1,

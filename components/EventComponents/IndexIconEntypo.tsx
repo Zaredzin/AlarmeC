@@ -5,12 +5,12 @@ import React from 'react';
 import Entypo from '@expo/vector-icons/Entypo';
 import { FontAwesome6 } from '@expo/vector-icons';
 
-export default function IndexIconEntypo({icon, colorI, size, style}){
+export default function IndexIconEntypo({icon, colorI, size}){
     return(
 
 
         
-        <Entypo style={[styles.iconStyle, style]} name={icon} size={size} color={colorI}/>
+        <Entypo style={[styles.iconStyle]} name={icon} size={size} color={colorI}/>
 
     )
 }
