@@ -62,44 +62,72 @@ export default function(){
                 
                 </View>
             
-                <View style={styles.container3}>
+                <LinearGradient  style={styles.container3}
+                colors={['#0B2447', '#576CBC','#19376D', '#0B2447']} 
+                start={{
+                    x: 0,
+                    y: 0
+                }}
+                end={{
+                    x: 1,
+                    y: 1
+                }}
+                
+                >
                     
-                    <ScrollView style={{flex:1}} >  
-                      <View  style={styles.triggerContainer}>
+                    <ScrollView style={{flex:1}} >
+                        <View style={styles.line}/>
+                      <BlurView  style={styles.triggerContainer}>
                           <Text style={styles.triggerContainerText}>Puerta cocina</Text>
                           <TouchableOpacity style={styles.triggerButton}>
-                            <TriggerIcon icon={"door-closed"} size={50} colorI={"black"}/>
+                            <TriggerIcon icon={"door-closed"} size={34} colorI={"black"}/>
                             <Text style={styles.iconText}>Cerrar</Text>
                           </TouchableOpacity>
                           
-                      </View>
-                      <View  style={styles.triggerContainer}>
+                      </BlurView>
+                      <View style={styles.line}/>
+                      <BlurView  style={styles.triggerContainer}>
                           <Text style={styles.triggerContainerText}>Puerta cocina</Text>
                           <TouchableOpacity style={styles.triggerButton}>
-                            <TriggerIcon icon={"door-open"} size={50} colorI={"black"}/>
+                            <TriggerIcon icon={"door-open"} size={34} colorI={"black"}/>
                             <Text style={styles.iconText}>Abrir</Text>
                           </TouchableOpacity>
                           
-                      </View>
-                      <View  style={styles.triggerContainer}>
+                      </BlurView>
+                      <View style={styles.line}/>
+                      <BlurView  style={styles.triggerContainer}>
                           <Text style={styles.triggerContainerText}>Puerta cocina</Text>
                           <TouchableOpacity style={styles.triggerButton}>
-                            <TriggerIcon icon={"door-closed"} size={50} colorI={"black"}/>
+                            <TriggerIcon icon={"door-closed"} size={34} colorI={"black"}/>
                             <Text style={styles.iconText}>Cerrar</Text>
                           </TouchableOpacity>
                           
-                      </View>
-                      <View  style={styles.triggerContainer}>
+                      </BlurView>
+                      <View style={styles.line}/>
+                      <BlurView  style={styles.triggerContainer}>
                           <Text style={styles.triggerContainerText}>Puerta cocina</Text>
                           <TouchableOpacity style={styles.triggerButton}>
-                            <TriggerIcon icon={"door-closed"} size={50} colorI={"black"}/>
+                            <TriggerIcon icon={"door-closed"} size={34} colorI={"black"}/>
                             <Text style={styles.iconText}>Cerrar</Text>
                           </TouchableOpacity>
                           
-                      </View>
+                      </BlurView>
+                      <View style={styles.line}/>
+                      <BlurView  style={styles.triggerContainer}>
+                          <Text style={styles.triggerContainerText}>Puerta cocina</Text>
+                          <TouchableOpacity style={styles.triggerButton}>
+                            <TriggerIcon icon={"door-closed"} size={34} colorI={"black"}/>
+                            <Text style={styles.iconText}>Cerrar</Text>
+                          </TouchableOpacity>
+                          
+                      </BlurView>
+                      <View style={styles.line}/>
+                      
+
+                      
  
                     </ScrollView>
-                </View>
+                </LinearGradient>
             </View>
 
 
@@ -110,6 +138,14 @@ export default function(){
 
 
 const styles = StyleSheet.create ({
+    line:{
+        alignSelf:"center",
+        width:"95%",
+        borderBottomColor: "gray",
+        borderBottomWidth:1,
+        marginVertical: 5,
+        elevation: 2,
+      },
     Title: {
         fontSize: 20,
         color: 'white',
@@ -222,7 +258,7 @@ const styles = StyleSheet.create ({
         //borderColor: 'blue',
         //borderWidth: 2,
         justifyContent: 'center',
-        backgroundColor:"#f5f7fa",
+        backgroundColor:"#0B2447",
         paddingBottom:6,
         marginHorizontal:8,
         elevation:5,
@@ -267,10 +303,8 @@ const styles = StyleSheet.create ({
         borderBottomRightRadius:30,
     },
     roomButton:{
-        
         width:"100%",
         justifyContent:'center',
-        
         backgroundColor: "#0B2447",
         textAlign: 'center',
         paddingVertical: 2,
@@ -286,29 +320,35 @@ const styles = StyleSheet.create ({
         textAlign: 'center',
     },
     triggerContainer:{
-        height:101,
+        height:80,
         width:300,
         justifyContent:'center',
         flexDirection: "row",
+        overflow:"hidden",
         
-        //borderWidth: 2,
+        borderWidth: 1,
         borderRadius: 12,
-        //borderColor: 'orange',
+        borderColor: '#2ad',
         textAlign: 'center',
         paddingVertical: 15,
         marginHorizontal:8,
-        elevation:5,
+        //elevation:5,
         marginVertical: 3,
-        backgroundColor: "orange",
+        //backgroundColor: "#dedede",
     },
     triggerContainerText:{
         fontSize:22,
-        color: "black",
+        color: "#f5f7fa",
         fontWeight: "500",
         justifyContent:'center',
         textAlign: 'center',
         alignSelf:"center",
         marginHorizontal:"auto",
+        textShadowColor: 'rgba(0,0,0,0.2)',
+        textShadowRadius:3,
+        textShadowOffset:{
+            width:2,height:1,
+        }
         //textShadowColor: 'rgba(0,0,0,0.2)',
         //textShadowRadius:3,
         //textShadowOffset:{
@@ -316,13 +356,16 @@ const styles = StyleSheet.create ({
         //}
     },
     triggerButton:{
+        justifyContent:"center",
+        alignSelf:"center",
         borderRadius:15,
         backgroundColor:"white",
         marginHorizontal:"auto",
         paddingHorizontal:"5%",
         elevation: 5,
         borderWidth:1,
-        borderColor:"#0B2447"
+        borderColor:"#0B2447",
+        height:65
     },
     iconText:{
         borderTopWidth:1,

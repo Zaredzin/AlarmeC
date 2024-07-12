@@ -90,6 +90,7 @@ const styles = StyleSheet.create ({
         
       },
       day:{
+        color:"#fff",
         fontSize: 24,
         fontWeight: "bold",
         marginBottom: 10,

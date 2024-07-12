@@ -29,11 +29,11 @@ export default function (){
         <BlurView style={styles.monthView}>
           <EventMonth month={"November"}/>
         </BlurView>
-            <View style={styles.containerContainer}>
+            <BlurView experimentalBlurMethod="dimezisBlurView" style={styles.containerContainer}>
               <View style={styles.mainContainer}>
                 <View>
                   <EventDay day={"Martes"}/>
-                  <ScrollView style={styles.scrollContainer}>
+                  <ScrollView  style={styles.scrollContainer}>
                     <EventView time={"10:00"} description={"The oxygen level has decreased to a critical value."}/>
                     <EventView time={"10:00"} description={"The oxygen level has decreased to a critical value."}/>
                     <EventView time={"10:00"} description={"The oxygen level has decreased to a critical value."}/>
@@ -51,7 +51,7 @@ export default function (){
 
                 </View>
               </View>
-            </View>
+            </BlurView>
 
       </LinearGradient>
     )
@@ -60,11 +60,12 @@ export default function (){
   const styles =StyleSheet.create({
 
   containerContainer:{
+  overflow:"hidden",
     alignSelf:"center",
     marginTop:8,
     width:"95%",
     height:"89%",
-    backgroundColor:"#f5f7fa",
+    //backgroundColor:"#f5f7fa",
     paddingBottom:6,
     elevation:5,
     borderTopWidth:2,
@@ -109,6 +110,7 @@ export default function (){
 
   },
     scrollContainer:{
+      
       marginTop:8,
       backgroundColor:"#f5f7fa",
       paddingBottom:6,
