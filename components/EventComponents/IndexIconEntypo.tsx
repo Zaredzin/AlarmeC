@@ -4,8 +4,10 @@ import { Stack } from 'expo-router';
 import React from 'react';
 import Entypo from '@expo/vector-icons/Entypo';
 import { FontAwesome6 } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
 
-export default function IndexIconEntypo({icon, colorI, size}){
+
+export  function IconEntypo({icon, colorI, size}){
     return(
 
 
@@ -14,6 +16,17 @@ export default function IndexIconEntypo({icon, colorI, size}){
 
     )
 }
+export function MaterialI({icon, colorI, size}){
+    return(
+
+
+        
+        <MaterialIcons style={[styles.iconStyle]} name={icon} size={size} color={colorI}/>
+
+    )
+}
+
+
 
 
 

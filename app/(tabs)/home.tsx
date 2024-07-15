@@ -5,10 +5,11 @@ import EventIcon from '@/components/EventComponents/EventIcon';
 import TriggerIcon from '@/components/indexComponents/TriggerIcon';
 import { LinearGradient } from 'expo-linear-gradient';
 import IndexIcon from "@/components/EventComponents/IndexIcon";
-import IndexIconEntypo from '@/components/EventComponents/IndexIconEntypo';
+import { IconEntypo } from '@/components/EventComponents/IndexIconEntypo';
 import { StatusBar } from 'expo-status-bar';
 import { BlurView } from 'expo-blur';
 import  HomeComponents, { HomeTriggerView, HumiditySensor, OxygenSensor, TempSensor }  from '../../components/HomeComponents/HomeComponents'
+import { MaterialI } from '@/components/EventComponents/IndexIconEntypo';
 
 
 
@@ -50,18 +51,29 @@ export default function(){
                         <EventIcon icon="down" colorI="#fff" size={20} />
                 </TouchableOpacity>
                 <View style={styles.container2}>
-                        <View style={[styles.SensorsContainer, {flexDirection:"row",justifyContent:"space-around"}]}>
-                            <IndexIcon icon={"temperature-empty"} colorI={"#000"} size={26}/>
-                            <TempSensor temp={"27°"}/>
+                        <View style={{}}>
+                            <View style={[styles.SensorsContainer, {flexDirection:"row",justifyContent:"space-around"}]}>
+                                <IndexIcon icon={"temperature-empty"} colorI={"#000"} size={26}/>
+                                <TempSensor temp={"27°"}/>
+                            </View>
+                            <View style={[styles.SensorsContainer, {flexDirection:"row",justifyContent:"space-around"}]}>
+                                <IconEntypo icon={"air"} colorI={"gray"} size={26} />
+                                <OxygenSensor oxygenLevel={"71%"}/>
+                            </View>
+
                         </View>
-                        <View style={[styles.SensorsContainer, {flexDirection:"row",justifyContent:"space-around"}]}>
-                            <IndexIconEntypo icon={"air"} colorI={"gray"} size={26} />
-                            <OxygenSensor oxygenLevel={"71%"}/>
+                        <View style={{}}>
+                            <View style={[styles.SensorsContainer, {flexDirection:"row",justifyContent:"space-around"}]}>
+                                <IconEntypo icon={"water"} colorI={"#2ad"} size={26}/>
+                                <HumiditySensor humidityLevel="65%"/>
+                            </View>
+                            <View style={[styles.SensorsContainer, {flexDirection:"row",justifyContent:"space-around"}]}>
+                                <MaterialI icon={"gas-meter"} colorI={"orange"} size={28}/>
+                                <HumiditySensor humidityLevel="65%"/>
+                            </View>
+
                         </View>
-                        <View style={[styles.SensorsContainer, {flexDirection:"row",justifyContent:"space-around"}]}>
-                            <IndexIconEntypo icon={"water"} colorI={"#2ad"} size={26}/>
-                            <HumiditySensor humidityLevel="65%"/>
-                        </View>
+                        
                 
                 
                 
@@ -174,7 +186,7 @@ const styles = StyleSheet.create ({
         borderCurve:"continuous",
         paddingVertical: 12,
         //elevation:5,*/
-        height:80,
+        height:160,
         //borderBottomWidth:2,
         //borderBottomColor: "#2ad",
         //borderTopWidth:0,
@@ -193,7 +205,7 @@ const styles = StyleSheet.create ({
     },
 
     SensorsContainer:{
-        width:95,
+        width:120,
         margin: 5,
         padding: 10,
         justifyContent: 'center',
@@ -230,7 +242,7 @@ const styles = StyleSheet.create ({
         
         alignItems:"center",
         //height:330,
-        height:420,
+        height:340,
         //borderTopWidth:2,
         //borderTopColor: "#2ad",
         //borderColor:"#2ad",
@@ -275,8 +287,9 @@ const styles = StyleSheet.create ({
     },
     roomButton:{
         width:"100%",
-        justifyContent:'center',
         backgroundColor: "#0B2447",
+        justifyContent:'center',
+       
         textAlign: 'center',
         paddingVertical: 2,
         

@@ -10,10 +10,10 @@ export  function EventView({time,description}){
         <View style={styles.eventContainer}>
             
             <View style={styles.alertMainContainer}>
-                <BlurView style={styles.alertContainer}>
+                <View style={styles.alertContainer}>
                     <Text style={styles.eventText}>{description}</Text>
                     <Text style={styles.timeContainer}>{time}</Text>
-                </BlurView>
+                </View>
       
             </View>
         </View>

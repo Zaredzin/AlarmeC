@@ -1,163 +1,187 @@
-
-import { Text,View,TextInput,StyleSheet, Pressable,Platform  } from "react-native";
-import React, { useState } from "react";
-import {LinearGradient} from 'expo-linear-gradient';
-import { createStackNavigator } from "@react-navigation/stack";
+import { Text, View, TextInput, StyleSheet, Pressable, ScrollView, TouchableOpacity } from "react-native";
+import React, { useState, useEffect } from "react";
+import { LinearGradient } from 'expo-linear-gradient';
+import * as SplashScreen from 'expo-splash-screen';
+import { useRouter } from 'expo-router';
 import { Stack } from "expo-router";
+import { BlurView } from 'expo-blur';
+import EventIcon from "@/components/EventComponents/EventIcon";
+import { StatusBar } from 'expo-status-bar';
+import { auth } from './fireBase';  // Asegúrate de que la ruta sea correcta
 
+export default function LoginScreen() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
 
+  const handleLogin = async () => {
+    try {
+        await auth.signInWithEmailAndPassword(email, password);
+        router.push('/(tabs)/home'); // Cambia la ruta a '/home'
+    } catch (err) {
+        if (err instanceof Error) {
+            setError(err.message);
+        } else {
+            setError('An unknown error occurred.');
+        }
+    }
+};
 
+  const amonos = () => {
+    router.push('/(tabs)/home');
+  }
 
+  useEffect(() => {
+    SplashScreen.preventAutoHideAsync();
 
-export default function(){
-        const [text, setText] = useState('');
-        const [pass, setPass] = useState('');
-    
+    async function prepare() {
+      await SplashScreen.preventAutoHideAsync();
+    }
 
-    return(
-        <View style={styles.loginContainer} >
-            <Stack.Screen
-                options={{ headerShown: false }}
-            />        
-            
-            <LinearGradient 
-                colors={['#0B2447', '#576CBC','#19376D', '#0B2447']} 
-                start={{
-                    x: 0,
-                    y: 0
-                }}
-                end={{
-                    x: 1,
-                    y: 1
-                }}
-                style={styles.box}>
+    prepare().then(() => {
+      SplashScreen.hideAsync();
+    });
+  }, []);
 
-                    <View style={styles.mainContainer} >
-                        <View style={styles.image}><Text style={styles.imageText}>ImagenLogo</Text></View>
-                        <Text style={styles.title}>PITOTOTOTOTOTOTOTO</Text>
-                        <View style={styles.inputContainer}>
-                            <TextInput style={styles.inputText} placeholder="Usuario" placeholderTextColor={"gray"} onChangeText={setText} value={text}></TextInput>
-                            <TextInput style={styles.inputText} placeholder="Contraseña" placeholderTextColor={"gray"} onChangeText={setPass} value={pass}></TextInput>
-                            <Pressable><Text style={styles.loginButton}>Iniciar</Text></Pressable>
-                        </View>
-                        <Pressable style={styles.noAccount}>
-                            <Text style={styles.noAccount} >¿No tienes cuenta?</Text>
-                        </Pressable>
-                    </View>    
-
-                
-            </LinearGradient>
-
-    
-            
-        </View>
-    )
+  return (
+    <View style={styles.loginContainer}>
+      <StatusBar style="light" backgroundColor="#121532" />
+      <Stack.Screen options={{ headerShown: false }} />
+      <LinearGradient
+        colors={['#121532', '#203457', '#6c8294', '#506275', '#3483b0']}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
+        style={styles.box}
+      >
+        <View style={{ width: 100, height: 100, backgroundColor: "#264a71", position: "absolute" }}></View>
+        <ScrollView contentContainerStyle={{ flex: 1, width: "100%", height: "100%" }}>
+          <View style={styles.labelT}>
+            <Text style={styles.title}>Iniciar Sesión</Text>
+          </View>
+          <BlurView experimentalBlurMethod="dimezisBlurView" intensity={60} style={styles.blurContainer}>
+            <View style={styles.mainContainer}>
+              <View style={styles.inputContainer}>
+                <TextInput
+                  style={styles.inputText}
+                  placeholder="Email"
+                  onChangeText={setEmail}
+                  value={email}
+                  autoCapitalize="none"
+                  keyboardType="email-address"
+                />
+                <TextInput
+                  style={styles.inputText}
+                  placeholder="Contraseña"
+                  onChangeText={setPassword}
+                  value={password}
+                  secureTextEntry
+                />
+                {error ? <Text style={styles.errorText}>{error}</Text> : null}
+                <TouchableOpacity onPress={amonos}>
+                  <Text style={styles.loginButton}>
+                    Iniciar<EventIcon colorI={"#fff"} icon="arrowright" size={24} />
+                  </Text>
+                </TouchableOpacity>
+              </View>
+              <Pressable style={styles.noAccount}>
+                <Text style={styles.noAccount}>I don't know my password</Text>
+              </Pressable>
+            </View>
+          </BlurView>
+        </ScrollView>
+      </LinearGradient>
+    </View>
+  )
 }
 
-
 const styles = StyleSheet.create({
-    title:{
-        fontSize: 30,
-        fontWeight: "bold",
-        justifyContent:'center',
-        textAlign:'center',
-        color: "#fff",
-
-        
+  blurContainer: {
+    borderRadius: 15,
+    overflow: 'hidden',
+    width: 300,
+    height: 400,
+  },
+  title: {
+    fontSize: 38,
+    fontWeight: "bold",
+    textAlign: 'left',
+    color: "white",
+  },
+  mainContainer: {
+    justifyContent: "center",
+    width: "100%",
+    height: "100%",
+    alignSelf: "center",
+    borderRadius: 15,
+    borderWidth: 2,
+    borderColor: "#fff",
+    shadowColor: "black",
+    shadowOffset: {
+      width: 1,
+      height: 5
     },
-    mainContainer:{
-        justifyContent: "center",
-        backgroundColor: 'rgba(0,0,0,0.6)',
-
-        width: "94%",
-        height: "90%",
-
-        alignSelf:"center",
-        borderStartColor: 'rgba(0,112,255,0.5)',
-        borderTopColor: 'rgba(0,112,255,0.5)',
-        borderEndColor: 'rgba(0,112,255,0.2)',
-        borderBottomColor: 'rgba(0,112,255,0.3)',
-        borderWidth: 2,
-        borderRadius: 15,
-        marginVertical: "auto",
-        shadowColor: "black",
-        shadowOffset: {
-            width: 1,
-            height: 5
-        },
-        shadowRadius: 10,
-        shadowOpacity: 0.8,
-
-        
-    },
-    box:{
-        width: "100%",
-        height: "100%"
-    },
-    loginContainer:{
-        justifyContent:'center',
-        textAlign: 'center',
-        borderWidth: 2,
-        borderColor: 'blue',
-        backgroundColor: "#0B2447",
-        flex: 1,
-    },
-    image:{
-
-        //borderWidth: 2,
-        //borderColor: 'red',
-        justifyContent:'center',
-        textAlign:'center',
-        marginBottom: 10,
-        marginTop:10,
-        height:100
-
-    },
-    imageText:{
-        textAlign:'center',
-        justifyContent:'center'
-    },
-    inputContainer:{
-        marginTop: 60,
-
-    },
-    inputText:{
-        borderColor: '#19376D',
-        fontSize:20,
-        borderRadius: 5,
-        borderBottomWidth: 2,
-        justifyContent:'center',
-        alignItems: "center",
-        alignContent:"center",
-        alignSelf:"center",
-        textAlign:'center',
-        marginHorizontal: 20,
-        marginVertical: 10,
-        paddingHorizontal: 80   ,
-        paddingVertical: 4,
-        backgroundColor: 'rgba(0,0,0,0.5)',
-        color: "#fff",
-        width: "35%",
-        
-
-    },
-    noAccount:{
-        marginTop: 50,
-        color: '#fff',
-        textAlign:'center',
-        marginBottom:6,
-    },
-    loginButton:{
-        textAlign: "center",
-        justifyContent: "center",
-        fontSize: 28,
-
-        marginHorizontal: "auto",
-        marginTop: 30,
-        paddingVertical: 5,
-        paddingHorizontal: 30,
-        borderRadius: 5,
-        backgroundColor: '#576CBC'
-    },
-    
-})
+    shadowRadius: 10,
+    shadowOpacity: 0.8,
+  },
+  box: {
+    width: "100%",
+    height: "100%",
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  loginContainer: {
+    justifyContent: 'center',
+    textAlign: 'center',
+    alignItems: "center",
+    flex: 1,
+  },
+  labelT: {
+    marginTop: 85,
+    marginBottom: 40,
+    textAlign: "left",
+  },
+  inputContainer: {
+    alignItems: "center"
+  },
+  inputText: {
+    justifyContent: "center",
+    width: 250,
+    height: 40,
+    borderColor: "#fff",
+    borderWidth: 2,
+    borderRadius: 10,
+    padding: 10,
+    marginVertical: 10,
+    backgroundColor: "#ffffff50",
+    marginBottom: 20,
+  },
+  noAccount: {
+    marginTop: 50,
+    color: '#fff',
+    textAlign: 'center',
+    marginBottom: 6,
+  },
+  loginButton: {
+    width: 250,
+    height: 40,
+    borderRadius: 10,
+    backgroundColor: "#82d8e980",
+    alignItems: "center",
+    justifyContent: "center",
+    textAlign: "center",
+    alignSelf: "center",
+    fontSize: 28,
+    marginVertical: 10,
+    borderWidth: 1,
+    borderColor: "#fff",
+    color: "#fff",
+    fontWeight: "500",
+  },
+  errorText: {
+    color: 'red',
+    textAlign: 'center',
+    marginBottom: 10,
+  },
+});

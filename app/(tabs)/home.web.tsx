@@ -1,122 +1,296 @@
-import {Text, View, Pressable, StyleSheet} from 'react-native';
-import { AntDesign } from '@expo/vector-icons';
+import {Text, View, Pressable, StyleSheet, ScrollView, SafeAreaView, TouchableOpacity} from 'react-native';
+import { AntDesign, FontAwesome6 } from '@expo/vector-icons';
 import { Stack } from 'expo-router';
+import EventIcon from '@/components/EventComponents/EventIcon';
+import TriggerIcon from '@/components/indexComponents/TriggerIcon';
+import { LinearGradient } from 'expo-linear-gradient';
+import IndexIcon from "@/components/EventComponents/IndexIcon";
+import IndexIconEntypo from '@/components/EventComponents/IndexIconEntypo';
+import { StatusBar } from 'expo-status-bar';
+import { BlurView } from 'expo-blur';
+import  HomeComponents, { HomeTriggerView, HumiditySensor, OxygenSensor, TempSensor }  from '../../components/HomeComponents/HomeComponents'
+
+
 
 
 export default function(){
     return(
         
-        <View style={styles.mainContainer}>
+
+        
+        
+        <LinearGradient style={styles.mainContainer}
+        colors={['#0B2447', '#576CBC','#19376D', '#0B2447']} 
+        start={{
+            x: 0,
+            y: 0
+        }}
+        end={{
+            x: 1,
+            y: 1
+        }}
+        
+        
+        >
+            <StatusBar style="light"  backgroundColor="#121532" />
+            
             <Stack.Screen
 
                 options={{ headerShown: false }}
             />
-            <View style={styles.container1}>
-
-                <AntDesign name="check" size={28} color="green" />
-                <Text style={styles.Title}>No se han registrado eventos</Text>
-
-            </View>
-            <View style={styles.container2}>
-                <View style={styles.SensorsContainer}><Text>Temp</Text></View>
-                <View style={styles.SensorsContainer}><Text>Oxygen</Text></View>
-                <View style={styles.SensorsContainer}><Text>Humidity</Text></View>
-                <View style={styles.SensorsContainer}><Text>Temp</Text></View>
-                <View style={styles.SensorsContainer}><Text>S</Text></View>
-            </View>
-            <View style={styles.container3}>
-              <Pressable style={styles.roomButton}><Text style={styles.roomButton}> Habitación</Text></Pressable>
-              <View>
-                  <View>
-                      <View  style={styles.triggerContainer}>
-                          <Text style={styles.triggerContainerText}>Puerta cocina</Text>
-                      </View>
-                      <View  style={styles.triggerContainer}>
-                          <Text style={styles.triggerContainerText}>Ventana cocina</Text>
-                      </View>
-                  </View>
-              </View>
-            </View>
-            <View>
-                <Text>
-                    pito
-                </Text>
-            </View>
             
+                <BlurView style={styles.container1}>
+                
+                    <Text style={styles.Title}>No se han registrado eventos</Text>
+
+                </BlurView>
+            <View style={styles.containerContainer}>
+                <TouchableOpacity  style={[styles.roomButton,{flexDirection:"row"}]}>
+                        <Text style={styles.roomButtonText}> Habitación</Text> 
+                        <EventIcon icon="down" colorI="#fff" size={20} />
+                </TouchableOpacity>
+                <View style={styles.container2}>
+                        <View style={[styles.SensorsContainer, {flexDirection:"row",justifyContent:"space-around"}]}>
+                            <IndexIcon icon={"temperature-empty"} colorI={"#000"} size={26}/>
+                            <TempSensor temp={"27°"}/>
+                        </View>
+                        <View style={[styles.SensorsContainer, {flexDirection:"row",justifyContent:"space-around"}]}>
+                            <IndexIconEntypo icon={"air"} colorI={"gray"} size={26} />
+                            <OxygenSensor oxygenLevel={"71%"}/>
+                        </View>
+                        <View style={[styles.SensorsContainer, {flexDirection:"row",justifyContent:"space-around"}]}>
+                            <IndexIconEntypo icon={"water"} colorI={"#2ad"} size={26}/>
+                            <HumiditySensor humidityLevel="65%"/>
+                        </View>
+                
+                
+                
+                </View>
+            
+                <View  style={styles.container3}
+                
+                
+                >
+                    
+                    <ScrollView style={{}} >
+
+                        <HomeTriggerView triggerName={"Puerta Este"} action={"close"}/>
+                        <HomeTriggerView triggerName={"Puerta Oeste"} action={"open"}/>
+                        <HomeTriggerView triggerName={"Puerta Este"} action={"close"}/>
+                        <HomeTriggerView triggerName={"Puerta Oeste"} action={"open"}/>
+                        <HomeTriggerView triggerName={"Puerta Este"} action={"close"}/>
+                        <HomeTriggerView triggerName={"Puerta Oeste"} action={"open"}/>
+                     
+
+                        
+                        
+                      
+                    
+                      
+
+                      
+ 
+                    </ScrollView>
+                </View>
+            </View>
 
 
-        </View>
+        </LinearGradient>
         
     );
 }
 
 
 const styles = StyleSheet.create ({
+    line:{
+        alignSelf:"center",
+        width:"95%",
+        borderBottomColor: "gray",
+        borderBottomWidth:1,
+        marginVertical: 5,
+        elevation: 2,
+      },
     Title: {
-        fontSize: 28,
-        color: 'green',
+        fontSize: 20,
+        color: 'white',
+        textShadowColor: 'rgba(0,0,0,0.2)',
+        //elevation:5,
+        //textShadowRadius:3,
+        //textShadowOffset:{
+        //    width:2,height:1,
+        //}
+    },
+    box:{
+        width: "100%",
+        height: "100%"
     },
     mainContainer: {
         marginVertical: 0,
         marginHorizontal:0,
         flex: 1,
-        padding: 5,
-        borderColor: 'red',
-        borderWidth: 2,
-        backgroundColor: "#f5f7fa"
+        
+        //borderColor: 'red',
+        //borderWidth: 2,
+        backgroundColor: "#d7dbdd" ,
+        zIndex:3
 
     },
     container1:{
-        borderColor: "#007AA2",
-        borderWidth: 2,
+        //borderColor: "#007AA2",
+        //borderWidth: 2,
+        marginTop: 8,
+        marginHorizontal:8,
         flexDirection: 'row',
         justifyContent: 'center',  
+        //backgroundColor: "#f5f7fa",
+        padding:15,
+        //elevation:5,
+        //borderColor:"#2ad",
+        //borderWidth:1,
+        borderRadius: 15,
+        borderCurve:"continuous",
+        overflow:"hidden",
+        height:60
+        
 
     },
     container2:{
+        marginTop: 10,
         flexDirection: 'row',
-        justifyContent: 'center',
-        borderColor: 'black',
-        borderWidth: 2,
+        justifyContent: 'space-between',
+        alignContent:"center",
+       
+        alignItems:"center",
+       // backgroundColor: "#f5f7fa",
+        marginHorizontal:8,
+        //borderColor: 'black',
+        //borderWidth: 2,
+        
+        /*borderBottomWidth: 2,
+        borderBottomColor: "#2ad",
+        
+        borderBottomStartRadius:12,
+        borderBottomEndRadius:12,
+        borderCurve:"continuous",
+        paddingVertical: 12,
+        //elevation:5,*/
+        height:80,
+        //borderBottomWidth:2,
+        //borderBottomColor: "#2ad",
+        //borderTopWidth:0,
+        //borderTopLeftRadius:0,
+        //borderTopRightRadius:0,
+        //borderStartWidth:0,
+        //borderEndWidth:0,
+        //borderColor:"#2ad",
+        //borderWidth:1,
+        borderRadius: 15,
+        borderCurve:"continuous",
+
+
+
         
     },
+
     SensorsContainer:{
+        width:95,
         margin: 5,
-        padding: 5,
+        padding: 10,
         justifyContent: 'center',
         height: 65,
-        borderWidth: 2,
-        borderRadius: 5,
-        flex: 1,
-        backgroundColor: "#A5D7E8",
+        //borderWidth: 0.8,
+        borderRadius: 12,
+        //borderColor:"#2ad",
+    
+        backgroundColor: "white",
+        elevation:5,
+        
+        
 
+    },
+    sensorsText:{
+        fontSize: 14,
+        textShadowColor: 'rgba(0,0,0,0.2)',
+        textShadowRadius:3,
+        textShadowOffset:{
+            width:2,height:1,
+        }
     },
     container3:{
-        borderColor: 'blue',
-        borderWidth: 2,
+        marginTop:8,
+        width:300,
+        
+        //borderColor: 'blue',
+        //borderWidth: 2,
         justifyContent: 'center',
+        backgroundColor:"#d7dbdd",
+        paddingBottom:6,
+        marginHorizontal:8,
+        //elevation:5,
+        
+        alignItems:"center",
+        //height:330,
+        height:420,
+        //borderTopWidth:2,
+        //borderTopColor: "#2ad",
+        //borderColor:"#2ad",
+        //borderWidth:1,
+        borderColor:"#2ad",
+        borderTopWidth:1,
+        borderBottomWidth:1,
+        borderBottomLeftRadius:3,
+        borderBottomRightRadius:3,
+        //borderRadius: 15,
+        //borderCurve:"continuous",
+        overflow:"hidden"
+       
+        
+    
 
     },
-    roomButton:{
-        fontSize: 28,
-        justifyContent:'center',
-        backgroundColor: "#19376D",
-        textAlign: 'center',
-        paddingVertical: 5,
-        marginBottom: 10,
-        borderRadius: 5,
+    containerContainer:{
+        alignSelf:"center",
+        marginHorizontal:8,
+        marginTop:8,
+        width:"95%",
+        height:"89%",
+        //borderColor: 'blue',
+        //borderWidth: 2,
+       
+        backgroundColor:"#f5f7fa",
+        paddingBottom:6,
         
+        elevation:5,
+        
+        alignItems:"center",
+        
+        //borderTopWidth:2,
+        //borderTopColor: "#2ad",
+        //borderColor:"#2ad",
+        //borderWidth:1,
+        borderRadius: 15,
+        borderCurve:"continuous",
+        borderBottomLeftRadius:30,
+        borderBottomRightRadius:30,
     },
-    triggerContainer:{
+    roomButton:{
+        width:"100%",
+        backgroundColor: "#0B2447",
         justifyContent:'center',
-        borderWidth: 2,
-        borderColor: 'orange',
+       
         textAlign: 'center',
-        paddingVertical: 15,
-        backgroundColor: "#576CBC"
+        paddingVertical: 2,
+        
+        borderRadius: 12,
+        borderBottomStartRadius:0,
+        borderBottomEndRadius:0,
+        elevation: 5,
     },
-    triggerContainerText:{
-        justifyContent:'center',
+    roomButtonText:{
+        fontSize: 24,
+        color:"white",
         textAlign: 'center',
-    }
+    },
+    
+    
 })
