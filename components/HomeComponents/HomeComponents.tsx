@@ -26,6 +26,24 @@ export function HomeTriggerView({triggerName, action}){
         </View>
     );
 }
+export function TempSensor({temp}){
+
+    return(
+        <Text style={{alignSelf:"center", fontSize:20, justifyContent:"space-between"}}>{temp}</Text>
+    )
+
+        
+}
+export function OxygenSensor({oxygenLevel}){
+    return(
+        <Text style={{alignSelf:"center", fontSize:20, justifyContent:"space-between"}}>{oxygenLevel}</Text>
+    )
+}
+export function HumiditySensor({humidityLevel}){
+    return(
+        <Text style={{alignSelf:"center", fontSize:20, justifyContent:"space-between"}}>{humidityLevel}</Text>
+    )
+}
 
 const styles = StyleSheet.create({
     triggerContainer:{
@@ -35,19 +53,11 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         flexDirection: "row",
         overflow:"hidden",
-        
-        //borderWidth: 1,
-        borderRadius: 12,
-        //borderColor: '#2ad',
-        textAlign: 'center',
-        paddingVertical: 15,
-        marginHorizontal:8,
-        //elevation:5,
         marginVertical: 3,
-
-        
-
-
+        paddingVertical: 15,
+        borderRadius: 12,
+        marginHorizontal:8,
+        textAlign: 'center',
         backgroundColor: "#00447c",
     },
     triggerContainerText:{
@@ -58,16 +68,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         alignSelf:"center",
         marginHorizontal:"auto",
-        //textShadowColor: 'rgba(0,0,0,0.2)',
-        //textShadowRadius:3,
-        //textShadowOffset:{
-        //    width:2,height:1,
-        //}
-        //textShadowColor: 'rgba(0,0,0,0.2)',
-        //textShadowRadius:3,
-        //textShadowOffset:{
-        //    width:2,height:1,
-        //}
+        
     },
     triggerButton:{
         justifyContent:"center",
@@ -77,8 +78,7 @@ const styles = StyleSheet.create({
         marginHorizontal:"auto",
         paddingHorizontal:"5%",
         elevation: 5,
-        //borderWidth:1,
-        //borderColor:"#0B2447",
+        
         height:65
     },
     iconText:{

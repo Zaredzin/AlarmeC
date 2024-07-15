@@ -8,7 +8,7 @@ import IndexIcon from "@/components/EventComponents/IndexIcon";
 import IndexIconEntypo from '@/components/EventComponents/IndexIconEntypo';
 import { StatusBar } from 'expo-status-bar';
 import { BlurView } from 'expo-blur';
-import  HomeComponents, { HomeTriggerView }  from '../../components/HomeComponents/HomeComponents'
+import  HomeComponents, { HomeTriggerView, HumiditySensor, OxygenSensor, TempSensor }  from '../../components/HomeComponents/HomeComponents'
 
 
 
@@ -45,18 +45,22 @@ export default function(){
 
                 </BlurView>
             <View style={styles.containerContainer}>
-                <TouchableOpacity  style={styles.roomButton}>
-                        <Text style={styles.roomButtonText}> Habitación</Text>
+                <TouchableOpacity  style={[styles.roomButton,{flexDirection:"row"}]}>
+                        <Text style={styles.roomButtonText}> Habitación</Text> 
+                        <EventIcon icon="down" colorI="#fff" size={20} />
                 </TouchableOpacity>
                 <View style={styles.container2}>
-                        <View style={styles.SensorsContainer}>
+                        <View style={[styles.SensorsContainer, {flexDirection:"row",justifyContent:"space-around"}]}>
                             <IndexIcon icon={"temperature-empty"} colorI={"#000"} size={26}/>
+                            <TempSensor temp={"27°"}/>
                         </View>
-                        <View style={styles.SensorsContainer}>
+                        <View style={[styles.SensorsContainer, {flexDirection:"row",justifyContent:"space-around"}]}>
                             <IndexIconEntypo icon={"air"} colorI={"gray"} size={26} />
+                            <OxygenSensor oxygenLevel={"71%"}/>
                         </View>
-                        <View style={styles.SensorsContainer}>
+                        <View style={[styles.SensorsContainer, {flexDirection:"row",justifyContent:"space-around"}]}>
                             <IndexIconEntypo icon={"water"} colorI={"#2ad"} size={26}/>
+                            <HumiditySensor humidityLevel="65%"/>
                         </View>
                 
                 
