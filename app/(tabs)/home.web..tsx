@@ -10,7 +10,7 @@ import { StatusBar } from 'expo-status-bar';
 import { BlurView } from 'expo-blur';
 import  HomeComponents, { GasConcentration, HomeTriggerView, HumiditySensor, OxygenSensor, TempSensor }  from '../../components/HomeComponents/HomeComponents'
 import { MaterialI } from '@/components/EventComponents/IndexIconEntypo';
-
+//
 
 
 
