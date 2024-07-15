@@ -8,9 +8,10 @@ import IndexIcon from "@/components/EventComponents/IndexIcon";
 import { IconEntypo } from '@/components/EventComponents/IndexIconEntypo';
 import { StatusBar } from 'expo-status-bar';
 import { BlurView } from 'expo-blur';
-import  HomeComponents, { GasConcentration, HomeTriggerView, HumiditySensor, OxygenSensor, TempSensor }  from '../../components/HomeComponents/HomeComponents'
+import  HomeComponents, { HomeTriggerView, HumiditySensor, OxygenSensor, TempSensor }  from '../../components/HomeComponents/HomeComponents'
 import { MaterialI } from '@/components/EventComponents/IndexIconEntypo';
-//
+import { GasConcentration } from '../../components/HomeComponents/HomeComponents';
+
 
 
 
