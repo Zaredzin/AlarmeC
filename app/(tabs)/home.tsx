@@ -10,6 +10,7 @@ import { StatusBar } from 'expo-status-bar';
 import { BlurView } from 'expo-blur';
 import  HomeComponents, { HomeTriggerView, HumiditySensor, OxygenSensor, TempSensor }  from '../../components/HomeComponents/HomeComponents'
 import { MaterialI } from '@/components/EventComponents/IndexIconEntypo';
+import { GasConcentration } from '../../components/HomeComponents/HomeComponents';
 
 
 
@@ -69,7 +70,7 @@ export default function(){
                             </View>
                             <View style={[styles.SensorsContainer, {flexDirection:"row",justifyContent:"space-around"}]}>
                                 <MaterialI icon={"gas-meter"} colorI={"orange"} size={28}/>
-                                <HumiditySensor humidityLevel="65%"/>
+                                <GasConcentration gasLevel="65%"/>
                             </View>
 
                         </View>
