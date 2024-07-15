@@ -59,7 +59,7 @@ export default function LoginScreen() {
           <View style={styles.labelT}>
             <Text style={styles.title}>Iniciar Sesión</Text>
           </View>
-          <BlurView intensity={60} style={styles.blurContainer}>
+          <BlurView experimentalBlurMethod="dimezisBlurView" intensity={60} style={styles.blurContainer}>
             <View style={styles.mainContainer}>
               <View style={styles.inputContainer}>
                 <TextInput
@@ -78,7 +78,7 @@ export default function LoginScreen() {
                   secureTextEntry
                 />
                 {error ? <Text style={styles.errorText}>{error}</Text> : null}
-                <TouchableOpacity onPress={handleLogin}>
+                <TouchableOpacity onPress={amonos}>
                   <Text style={styles.loginButton}>
                     Iniciar<EventIcon colorI={"#fff"} icon="arrowright" size={24} />
                   </Text>

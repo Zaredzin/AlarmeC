@@ -8,6 +8,7 @@ import IndexIcon from "@/components/EventComponents/IndexIcon";
 import IndexIconEntypo from '@/components/EventComponents/IndexIconEntypo';
 import { StatusBar } from 'expo-status-bar';
 import { BlurView } from 'expo-blur';
+import  HomeComponents, { HomeTriggerView }  from '../../components/HomeComponents/HomeComponents'
 
 
 
@@ -68,51 +69,18 @@ export default function(){
                 >
                     
                     <ScrollView style={{}} >
-                        
-                      <BlurView  style={styles.triggerContainer}>
-                          <Text style={styles.triggerContainerText}>Puerta cocina</Text>
-                          <TouchableOpacity style={styles.triggerButton}>
-                            <TriggerIcon icon={"door-closed"} size={34} colorI={"black"}/>
-                            <Text style={styles.iconText}>Cerrar</Text>
-                          </TouchableOpacity>
-                          
-                      </BlurView>
+
+                        <HomeTriggerView triggerName={"Puerta Este"} action={"close"}/>
+                        <HomeTriggerView triggerName={"Puerta Oeste"} action={"open"}/>
+                        <HomeTriggerView triggerName={"Puerta Este"} action={"close"}/>
+                        <HomeTriggerView triggerName={"Puerta Oeste"} action={"open"}/>
+                        <HomeTriggerView triggerName={"Puerta Este"} action={"close"}/>
+                        <HomeTriggerView triggerName={"Puerta Oeste"} action={"open"}/>
                      
-                      <BlurView  style={styles.triggerContainer}>
-                          <Text style={styles.triggerContainerText}>Puerta cocina</Text>
-                          <TouchableOpacity style={styles.triggerButton}>
-                            <TriggerIcon icon={"door-open"} size={34} colorI={"black"}/>
-                            <Text style={styles.iconText}>Abrir</Text>
-                          </TouchableOpacity>
-                          
-                      </BlurView>
+
+                        
+                        
                       
-                      <BlurView  style={styles.triggerContainer}>
-                          <Text style={styles.triggerContainerText}>Puerta cocina</Text>
-                          <TouchableOpacity style={styles.triggerButton}>
-                            <TriggerIcon icon={"door-closed"} size={34} colorI={"black"}/>
-                            <Text style={styles.iconText}>Cerrar</Text>
-                          </TouchableOpacity>
-                          
-                      </BlurView>
-                      
-                      <BlurView  style={styles.triggerContainer}>
-                          <Text style={styles.triggerContainerText}>Puerta cocina</Text>
-                          <TouchableOpacity style={styles.triggerButton}>
-                            <TriggerIcon icon={"door-closed"} size={34} colorI={"black"}/>
-                            <Text style={styles.iconText}>Cerrar</Text>
-                          </TouchableOpacity>
-                          
-                      </BlurView>
-                    
-                      <BlurView  style={styles.triggerContainer}>
-                          <Text style={styles.triggerContainerText}>Puerta cocina</Text>
-                          <TouchableOpacity style={styles.triggerButton}>
-                            <TriggerIcon icon={"door-closed"} size={34} colorI={"black"}/>
-                            <Text style={styles.iconText}>Cerrar</Text>
-                          </TouchableOpacity>
-                          
-                      </BlurView>
                     
                       
 
@@ -266,8 +234,10 @@ const styles = StyleSheet.create ({
         borderColor:"#2ad",
         borderTopWidth:1,
         borderBottomWidth:1,
-        borderRadius: 15,
-        borderCurve:"continuous",
+        borderBottomLeftRadius:3,
+        borderBottomRightRadius:3,
+        //borderRadius: 15,
+        //borderCurve:"continuous",
         overflow:"hidden"
        
         
@@ -316,62 +286,6 @@ const styles = StyleSheet.create ({
         color:"white",
         textAlign: 'center',
     },
-    triggerContainer:{
-        height:80,
-        alignSelf:"center",
-        width:280,
-        justifyContent:'center',
-        flexDirection: "row",
-        overflow:"hidden",
-        
-        //borderWidth: 1,
-        borderRadius: 12,
-        //borderColor: '#2ad',
-        textAlign: 'center',
-        paddingVertical: 15,
-        marginHorizontal:8,
-        //elevation:5,
-        marginVertical: 3,
-
-        
-
-
-        backgroundColor: "#00447c",
-    },
-    triggerContainerText:{
-        fontSize:22,
-        color: "#f5f7fa",
-        fontWeight: "400",
-        justifyContent:'center',
-        textAlign: 'center',
-        alignSelf:"center",
-        marginHorizontal:"auto",
-        //textShadowColor: 'rgba(0,0,0,0.2)',
-        //textShadowRadius:3,
-        //textShadowOffset:{
-        //    width:2,height:1,
-        //}
-        //textShadowColor: 'rgba(0,0,0,0.2)',
-        //textShadowRadius:3,
-        //textShadowOffset:{
-        //    width:2,height:1,
-        //}
-    },
-    triggerButton:{
-        justifyContent:"center",
-        alignSelf:"center",
-        borderRadius:15,
-        backgroundColor:"white",
-        marginHorizontal:"auto",
-        paddingHorizontal:"5%",
-        elevation: 5,
-        //borderWidth:1,
-        //borderColor:"#0B2447",
-        height:65
-    },
-    iconText:{
-        borderTopWidth:1,
-        borderTopColor: "gray",
-        textAlign:"center",
-    }
+    
+    
 })
