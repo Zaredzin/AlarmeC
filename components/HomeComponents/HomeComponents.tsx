@@ -44,6 +44,11 @@ export function HumiditySensor({humidityLevel}){
         <Text style={{alignSelf:"center", fontSize:20, justifyContent:"space-between"}}>{humidityLevel}</Text>
     )
 }
+export function GasConcentration({gasLevel}){
+    return(
+        <Text style={{alignSelf:"center", fontSize:20, justifyContent:"space-between"}}>{gasLevel}</Text>
+    )
+}
 
 const styles = StyleSheet.create({
     triggerContainer:{
