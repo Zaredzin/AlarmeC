@@ -31,19 +31,23 @@ export default function LoginScreen() {
 };
 
 
-
-
-
-
-
-
 useEffect(() => {
+  SplashScreen.preventAutoHideAsync();
+
   async function prepare() {
-       SplashScreen.preventAutoHideAsync
-      
+    await SplashScreen.preventAutoHideAsync();
   }
-  prepare();
-}, [])
+
+  prepare().then(() => {
+    SplashScreen.hideAsync();
+  });
+}, []);
+
+
+
+
+
+
 
 
 
@@ -71,20 +75,10 @@ if (!fontsLoaded) return null;
     router.push('/inicio');
   };
 
-  useEffect(() => {
-    SplashScreen.preventAutoHideAsync();
-
-    async function prepare() {
-      await SplashScreen.preventAutoHideAsync();
-    }
-
-    prepare().then(() => {
-      SplashScreen.hideAsync();
-    });
-  }, []);
+  
 
   return (
-    <View style={styles.loginContainer}>
+    <View  onLayout={onLayout} style={styles.loginContainer}>
       <StatusBar style="light" backgroundColor="#121532" />
       <Stack.Screen options={{ headerShown: false }} />
       <LinearGradient
@@ -94,7 +88,7 @@ if (!fontsLoaded) return null;
         style={styles.box}
       >
         <View style={{ width: 100, height: 100, backgroundColor: "#264a71", position: "absolute" }}></View>
-        <ScrollView contentContainerStyle={{ flex: 1, width: "100%", height: "100%" }}>
+        <View  style={{ flex: 1, width: "100%", height: "100%" }}>
           <View style={styles.labelT}>
             <Text style={styles.title}>Iniciar Sesión</Text>
           </View>
@@ -128,7 +122,7 @@ if (!fontsLoaded) return null;
               </Pressable>
             </View>
           </BlurView>
-        </ScrollView>
+        </View>
       </LinearGradient>
     </View>
   )
