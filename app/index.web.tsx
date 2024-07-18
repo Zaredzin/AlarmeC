@@ -1,5 +1,5 @@
 import { Text, View, TextInput, StyleSheet, Pressable, ScrollView, TouchableOpacity } from "react-native";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { LinearGradient } from 'expo-linear-gradient';
 import * as SplashScreen from 'expo-splash-screen';
 import { useRouter } from 'expo-router';
@@ -8,6 +8,8 @@ import { BlurView } from 'expo-blur';
 import EventIcon from "@/components/EventComponents/EventIcon";
 import { StatusBar } from 'expo-status-bar';
 import { auth } from './fireBase';  // Asegúrate de que la ruta sea correcta
+import { useFonts } from "expo-font";
+import {Inter_600SemiBold} from "@expo-google-fonts/inter";
 
 export default function LoginScreen() {
   const [email, setEmail] = useState('');
@@ -28,9 +30,46 @@ export default function LoginScreen() {
     }
 };
 
+
+
+
+
+
+
+
+useEffect(() => {
+  async function prepare() {
+       SplashScreen.preventAutoHideAsync
+      
+  }
+  prepare();
+}, [])
+
+
+
+const [fontsLoaded] = useFonts({
+  SpaceMono: require("../assets/fonts/SpaceMono.ttf"),
+  Inter_600SemiBold,
+});
+
+
+
+const onLayout = useCallback(async() => {
+  if(fontsLoaded){
+      await SplashScreen.hideAsync();
+  }
+}, [fontsLoaded])
+
+if (!fontsLoaded) return null;
+
+
+
   const amonos = () => {
     router.push('/(tabs)/home');
-  }
+  };
+  const amonos2 = () => {
+    router.push('/inicio');
+  };
 
   useEffect(() => {
     SplashScreen.preventAutoHideAsync();
@@ -78,7 +117,7 @@ export default function LoginScreen() {
                   secureTextEntry
                 />
                 {error ? <Text style={styles.errorText}>{error}</Text> : null}
-                <TouchableOpacity onPress={amonos}>
+                <TouchableOpacity onPress={amonos2}>
                   <Text style={styles.loginButton}>
                     Iniciar<EventIcon colorI={"#fff"} icon="arrowright" size={24} />
                   </Text>

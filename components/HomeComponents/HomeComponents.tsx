@@ -4,7 +4,7 @@ import { Stack } from 'expo-router';
 import React from 'react';
 import TriggerIcon from '../indexComponents/TriggerIcon';
 
-export function HomeTriggerView({triggerName, action}){
+export function HomeTriggerView({triggerName, action, style}){
     let icon
 
     if ( action = "close"){
@@ -16,7 +16,7 @@ export function HomeTriggerView({triggerName, action}){
     };
 
     return(
-        <View  style={styles.triggerContainer}>
+        <View  style={[styles.triggerContainer,style]}>
             <Text style={styles.triggerContainerText}>{triggerName}</Text>
             <TouchableOpacity style={styles.triggerButton}>
                 <TriggerIcon icon={icon} size={34} colorI={"black"}/>
@@ -52,7 +52,7 @@ export function GasConcentration({gasLevel}){
 
 const styles = StyleSheet.create({
     triggerContainer:{
-        height:80,
+        //height:80,
         alignSelf:"center",
         width:280,
         justifyContent:'center',
@@ -64,6 +64,11 @@ const styles = StyleSheet.create({
         marginHorizontal:8,
         textAlign: 'center',
         backgroundColor: "#00447c",
+        alignItems:"center",
+        alignContent:"center",
+        shadowColor:"#000",
+        shadowOffset: {width:1, height:0},
+        shadowRadius:5,
     },
     triggerContainerText:{
         fontSize:22,
@@ -84,7 +89,10 @@ const styles = StyleSheet.create({
         paddingHorizontal:"5%",
         elevation: 5,
         
-        height:65
+        height:65,
+        shadowColor:"#000",
+        shadowOffset: {width:1, height:0},
+        shadowRadius:5,
     },
     iconText:{
         borderTopWidth:1,

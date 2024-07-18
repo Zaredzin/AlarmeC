@@ -31,7 +31,9 @@ export default function LoginScreen() {
   const amonos = () => {
     router.push('/(tabs)/home');
   }
-
+  const amonos2 = () => {
+    router.push('/inicio');
+  }
   useEffect(() => {
     SplashScreen.preventAutoHideAsync();
 
@@ -78,7 +80,7 @@ export default function LoginScreen() {
                   secureTextEntry
                 />
                 {error ? <Text style={styles.errorText}>{error}</Text> : null}
-                <TouchableOpacity onPress={amonos}>
+                <TouchableOpacity onPress={amonos2}>
                   <Text style={styles.loginButton}>
                     Iniciar<EventIcon colorI={"#fff"} icon="arrowright" size={24} />
                   </Text>

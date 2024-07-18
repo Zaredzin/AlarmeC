@@ -5,13 +5,13 @@ import React from 'react';
 import EventIcon from './EventIcon';
 import { BlurView } from 'expo-blur';
 
-export  function EventView({time,description}){
+export  function EventView({time,description, style, fontSize}){
     return(
-        <View style={styles.eventContainer}>
+        <View style={[styles.eventContainer]}>
             
             <View style={styles.alertMainContainer}>
-                <View style={styles.alertContainer}>
-                    <Text style={styles.eventText}>{description}</Text>
+                <View style={[styles.alertContainer, style]}>
+                    <Text style={[styles.eventText, fontSize]}>{description}</Text>
                     <Text style={styles.timeContainer}>{time}</Text>
                 </View>
       
@@ -45,7 +45,8 @@ const styles = StyleSheet.create ({
         //borderColor: "blue",
         paddingHorizontal: 10,
         flexDirection: "row",
-        height:90,
+        height:100,
+        alignSelf:"center"
         
         
       },
@@ -65,14 +66,15 @@ const styles = StyleSheet.create ({
         //borderWidth: 1,
         flex:1,
         paddingHorizontal: 10,
-        backgroundColor:"#00000010",
+        
       
       },
       eventText:{
         elevation:5,
         fontSize:16,
         color:"#fff",
-        fontWeight:"400"
+        fontWeight:"400",
+        textAlign:"center"
       },
       alertContainer:{
         alignSelf:"center",
@@ -87,6 +89,9 @@ const styles = StyleSheet.create ({
         overflow:"hidden",
         height:80,
         marginVertical:4,
+        shadowColor:"#000",
+        shadowOffset: {width:1, height:0},
+        shadowRadius:5,
         
         
       },

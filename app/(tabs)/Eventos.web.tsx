@@ -1,4 +1,4 @@
-import { Pressable, Text,View, ScrollView, } from "react-native";
+import { Pressable, Text,View, ScrollView, useWindowDimensions  } from "react-native";
 import { Stack } from "expo-router";
 import {EventDay, EventMonth, EventView} from "@/components/EventComponents/EventComponents";
 import { StyleSheet } from "react-native";
@@ -8,7 +8,9 @@ import { BlurView } from "expo-blur";
 import { LinearGradient } from "expo-linear-gradient";
 
 
+
 export default function (){
+  const { width, height } = useWindowDimensions();
     return(
 
       <LinearGradient style={styles.mainContainer0}
@@ -33,24 +35,24 @@ export default function (){
               <View style={styles.mainContainer}>
                 <View>
                   <EventDay day={"Martes"}/>
-                  <View style={styles.scrollContainer}
+                  <ScrollView style={[styles.scrollContainer, { width: width * 0.6, height: height * 0.6, alignSelf:"center"}]}
                    
                   
                   
                   >
-                    <ScrollView>
-                      <EventView time={"10:00 am"} description={"The oxygen level has decreased to a critical value."}/>
-                      <EventView time={"10:00 am"} description={"The oxygen level has decreased to a critical value."}/>
-                      <EventView time={"10:00 am"} description={"The oxygen level has decreased to a critical value."}/>
-                      <EventView time={"10:00 am"} description={"The oxygen level has decreased to a critical value."}/>
-                      <EventView time={"10:00 am" } description={"The oxygen level has decreased to a critical value."}/>
-                      <EventView time={"10:00 am"} description={"The oxygen level has decreased to a critical value."}/>
-                      <EventView time={"10:00 am"} description={"The oxygen level has decreased to a critical value."}/>
+                    
+                      <EventView style={{width: width * 0.5, height: 120}} fontSize={{fontSize: 18}} time={"10:00 am"} description={"The oxygen level has decreased to a critical value."}/>
+                      <EventView style={{width: width * 0.5, height: 120}} fontSize={{fontSize: 18}} time={"10:00 am"} description={"The oxygen level has decreased to a critical value."}/>
+                      <EventView style={{width: width * 0.5, height: 120}} fontSize={{fontSize: 18}} time={"10:00 am"} description={"The oxygen level has decreased to a critical value."}/>
+                      <EventView style={{width: width * 0.5, height: 120}} fontSize={{fontSize: 18}} time={"10:00 am"} description={"The oxygen level has decreased to a critical value."}/>
+                      <EventView style={{width: width * 0.5, height: 120}} fontSize={{fontSize: 18}} time={"10:00 am"} description={"The oxygen level has decreased to a critical value."}/>
+                      <EventView style={{width: width * 0.5, height: 120}} fontSize={{fontSize: 18}} time={"10:00 am"} description={"The oxygen level has decreased to a critical value."}/>
+                      <EventView style={{width: width * 0.5, height: 120}} fontSize={{fontSize: 18}} time={"10:00 am"} description={"The oxygen level has decreased to a critical value."}/>
                   
 
 
-                    </ScrollView>
-                  </View>
+                    
+                  </ScrollView>
                 
                 
 
@@ -105,7 +107,7 @@ export default function (){
       flexDirection: 'row',
       justifyContent: 'center',  
       padding:15,
-      borderColor:"#2ad",
+      
       //borderWidth:1,
       borderRadius: 15,
       borderCurve:"continuous",
@@ -120,7 +122,7 @@ export default function (){
       //paddingTop:6,
       //elevation:5,
       width:320,
-      height:480,
+      //height:"70%",
       //borderTopWidth:2,
       //borderTopColor: "#2ad",
       borderColor:"#2ad",
@@ -128,7 +130,9 @@ export default function (){
       borderBottomWidth:1,
       borderRadius: 15,
       borderCurve:"continuous",
-      flex:1,
+      marginBottom:110,
+      backgroundColor:"#00000010",
+      
       
       //backgroundColor:"#0B2447"
 
@@ -153,7 +157,7 @@ export default function (){
     mainContainer:{
       justifyContent:"center",
       alignSelf:"center",
-      height:554.5,
+      
       marginHorizontal:8,
       elevation:5
     },

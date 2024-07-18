@@ -38,7 +38,7 @@ export default function (){
                   
                   
                   >
-                    <ScrollView>
+                    <ScrollView style={{flex:1}}>
                       <EventView time={"10:00 am"} description={"The oxygen level has decreased to a critical value."}/>
                       <EventView time={"10:00 am"} description={"The oxygen level has decreased to a critical value."}/>
                       <EventView time={"10:00 am"} description={"The oxygen level has decreased to a critical value."}/>
