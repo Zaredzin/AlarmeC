@@ -32,7 +32,7 @@ export default function App() {
             </BlurView>
             
             <View style={[styles.containerContainer, ]}>
-                <TouchableOpacity style={[styles.roomButton, { flexDirection: "row" }]}>
+                <TouchableOpacity  style={[styles.roomButton, { flexDirection: "row" }]}>
                     <Text style={styles.roomButtonText}> Habitación</Text> 
                     <EventIcon icon="down" colorI="#fff" size={20} />
                 </TouchableOpacity>

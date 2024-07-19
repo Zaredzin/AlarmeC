@@ -1,5 +1,4 @@
 import {Text, View, Pressable, StyleSheet, ScrollView, SafeAreaView, TouchableOpacity} from 'react-native';
-import { AntDesign, FontAwesome6 } from '@expo/vector-icons';
 import { Stack } from 'expo-router';
 import EventIcon from '@/components/EventComponents/EventIcon';
 import TriggerIcon from '@/components/indexComponents/TriggerIcon';
@@ -8,29 +7,90 @@ import IndexIcon from "@/components/EventComponents/IndexIcon";
 import { IconEntypo } from '@/components/EventComponents/IndexIconEntypo';
 import { StatusBar } from 'expo-status-bar';
 import { BlurView } from 'expo-blur';
-import  HomeComponents, { HomeTriggerView, HumiditySensor, OxygenSensor, TempSensor }  from '../../components/HomeComponents/HomeComponents'
+import  HomeComponents, { HomeTriggerView, HumiditySensor, OxygenSensor, TempSensor,RoomMenu, RoomSelector }  from '../../components/HomeComponents/HomeComponents'
 import { MaterialI } from '@/components/EventComponents/IndexIconEntypo';
 import { GasConcentration } from '../../components/HomeComponents/HomeComponents';
+import {Inter_600SemiBold} from "@expo-google-fonts/inter";
+import React, {useState} from 'react';
+import { MotiView } from 'moti';
 
 
 
+const roomData = {
+    Habitaciones:{
+        Cocina: {
+            sensors: {
+                temperature: '27°',
+                oxygenLevel: '71%',
+                humidityLevel: '65%',
+                gasLevel: '65%',
+            },
+            triggers: [
+                { name: 'Puerta este', action: true },
+                { name: 'Puerta oeste', action: false },
+                { name: 'Ventana oeste', action: false},
+            ],
+        },
+        Taller: {
+            sensors: {
+                temperature: '25°',
+                oxygenLevel: '75%',
+                humidityLevel: '60%',
+                gasLevel: '60%',
+            },
+            triggers: [
+                { name: 'Puerta', action: true },
+                { name: 'Ventilador', action: false },
+            ],
+        },
+        Pito: {
+            sensors: {
+                temperature: '25°',
+                oxygenLevel: '75%',
+                humidityLevel: '60%',
+                gasLevel: '60%',
+            },
+            triggers: [
+                { name: 'Puerta', action: true },
+                { name: 'Ventilador', action: false },
+            ],
+        },
+    }
+    
+
+};
 
 export default function(){
+    const [showMenu, setShowMenu] = useState(false);
+
+    // Función para mostrar u ocultar el menú
+    const toggleMenu = () => {
+        setShowMenu(!showMenu); // Invertir valor actual de showMenu
+    };
+
+    const rooms = Object.keys(roomData.Habitaciones);
+    const [selectedRoom, setSelectedRoom] = useState(rooms[0]); // Estado para la habitación seleccionada
+
+    const handleRoomPress = (room) => {
+        setSelectedRoom(room);
+        setShowMenu(false); // Cerrar el menú después de seleccionar una habitación
+    };
+
+    
+
+    
+
+
+
+
+
     return(
         
 
         
         
-        <LinearGradient style={styles.mainContainer}
-        colors={['#0B2447', '#576CBC','#19376D', '#0B2447']} 
-        start={{
-            x: 0,
-            y: 0
-        }}
-        end={{
-            x: 1,
-            y: 1
-        }}
+        <View style={{backgroundColor:"#101727", width:"100%", height:"100%"}}
+        
         
         
         >
@@ -46,75 +106,103 @@ export default function(){
                     <Text style={styles.Title}>No se han registrado eventos</Text>
 
                 </BlurView>
-            <View style={styles.containerContainer}>
-                <TouchableOpacity  style={[styles.roomButton,{flexDirection:"row"}]}>
-                        <Text style={styles.roomButtonText}> Habitación</Text> 
-                        <EventIcon icon="down" colorI="#fff" size={20} />
+            <View style={[styles.containerContainer, {backgroundColor:"#00000000"}]}>
+                <TouchableOpacity onPress={toggleMenu}  style={[styles.roomButton,{flexDirection:"row"}]}>
+                    <LinearGradient colors={['#164b6a',  '#0B2447']}  
+                        start={{
+                        x: 0,
+                        y: 0
+                        }}
+                        end={{
+                            x: 1,
+                            y: 1
+                        }} style={{width:"100%", borderRadius:15,zIndex:2}}>
+                            <View style={{flexDirection:"row"}}>
+                                <View style={{width:"65%"}}>
+                                    <Text style={styles.roomButtonText}>{selectedRoom ? selectedRoom : "Habitación"}</Text>
+                                </View>
+                                <View style={{width:"25%", backgroundColor:"#fff", borderTopLeftRadius:15, borderTopRightRadius:15, alignSelf:"flex-end",}}>
+                                    <EventIcon  icon="down" colorI="#000" size={20} />
+                                </View>
+                                
+                            </View>
+                            
+
+                            
+                        
+
+                    </LinearGradient>
+                        
                 </TouchableOpacity>
-                <View style={styles.container2}>
-                        <View style={{}}>
-                            <View style={[styles.SensorsContainer, {flexDirection:"row",justifyContent:"space-around"}]}>
-                                <IndexIcon icon={"temperature-empty"} colorI={"#000"} size={26}/>
-                                <TempSensor temp={"27°"}/>
+                {showMenu && <RoomMenu rooms={rooms}  handleRoomPress={handleRoomPress}>
+                        
+
+                    </RoomMenu>}
+                    {selectedRoom && (
+                    <View style={styles.container2}>
+                        {/* Muestra los sensores de la habitación */}
+                        <View style={{ flexDirection: "row" }}>
+                            <View style={[styles.SensorsContainer, { flexDirection: "column", justifyContent: "space-around" }]}>
+                                <IndexIcon icon={"temperature-empty"} colorI={"#00ff00"} size={26} />
+                                <TempSensor temp={roomData.Habitaciones[selectedRoom].sensors.temperature} />
                             </View>
-                            <View style={[styles.SensorsContainer, {flexDirection:"row",justifyContent:"space-around"}]}>
+
+                            <View style={[styles.SensorsContainer, { flexDirection: "column", justifyContent: "space-around" }]}>
                                 <IconEntypo icon={"air"} colorI={"gray"} size={26} />
-                                <OxygenSensor oxygenLevel={"71%"}/>
+                                <OxygenSensor oxygenLevel={roomData.Habitaciones[selectedRoom].sensors.oxygenLevel} />
                             </View>
 
-                        </View>
-                        <View style={{}}>
-                            <View style={[styles.SensorsContainer, {flexDirection:"row",justifyContent:"space-around"}]}>
-                                <IconEntypo icon={"water"} colorI={"#2ad"} size={26}/>
-                                <HumiditySensor humidityLevel="65%"/>
-                            </View>
-                            <View style={[styles.SensorsContainer, {flexDirection:"row",justifyContent:"space-around"}]}>
-                                <MaterialI icon={"gas-meter"} colorI={"orange"} size={28}/>
-                                <GasConcentration gasLevel="65%"/>
+                            <View style={[styles.SensorsContainer, { flexDirection: "column", justifyContent: "space-around" }]}>
+                                <IconEntypo icon={"water"} colorI={"#2ad"} size={26} />
+                                <HumiditySensor humidityLevel={roomData.Habitaciones[selectedRoom].sensors.humidityLevel} />
                             </View>
 
+                            <View style={[styles.SensorsContainer, { flexDirection: "column", justifyContent: "space-around" }]}>
+                                <MaterialI icon={"gas-meter"} colorI={"orange"} size={28} />
+                                <GasConcentration gasLevel={roomData.Habitaciones[selectedRoom].sensors.gasLevel} />
+                            </View>
                         </View>
-                        
-                
-                
-                
-                </View>
+                    </View>
+                )}
             
-                <View  style={styles.container3}
-                
-                
-                >
-                    
-                    <ScrollView style={{}} >
-
-                        <HomeTriggerView triggerName={"Puerta Este"} action={"close"}/>
-                        <HomeTriggerView triggerName={"Puerta Oeste"} action={"open"}/>
-                        <HomeTriggerView triggerName={"Puerta Este"} action={"close"}/>
-                        <HomeTriggerView triggerName={"Puerta Oeste"} action={"open"}/>
-                        <HomeTriggerView triggerName={"Puerta Este"} action={"close"}/>
-                        <HomeTriggerView triggerName={"Puerta Oeste"} action={"open"}/>
-                     
-
-                        
-                        
-                      
-                    
-                      
-
-                      
- 
-                    </ScrollView>
-                </View>
+            {selectedRoom && (
+                    <View style={styles.container3}>
+                        {/* Muestra los accionadores de la habitación */}
+                        <ScrollView>
+                            {roomData.Habitaciones[selectedRoom].triggers.map((trigger, index) => (
+                                <HomeTriggerView key={index} triggerName={trigger.name} action={trigger.action} />
+                            ))}
+                        </ScrollView>
+                    </View>
+                )}
             </View>
 
 
-        </LinearGradient>
+        </View>
         
     );
 }
 
 
 const styles = StyleSheet.create ({
+    roomButton:{
+        width:"90%",
+        //backgroundColor: "#0B2447",
+        justifyContent:'center',
+       
+        textAlign: 'center',
+        paddingVertical: 2,
+        
+        borderRadius: 12,
+
+        elevation: 5,
+        zIndex:2
+    },
+    roomButtonText:{
+        fontSize: 24,
+        color:"white",
+        textAlign: 'center',
+    },
     line:{
         alignSelf:"center",
         width:"95%",
@@ -187,7 +275,7 @@ const styles = StyleSheet.create ({
         borderCurve:"continuous",
         paddingVertical: 12,
         //elevation:5,*/
-        height:160,
+        height:120,
         //borderBottomWidth:2,
         //borderBottomColor: "#2ad",
         //borderTopWidth:0,
@@ -206,16 +294,17 @@ const styles = StyleSheet.create ({
     },
 
     SensorsContainer:{
-        width:120,
+        width:75,
         margin: 5,
         padding: 10,
         justifyContent: 'center',
-        height: 65,
+        alignItems:"center",
+        height: 75,
         //borderWidth: 0.8,
         borderRadius: 12,
         //borderColor:"#2ad",
     
-        backgroundColor: "white",
+        backgroundColor: "#172144",
         elevation:5,
         
         
@@ -236,7 +325,7 @@ const styles = StyleSheet.create ({
         //borderColor: 'blue',
         //borderWidth: 2,
         justifyContent: 'center',
-        backgroundColor:"#d7dbdd",
+        //backgroundColor:"#d7dbdd",
         paddingBottom:6,
         marginHorizontal:8,
         //elevation:5,
@@ -273,7 +362,7 @@ const styles = StyleSheet.create ({
         backgroundColor:"#f5f7fa",
         paddingBottom:6,
         
-        elevation:5,
+        //elevation:5,
         
         alignItems:"center",
         
@@ -286,24 +375,7 @@ const styles = StyleSheet.create ({
         borderBottomLeftRadius:30,
         borderBottomRightRadius:30,
     },
-    roomButton:{
-        width:"100%",
-        backgroundColor: "#0B2447",
-        justifyContent:'center',
-       
-        textAlign: 'center',
-        paddingVertical: 2,
-        
-        borderRadius: 12,
-        borderBottomStartRadius:0,
-        borderBottomEndRadius:0,
-        elevation: 5,
-    },
-    roomButtonText:{
-        fontSize: 24,
-        color:"white",
-        textAlign: 'center',
-    },
+    
     
     
 })

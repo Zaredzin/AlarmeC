@@ -9,6 +9,8 @@ import EventIcon from "@/components/EventComponents/EventIcon";
 import Box from "@/components/Main_Web/Box";
 import { useRouter } from 'expo-router';
 import { Stack } from "expo-router";
+import { MotiView } from "moti";
+import Animated, { useSharedValue, useAnimatedStyle, withTiming, Easing } from 'react-native-reanimated';
 
 
 
@@ -117,9 +119,11 @@ export default function(){
             
 
             <ScrollView style={{ flex: 1,  zIndex:1, }}>
-                <View style={{ flexDirection:"row",height: height * 0.1, justifyContent:"space-around", padding:20, marginHorizontal:width * 0.06,marginTop:height * 0.03, }}>
+                <MotiView from={{ translateY: "-30%"}} animate={{translateY: 0}} transition={{type: 'spring',duration: 3000,
+          }}
+                 style={{ flexDirection:"row",height: height * 0.1, justifyContent:"space-around", padding:20, marginHorizontal:width * 0.06,marginTop:height * 0.03, }}>
                     <View >
-                        <Text style={{fontFamily:"Inter_600SemiBold",width:width * 0.15, fontSize: ((height * 0.03)), color:"#fff", }}>Pito</Text>
+                        <Text style={{fontFamily:"Inter_600SemiBold",width:width * 0.15, fontSize: ((height * 0.03)), color:"#fff", }}>Alarmamela</Text>
                     </View>
                     <View style={{flexDirection:"row", justifyContent:"space-between"}}>
                         <Pressable onPress={amonos}>
@@ -128,7 +132,7 @@ export default function(){
                         
                         <Text style={{fontFamily:"Inter_600SemiBold",fontSize: ((height * 0.03)), color:"#fff", marginHorizontal:width * 0.01}}>Register</Text>
                     </View> 
-                </View>
+                </MotiView>
                 <View style={{width: width * 0.8, height: height * 0.7, marginTop: height * 0.2,position:"absolute", zIndex: 1,flexDirection:"row", borderRadius:15, backgroundColor: "#00000000", alignSelf:"center", }}>
                     <Pressable onPress={previousBox}   onHoverIn={() => setIsHoveredArrowL(true) } onHoverOut={() => setIsHoveredArrowL(false)}  style={({ pressed }) => [{backgroundColor: pressed ? 'blue' : isHoveredArrowL ? '#ffffff40' : '#00000000',},styles.arrowButtonL,]} >
                         <EventIcon icon={"caretleft"} size={28} colorI={"white"}/>
