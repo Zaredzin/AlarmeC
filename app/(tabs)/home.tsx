@@ -1,7 +1,6 @@
-import {Text, View, Pressable, StyleSheet, ScrollView, SafeAreaView, TouchableOpacity} from 'react-native';
+import {Text, View, Pressable, StyleSheet, ScrollView, SafeAreaView, TouchableOpacity, Platform,useWindowDimensions} from 'react-native';
 import { Stack } from 'expo-router';
 import EventIcon from '@/components/EventComponents/EventIcon';
-import TriggerIcon from '@/components/indexComponents/TriggerIcon';
 import { LinearGradient } from 'expo-linear-gradient';
 import IndexIcon from "@/components/EventComponents/IndexIcon";
 import { IconEntypo } from '@/components/EventComponents/IndexIconEntypo';
@@ -11,8 +10,10 @@ import  HomeComponents, { HomeTriggerView, HumiditySensor, OxygenSensor, TempSen
 import { MaterialI } from '@/components/EventComponents/IndexIconEntypo';
 import { GasConcentration } from '../../components/HomeComponents/HomeComponents';
 import {Inter_600SemiBold} from "@expo-google-fonts/inter";
-import React, {useState} from 'react';
+import React, {useState,useEffect,useCallback} from 'react';
 import { MotiView } from 'moti';
+import { useFonts } from "expo-font";
+import * as SplashScreen from 'expo-splash-screen';
 
 
 
@@ -27,6 +28,8 @@ const roomData = {
             },
             triggers: [
                 { name: 'Puerta este', action: true },
+                { name: 'Puerta oeste', action: false },
+                { name: 'Ventana oeste', action: false},
                 { name: 'Puerta oeste', action: false },
                 { name: 'Ventana oeste', action: false},
             ],
@@ -77,6 +80,41 @@ export default function(){
     };
 
     
+    const { width, height } = useWindowDimensions();
+
+    useEffect(() => {
+        SplashScreen.preventAutoHideAsync();
+      
+        async function prepare() {
+          await SplashScreen.preventAutoHideAsync();
+        }
+      
+        prepare().then(() => {
+          SplashScreen.hideAsync();
+        });
+      }, []);
+      
+      
+      
+      const [fontsLoaded] = useFonts({
+        
+        Inter_600SemiBold,
+      });
+      
+      
+      
+      const onLayout = useCallback(async() => {
+        if(fontsLoaded){
+            await SplashScreen.hideAsync();
+        }
+      }, [fontsLoaded])
+      
+      if (!fontsLoaded) return null;
+
+
+
+
+
 
     
 
@@ -89,7 +127,7 @@ export default function(){
 
         
         
-        <View style={{backgroundColor:"#101727", width:"100%", height:"100%"}}
+        <View onLayout={onLayout} style={{backgroundColor:"#101727", width:"100%", height:"100%"}}
         
         
         
@@ -166,9 +204,9 @@ export default function(){
                 )}
             
             {selectedRoom && (
-                    <View style={styles.container3}>
+                    <View  style={Platform.OS === 'web' ?  styles.container3 && {height: height * 0.5, width: width* 0.65}  : styles.container3}>
                         {/* Muestra los accionadores de la habitación */}
-                        <ScrollView>
+                        <ScrollView >
                             {roomData.Habitaciones[selectedRoom].triggers.map((trigger, index) => (
                                 <HomeTriggerView key={index} triggerName={trigger.name} action={trigger.action} />
                             ))}
@@ -185,6 +223,11 @@ export default function(){
 
 
 const styles = StyleSheet.create ({
+    
+
+    scrollViewWeb:{
+        
+    },
     roomButton:{
         width:"90%",
         //backgroundColor: "#0B2447",
@@ -333,6 +376,7 @@ const styles = StyleSheet.create ({
         alignItems:"center",
         //height:330,
         height:340,
+
         //borderTopWidth:2,
         //borderTopColor: "#2ad",
         //borderColor:"#2ad",

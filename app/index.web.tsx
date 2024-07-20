@@ -11,6 +11,7 @@ import { auth } from './fireBase';  // Asegúrate de que la ruta sea correcta
 import { useFonts } from "expo-font";
 import {Inter_600SemiBold} from "@expo-google-fonts/inter";
 
+
 export default function LoginScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -111,7 +112,7 @@ if (!fontsLoaded) return null;
                   secureTextEntry
                 />
                 {error ? <Text style={styles.errorText}>{error}</Text> : null}
-                <TouchableOpacity onPress={amonos2}>
+                <TouchableOpacity onPress={amonos}>
                   <Text style={styles.loginButton}>
                     Iniciar<EventIcon colorI={"#fff"} icon="arrowright" size={24} />
                   </Text>

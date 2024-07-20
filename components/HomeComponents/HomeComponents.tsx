@@ -1,4 +1,4 @@
-import {Text, View, Pressable, StyleSheet,TouchableOpacity} from 'react-native';
+import {Text, View, Pressable, StyleSheet,TouchableOpacity,useWindowDimensions, Platform} from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import { Stack } from 'expo-router';
 import React from 'react';
@@ -7,7 +7,9 @@ import {Inter_600SemiBold} from "@expo-google-fonts/inter";
 import { MotiView, ScrollView } from 'moti';
 import { useState,useEffect } from 'react';
 
-export function HomeTriggerView({triggerName, action,style}){
+
+
+export function HomeTriggerView({triggerName, action}){
     const [isOpen, setIsOpen] = useState(action); // Estado para controlar si el botón está abierto o cerrado
     
  
@@ -16,7 +18,8 @@ export function HomeTriggerView({triggerName, action,style}){
   const toggleAction = () => {
     setIsOpen(!isOpen);
   };
- 
+ //Dimensiones de la pantalla
+    const { width, height } = useWindowDimensions();
 
   // Variables para el icono y el color de fondo dependiendo del estado
   let icon = isOpen ? 'door-open' : 'door-closed';
@@ -24,7 +27,7 @@ export function HomeTriggerView({triggerName, action,style}){
   let buttonText = isOpen ? 'open' : 'close';
 
   return (
-    <View style={[styles.triggerContainer, style]}>
+    <View   style={Platform.OS === 'web' ? styles.triggerContainerWeb  : styles.triggerContainer}    >
       <Text style={styles.triggerContainerText}>{triggerName}</Text>
       <TouchableOpacity
         style={[styles.triggerButton, { backgroundColor }]}
@@ -99,6 +102,26 @@ const styles = StyleSheet.create({
         shadowRadius:5,
         elevation:5,
     },
+    triggerContainerWeb:{
+        //height:80,
+        alignSelf:"center",
+        width:"90%",
+        justifyContent:'center',
+        flexDirection: "row",
+        overflow:"hidden",
+        marginVertical: 3,
+        paddingVertical: 15,
+        borderRadius: 12,
+        marginHorizontal:8,
+        textAlign: 'center',
+        backgroundColor:  "#172144",
+        alignItems:"center",
+        alignContent:"center",
+        shadowColor:"#000",
+        shadowOffset: {width:1, height:0},
+        shadowRadius:5,
+        elevation:5,
+    },
     triggerContainerText:{
         fontSize:22,
         color: "#f5f7fa",
@@ -107,7 +130,9 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         alignSelf:"center",
         marginHorizontal:"auto",
-        fontFamily:"Inter_600SemiBold"
+        fontFamily:"Inter_600SemiBold",
+        width:"65%"
+        
         
     },
     triggerButton:{
@@ -118,6 +143,7 @@ const styles = StyleSheet.create({
         marginHorizontal:"auto",
         paddingHorizontal:"5%",
         elevation: 5,
+        
         
         
         height:65,

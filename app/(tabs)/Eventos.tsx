@@ -1,10 +1,13 @@
-import { Pressable, Text, View, ScrollView } from "react-native";
+import { Pressable, Text, View, ScrollView, useWindowDimensions } from "react-native";
 import { Stack } from "expo-router";
 import { EventDay, EventMonth, EventView } from "@/components/EventComponents/EventComponents";
 import { StyleSheet } from "react-native";
 import EventIcon from "@/components/EventComponents/EventIcon";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { BlurView } from "expo-blur";
+import * as Permissions from 'expo-permissions';
+import {Calendar} from 'react-native-calendars'
+
 
 import React, { useState } from "react";
 
@@ -16,6 +19,10 @@ export default function () {
         { time: '02:00 pm', description: 'Gas levels are within normal range.', icon: 'gas' },
       ],
       '20': [
+        { time: '09:00 am', description: 'The humidity level is lower than expected.', icon: 'water' },
+        { time: '02:00 pm', description: 'Gas levels are within normal range.', icon: 'gas' },
+      ],
+      '21': [
         { time: '09:00 am', description: 'The humidity level is lower than expected.', icon: 'water' },
         { time: '02:00 pm', description: 'Gas levels are within normal range.', icon: 'gas' },
       ],
