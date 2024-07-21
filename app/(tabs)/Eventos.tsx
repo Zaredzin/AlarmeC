@@ -1,4 +1,4 @@
-import { Pressable, Text, View, ScrollView, useWindowDimensions } from "react-native";
+import { Pressable, Text, View, ScrollView, useWindowDimensions, Platform } from "react-native";
 import { Stack } from "expo-router";
 import { EventDay, EventMonth, EventView } from "@/components/EventComponents/EventComponents";
 import { StyleSheet } from "react-native";
@@ -12,6 +12,8 @@ import { Inter_400Regular } from "@expo-google-fonts/inter";
 import React, { useState } from "react";
 
 export default function () {
+
+  const { width, height } = useWindowDimensions();
   const eventData = {
     June: {
       '11': [
@@ -60,33 +62,62 @@ export default function () {
     setSelectedDate({ date: dateString, day: dayOfMonth, events: dayEvents });
   };
 //Tema del calendario
-  const calendarTheme = {
-    backgroundColor: '#101727',
-    calendarBackground: '#101727',
-    textSectionTitleColor: 'white',
-    textSectionTitleDisabledColor: '#d9e1e8',
-    selectedDayBackgroundColor: '#00adf5',
-    selectedDayTextColor: 'white',
-    todayTextColor: '#00adf5',
-    dayTextColor: 'white',
-    textDisabledColor: '#d9e1e8',
-    dotColor: '#00adf5',
-    selectedDotColor: '#ffffff',
-    arrowColor: 'white',
-    disabledArrowColor: '#d9e1e8',
-    monthTextColor: 'white',
-    indicatorColor: 'white',
-    textDayFontFamily: 'monospace',
-    textMonthFontFamily: 'monospace',
-    textDayHeaderFontFamily: 'monospace',
-    textDayFontWeight: '300',
-    textMonthFontWeight: 'bold',
-    textDayHeaderFontWeight: '300',
-    textDayFontSize: 16,
-    textMonthFontSize: 16,
-    textDayHeaderFontSize: 16,
+  const calendarTheme = Platform.select( {
+    android:{
+      backgroundColor: '#101727',
+      calendarBackground: '#101727',
+      textSectionTitleColor: 'white',
+      textSectionTitleDisabledColor: '#d9e1e8',
+      selectedDayBackgroundColor: '#00adf5',
+      selectedDayTextColor: 'white',
+      todayTextColor: '#00adf5',
+      dayTextColor: 'white',
+      textDisabledColor: '#d9e1e8',
+      dotColor: '#00adf5',
+      selectedDotColor: '#ffffff',
+      arrowColor: 'white',
+      disabledArrowColor: '#d9e1e8',
+      monthTextColor: 'white',
+      indicatorColor: 'white',
+      textDayFontFamily: 'monospace',
+      textMonthFontFamily: 'monospace',
+      textDayHeaderFontFamily: 'monospace',
+      textDayFontWeight: '300',
+      textMonthFontWeight: 'bold',
+      textDayHeaderFontWeight: '300',
+      textDayFontSize: 16,
+      textMonthFontSize: 16,
+      textDayHeaderFontSize: 16,
+    },
+    web:{
+      backgroundColor: '#101727',
+      calendarBackground: '#101727',
+      textSectionTitleColor: 'white',
+      textSectionTitleDisabledColor: '#d9e1e8',
+      selectedDayBackgroundColor: '#00adf5',
+      selectedDayTextColor: 'white',
+      todayTextColor: '#00adf5',
+      dayTextColor: 'white',
+      textDisabledColor: '#d9e1e8',
+      dotColor: '#00adf5',
+      selectedDotColor: '#ffffff',
+      arrowColor: 'white',
+      disabledArrowColor: '#d9e1e8',
+      monthTextColor: 'white',
+      indicatorColor: 'white',
+      textDayFontFamily: 'monospace',
+      textMonthFontFamily: 'monospace',
+      textDayHeaderFontFamily: 'monospace',
+      textDayFontWeight: '300',
+      textMonthFontWeight: 'bold',
+      textDayHeaderFontWeight: '300',
+      textDayFontSize: height * 0.02,
+      textMonthFontSize: 16,
+      textDayHeaderFontSize: 16,
+    },
     
-  };
+    
+  });
 
 
 
@@ -103,7 +134,7 @@ export default function () {
       </BlurView>
       <View style={styles.containerContainer}>
         <View style={styles.mainContainer}>
-          <View style={{height: "63%"}}>
+          <View style={Platform.OS === 'web' ? {height: height*0.5, width: width* 0.65}  : {height:"63%"}}>
             <Calendar  theme={calendarTheme}
               onDayPress={handleDayPress}
               markedDates={{
