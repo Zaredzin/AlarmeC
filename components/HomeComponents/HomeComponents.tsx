@@ -47,7 +47,7 @@ export function RoomMenu({rooms, handleRoomPress}){
 
                 {rooms.map((room, index) => (
                     <TouchableOpacity onPress={() => handleRoomPress(room)} key={index} style={{overflow:"hidden", elevation:5, paddingHorizontal: 5, height:40, width:"100%", borderRadius:15, backgroundColor:"#fff", marginVertical:4}}>
-                        <Text style={{color:"#000", fontFamily:"Inter_600SemiBold", fontSize:28}}>{room}</Text>
+                        <Text style={{color:"#000", fontFamily:"Inter_600SemiBold", fontSize:24}}>{room}</Text>
                        
                     </TouchableOpacity>
                 ))}

@@ -245,6 +245,7 @@ const styles = StyleSheet.create ({
         fontSize: 24,
         color:"white",
         textAlign: 'center',
+        fontFamily:"Inter_600SemiBold"
     },
     line:{
         alignSelf:"center",

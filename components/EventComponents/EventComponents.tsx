@@ -10,6 +10,7 @@ import { IconEntypo } from './IndexIconEntypo';
 import { MaterialI } from './IndexIconEntypo';
 import Entypo from '@expo/vector-icons/Entypo';
 import { MotiView } from 'moti';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
 
 const TemperatureIcon = () => {
@@ -92,10 +93,10 @@ export function EventDay({day}){
 }  
 export function EventMonth({month}){
     return(
-        <TouchableOpacity style={{flexDirection:"row",}}>
+        <View style={{flexDirection:"row",}}>
             <Text style={styles.monthText}>{month}</Text>
-            <EventIcon icon="down" colorI="gray" size={30} />
-        </TouchableOpacity>
+            <MaterialIcons name="event" color="#fff" size={24} />
+        </View>
     )
 }
 
@@ -146,7 +147,7 @@ const styles = StyleSheet.create ({
         //borderColor: "red",
         //borderWidth: 2,
         textAlign:"right",
-        color:"#000",
+        color:"#2ad",
         fontWeight:"500",
         fontSize:14,
         

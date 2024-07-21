@@ -5,17 +5,31 @@ import { StyleSheet } from "react-native";
 import EventIcon from "@/components/EventComponents/EventIcon";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { BlurView } from "expo-blur";
-import * as Permissions from 'expo-permissions';
-import {Calendar} from 'react-native-calendars'
+import {Calendar} from 'react-native-calendars';
+import { Inter_400Regular } from "@expo-google-fonts/inter";
 
 
 import React, { useState } from "react";
 
 export default function () {
   const eventData = {
+    June: {
+      '11': [
+        { time: '10:00 am', description: 'The humidity level is lower than expected.', icon: 'water' },
+        { time: '02:00 pm', description: 'Gas levels are within normal range.', icon: 'gas' },
+      ],
+      '24': [
+        { time: '09:00 am', description: 'The humidity level is lower than expected.', icon: 'water' },
+        { time: '02:00 pm', description: 'Gas levels are within normal range.', icon: 'gas' },
+      ],
+      '27': [
+        { time: '09:00 am', description: 'The humidity level is lower than expected.', icon: 'water' },
+        { time: '02:00 pm', description: 'Gas levels are within normal range.', icon: 'gas' },
+      ],
+    },
     July: {
       '19': [
-        { time: '09:00 am', description: 'The humidity level is lower than expected.', icon: 'water' },
+        { time: '10:00 am', description: 'The humidity level is lower than expected.', icon: 'water' },
         { time: '02:00 pm', description: 'Gas levels are within normal range.', icon: 'gas' },
       ],
       '20': [
@@ -25,76 +39,103 @@ export default function () {
       '21': [
         { time: '09:00 am', description: 'The humidity level is lower than expected.', icon: 'water' },
         { time: '02:00 pm', description: 'Gas levels are within normal range.', icon: 'gas' },
+        { time: '09:00 am', description: 'The humidity level is lower than expected.', icon: 'water' },
+        { time: '02:00 pm', description: 'Gas levels are within normal range.', icon: 'gas' },
+        { time: '09:00 am', description: 'The humidity level is lower than expected.', icon: 'water' },
+        { time: '02:00 pm', description: 'Gas levels are within normal range.', icon: 'gas' },
+        { time: '09:00 am', description: 'The humidity level is lower than expected.', icon: 'water' },
+        { time: '02:00 pm', description: 'Gas levels are within normal range.', icon: 'gas' },
       ],
     },
-    // Agrega más meses y días aquí
+    
   };
 
-  const transformDataToDates = (data) => {
-    let dates = [];
-    for (const month in data) {
-        for (const day in data[month]) {
-            dates.push(`${day} ${month}`);
-        }
-    }
-    return dates;
-};
+  const [selectedDate, setSelectedDate] = useState(null);
 
-const dates = transformDataToDates(eventData);
-
-  const currentDate = new Date();
-  const currentMonth = currentDate.toLocaleString('default', { month: 'long' });
-  const currentDay = currentDate.getDate().toString();
-
-  // Asegúrate de que todayEvents siempre sea un array, incluso si no hay eventos
-  const todayEvents = eventData[currentMonth]?.[currentDay] || [];
-
-  const [showMenu, setShowMenu] = useState(false);
-
-  // Función para mostrar u ocultar el menú
-  const toggleMenu = () => {
-      setShowMenu(!showMenu);
+ const handleDayPress = (day) => {
+    const { dateString, day: dayOfMonth } = day;
+    const [year, month, dayNumber] = dateString.split('-');
+    const monthName = new Date(year, month - 1, dayNumber).toLocaleString('default', { month: 'long' });
+    const dayEvents = eventData[monthName]?.[dayNumber] || [];
+    setSelectedDate({ date: dateString, day: dayOfMonth, events: dayEvents });
+  };
+//Tema del calendario
+  const calendarTheme = {
+    backgroundColor: '#101727',
+    calendarBackground: '#101727',
+    textSectionTitleColor: 'white',
+    textSectionTitleDisabledColor: '#d9e1e8',
+    selectedDayBackgroundColor: '#00adf5',
+    selectedDayTextColor: 'white',
+    todayTextColor: '#00adf5',
+    dayTextColor: 'white',
+    textDisabledColor: '#d9e1e8',
+    dotColor: '#00adf5',
+    selectedDotColor: '#ffffff',
+    arrowColor: 'white',
+    disabledArrowColor: '#d9e1e8',
+    monthTextColor: 'white',
+    indicatorColor: 'white',
+    textDayFontFamily: 'monospace',
+    textMonthFontFamily: 'monospace',
+    textDayHeaderFontFamily: 'monospace',
+    textDayFontWeight: '300',
+    textMonthFontWeight: 'bold',
+    textDayHeaderFontWeight: '300',
+    textDayFontSize: 16,
+    textMonthFontSize: 16,
+    textDayHeaderFontSize: 16,
+    
   };
 
 
-
-    const [selectedDate, setSelectedDate] = useState(dates[0]); // Estado para la fecha seleccionada
-
-    const handleDatePress = (date) => {
-        setSelectedDate(date);
-        setShowMenu(false); // Cerrar el menú después de seleccionar una fecha
-    };
 
 
 
   return (
     <View style={{ backgroundColor: "#101727", width: "100%", height: "100%" }}>
-      <Stack.Screen options={{ headerShown: false }} />
+    <Stack.Screen
 
+      options={{ headerShown: false }}
+    />
       <BlurView style={styles.monthView}>
-        <EventMonth month={currentMonth} />
+        <EventMonth month={"Events"} />
       </BlurView>
       <View style={styles.containerContainer}>
         <View style={styles.mainContainer}>
-          <View>
-            <EventDay day={`Día ${currentDay}`} />
-            <View style={styles.scrollContainer}>
-              <ScrollView style={{ flex: 1 }}>
-                {todayEvents.length > 0 ? (
-                  todayEvents.map((event, index) => (
-                    <EventView key={index} time={event.time} description={event.description} icon={event.icon} />
-                  ))
-                ) : (
-                  <Text style={styles.noEventsText}>No hay eventos registrados el día de hoy.</Text>
-                )}
-              </ScrollView>
-            </View>
+          <View style={{height: "63%"}}>
+            <Calendar  theme={calendarTheme}
+              onDayPress={handleDayPress}
+              markedDates={{
+                [selectedDate?.date]: { selected: true, selectedColor: 'blue' },
+              }}
+          />
           </View>
+          
+          {selectedDate ? (
+            <>
+              
+              <View style={styles.scrollContainer}>
+                <ScrollView style={{ flex: 1 }}>
+                  {selectedDate.events.length > 0 ? (
+                    selectedDate.events.map((event, index) => (
+                      <EventView key={index} time={event.time} description={event.description} icon={event.icon} />
+                    ))
+                  ) : (
+                    <Text style={styles.noEventsText}>No hay eventos registrados para esta fecha.</Text>
+                  )}
+                </ScrollView>
+              </View>
+            </>
+          ) : (
+            <Text style={styles.noEventsText}>Seleccione una fecha para ver eventos.</Text>
+          )}
         </View>
       </View>
     </View>
   );
 }
+
 
 const styles = StyleSheet.create({
   noEventsText: {
