@@ -1,4 +1,5 @@
-import {Text, View, Pressable, StyleSheet, ScrollView, SafeAreaView, TouchableOpacity, Platform,useWindowDimensions} from 'react-native';
+import React, { useState, useEffect, useCallback } from 'react';
+import { Text, View, Pressable, StyleSheet, ScrollView, SafeAreaView, TouchableOpacity, Platform, useWindowDimensions } from 'react-native';
 import { Stack } from 'expo-router';
 import EventIcon from '@/components/EventComponents/EventIcon';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -6,19 +7,16 @@ import IndexIcon from "@/components/EventComponents/IndexIcon";
 import { IconEntypo } from '@/components/EventComponents/IndexIconEntypo';
 import { StatusBar } from 'expo-status-bar';
 import { BlurView } from 'expo-blur';
-import  HomeComponents, { HomeTriggerView, HumiditySensor, OxygenSensor, TempSensor,RoomMenu, RoomSelector }  from '../../components/HomeComponents/HomeComponents'
+import HomeComponents, { HomeTriggerView, HumiditySensor, OxygenSensor, TempSensor, RoomMenu, RoomSelector } from '../../components/HomeComponents/HomeComponents';
 import { MaterialI } from '@/components/EventComponents/IndexIconEntypo';
 import { GasConcentration } from '../../components/HomeComponents/HomeComponents';
-import {Inter_600SemiBold} from "@expo-google-fonts/inter";
-import React, {useState,useEffect,useCallback} from 'react';
+import { Inter_600SemiBold } from "@expo-google-fonts/inter";
 import { MotiView } from 'moti';
 import { useFonts } from "expo-font";
 import * as SplashScreen from 'expo-splash-screen';
 
-
-
-const roomData = {
-    Habitaciones:{
+const initialRoomData = {
+    Habitaciones: {
         Cocina: {
             sensors: {
                 temperature: '27°',
@@ -29,9 +27,9 @@ const roomData = {
             triggers: [
                 { name: 'Puerta este', action: true },
                 { name: 'Puerta oeste', action: false },
-                { name: 'Ventana oeste', action: false},
+                { name: 'Ventana oeste', action: false },
                 { name: 'Puerta oeste', action: false },
-                { name: 'Ventana oeste', action: false},
+                { name: 'Ventana oeste', action: false },
             ],
         },
         Taller: {
@@ -59,142 +57,116 @@ const roomData = {
             ],
         },
     }
-    
-
 };
 
-export default function(){
+export default function HomePage() {
     const [showMenu, setShowMenu] = useState(false);
+    const [selectedRoom, setSelectedRoom] = useState(Object.keys(initialRoomData.Habitaciones)[0]);
+    const [roomData, setRoomData] = useState(initialRoomData);
 
-    // Función para mostrar u ocultar el menú
     const toggleMenu = () => {
-        setShowMenu(!showMenu); // Invertir valor actual de showMenu
+        setShowMenu(!showMenu);
     };
-
-    const rooms = Object.keys(roomData.Habitaciones);
-    const [selectedRoom, setSelectedRoom] = useState(rooms[0]); // Estado para la habitación seleccionada
 
     const handleRoomPress = (room) => {
         setSelectedRoom(room);
-        setShowMenu(false); // Cerrar el menú después de seleccionar una habitación
+        setShowMenu(false);
     };
 
-    
     const { width, height } = useWindowDimensions();
 
     useEffect(() => {
         SplashScreen.preventAutoHideAsync();
-      
         async function prepare() {
-          await SplashScreen.preventAutoHideAsync();
+            await SplashScreen.preventAutoHideAsync();
         }
-      
         prepare().then(() => {
-          SplashScreen.hideAsync();
+            SplashScreen.hideAsync();
         });
-      }, []);
-      
-      
-      
-      const [fontsLoaded] = useFonts({
-        
+
+        // WebSocket setup
+        const ws = new WebSocket('ws://192.168.100.96:8080');
+
+        ws.onopen = () => {
+            console.log('WebSocket connection opened');
+        };
+
+        ws.onmessage = (event) => {
+            const data = JSON.parse(event.data);
+            if (data.room && data.sensors) {
+                setRoomData((prevData) => ({
+                    ...prevData,
+                    Habitaciones: {
+                        ...prevData.Habitaciones,
+                        [data.room]: {
+                            ...prevData.Habitaciones[data.room],
+                            sensors: data.sensors,
+                        }
+                    }
+                }));
+            }
+        };
+
+        ws.onclose = () => {
+            console.log('WebSocket connection closed');
+        };
+
+        return () => {
+            ws.close();
+        };
+    }, []);
+
+    const [fontsLoaded] = useFonts({
         Inter_600SemiBold,
-      });
-      
-      
-      
-      const onLayout = useCallback(async() => {
-        if(fontsLoaded){
+    });
+
+    const onLayout = useCallback(async () => {
+        if (fontsLoaded) {
             await SplashScreen.hideAsync();
         }
-      }, [fontsLoaded])
-      
-      if (!fontsLoaded) return null;
+    }, [fontsLoaded]);
 
+    if (!fontsLoaded) return null;
 
-
-
-
-
-    
-
-
-
-
-
-    return(
-        
-
-        
-        
-        <View onLayout={onLayout} style={{backgroundColor:"#101727", width:"100%", height:"100%"}}
-        
-        
-        
-        >
-            <StatusBar style="light"  backgroundColor="#121532" />
-            
-            <Stack.Screen
-
-                options={{ headerShown: false }}
-            />
-            
-                <BlurView style={styles.container1}>
-                
-                    <Text style={styles.Title}>No se han registrado eventos</Text>
-
-                </BlurView>
-            <View style={[styles.containerContainer, {backgroundColor:"#00000000"}]}>
-                <TouchableOpacity onPress={toggleMenu}  style={[styles.roomButton,{flexDirection:"row"}]}>
-                    <LinearGradient colors={['#164b6a',  '#0B2447']}  
-                        start={{
-                        x: 0,
-                        y: 0
-                        }}
-                        end={{
-                            x: 1,
-                            y: 1
-                        }} style={{width:"100%", borderRadius:15,zIndex:2}}>
-                            <View style={{flexDirection:"row"}}>
-                                <View style={{width:"65%"}}>
-                                    <Text style={styles.roomButtonText}>{selectedRoom ? selectedRoom : "Habitación"}</Text>
-                                </View>
-                                <View style={{width:"25%", backgroundColor:"#fff", borderTopLeftRadius:15, borderTopRightRadius:15, alignSelf:"flex-end",}}>
-                                    <EventIcon  icon="down" colorI="#000" size={20} />
-                                </View>
-                                
+    return (
+        <View onLayout={onLayout} style={{ backgroundColor: "#101727", width: "100%", height: "100%" }}>
+            <StatusBar style="light" backgroundColor="#121532" />
+            <Stack.Screen options={{ headerShown: false }} />
+            <BlurView style={styles.container1}>
+                <Text style={styles.Title}>No se han registrado eventos</Text>
+            </BlurView>
+            <View style={[styles.containerContainer, { backgroundColor: "#00000000" }]}>
+                <TouchableOpacity onPress={toggleMenu} style={[styles.roomButton, { flexDirection: "row" }]}>
+                    <LinearGradient colors={['#164b6a', '#0B2447']}
+                        start={{ x: 0, y: 0 }}
+                        end={{ x: 1, y: 1 }}
+                        style={{ width: "100%", borderRadius: 15, zIndex: 2 }}>
+                        <View style={{ flexDirection: "row" }}>
+                            <View style={{ width: "65%" }}>
+                                <Text style={styles.roomButtonText}>{selectedRoom ? selectedRoom : "Habitación"}</Text>
                             </View>
-                            
-
-                            
-                        
-
+                            <View style={{ width: "25%", backgroundColor: "#fff", borderTopLeftRadius: 15, borderTopRightRadius: 15, alignSelf: "flex-end" }}>
+                                <EventIcon icon="down" colorI="#000" size={20} />
+                            </View>
+                        </View>
                     </LinearGradient>
-                        
                 </TouchableOpacity>
-                {showMenu && <RoomMenu rooms={rooms}  handleRoomPress={handleRoomPress}>
-                        
-
-                    </RoomMenu>}
-                    {selectedRoom && (
+                {showMenu && <RoomMenu rooms={Object.keys(roomData.Habitaciones)} handleRoomPress={handleRoomPress} />}
+                {selectedRoom && (
                     <View style={styles.container2}>
-                        {/* Muestra los sensores de la habitación */}
                         <View style={{ flexDirection: "row" }}>
                             <View style={[styles.SensorsContainer, { flexDirection: "column", justifyContent: "space-around" }]}>
                                 <IndexIcon icon={"temperature-empty"} colorI={"#00ff00"} size={26} />
                                 <TempSensor temp={roomData.Habitaciones[selectedRoom].sensors.temperature} />
                             </View>
-
                             <View style={[styles.SensorsContainer, { flexDirection: "column", justifyContent: "space-around" }]}>
                                 <IconEntypo icon={"air"} colorI={"gray"} size={26} />
                                 <OxygenSensor oxygenLevel={roomData.Habitaciones[selectedRoom].sensors.oxygenLevel} />
                             </View>
-
                             <View style={[styles.SensorsContainer, { flexDirection: "column", justifyContent: "space-around" }]}>
                                 <IconEntypo icon={"water"} colorI={"#2ad"} size={26} />
                                 <HumiditySensor humidityLevel={roomData.Habitaciones[selectedRoom].sensors.humidityLevel} />
                             </View>
-
                             <View style={[styles.SensorsContainer, { flexDirection: "column", justifyContent: "space-around" }]}>
                                 <MaterialI icon={"gas-meter"} colorI={"orange"} size={28} />
                                 <GasConcentration gasLevel={roomData.Habitaciones[selectedRoom].sensors.gasLevel} />
@@ -202,11 +174,9 @@ export default function(){
                         </View>
                     </View>
                 )}
-            
-            {selectedRoom && (
-                    <View  style={Platform.OS === 'web' ?  styles.container3 && {height: height * 0.5, width: width* 0.65}  : styles.container3}>
-                        {/* Muestra los accionadores de la habitación */}
-                        <ScrollView >
+                {selectedRoom && (
+                    <View style={Platform.OS === 'web' ? { height: height * 0.5, width: width * 0.65 } : styles.container3}>
+                        <ScrollView>
                             {roomData.Habitaciones[selectedRoom].triggers.map((trigger, index) => (
                                 <HomeTriggerView key={index} triggerName={trigger.name} action={trigger.action} />
                             ))}
@@ -214,10 +184,7 @@ export default function(){
                     </View>
                 )}
             </View>
-
-
         </View>
-        
     );
 }
 
