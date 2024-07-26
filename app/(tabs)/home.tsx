@@ -85,7 +85,7 @@ export default function HomePage() {
         });
 
         // WebSocket setup
-        const ws = new WebSocket('ws://192.168.100.96:8080');
+        const ws = new WebSocket('ws://192.168.1.70:8080');
 
         ws.onopen = () => {
             console.log('WebSocket connection opened');

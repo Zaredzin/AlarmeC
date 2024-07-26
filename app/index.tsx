@@ -7,7 +7,7 @@ import { Stack } from "expo-router";
 import { BlurView } from 'expo-blur';
 import EventIcon from "@/components/EventComponents/EventIcon";
 import { StatusBar } from 'expo-status-bar';
-import { auth } from './fireBase';  // Asegúrate de que la ruta sea correcta
+import { auth } from './fireBase';  
 import {Inter_600SemiBold} from "@expo-google-fonts/inter";
 import { useFonts } from "expo-font";
 
@@ -20,7 +20,7 @@ export default function LoginScreen() {
   const handleLogin = async () => {
     try {
         await auth.signInWithEmailAndPassword(email, password);
-        router.push('/(tabs)/home'); // Cambia la ruta a '/home'
+        router.push('/(tabs)/home'); 
     } catch (err) {
         if (err instanceof Error) {
             setError(err.message);

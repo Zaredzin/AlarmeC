@@ -1,7 +1,7 @@
 import { View,Text,ScrollView,StyleSheet,TouchableHighlight,Pressable, useWindowDimensions, Image} from "react-native";
 import React, { useEffect, useCallback, useState } from "react";
 import { Circle } from "@/components/Figuras/Figuras";
-import Back1 from "../assets/SVG/Back1.svg";
+import Back1 from "../assets/SVG/Back1";
 import {useFonts} from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import {Inter_600SemiBold} from "@expo-google-fonts/inter";

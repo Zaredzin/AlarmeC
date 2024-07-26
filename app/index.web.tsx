@@ -1,5 +1,5 @@
 import { Text, View, TextInput, StyleSheet, Pressable, ScrollView, TouchableOpacity } from "react-native";
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect,useCallback } from "react";
 import { LinearGradient } from 'expo-linear-gradient';
 import * as SplashScreen from 'expo-splash-screen';
 import { useRouter } from 'expo-router';
@@ -7,10 +7,9 @@ import { Stack } from "expo-router";
 import { BlurView } from 'expo-blur';
 import EventIcon from "@/components/EventComponents/EventIcon";
 import { StatusBar } from 'expo-status-bar';
-import { auth } from './fireBase';  // Asegúrate de que la ruta sea correcta
-import { useFonts } from "expo-font";
+import { auth } from './fireBase';  
 import {Inter_600SemiBold} from "@expo-google-fonts/inter";
-
+import { useFonts } from "expo-font";
 
 export default function LoginScreen() {
   const [email, setEmail] = useState('');
@@ -21,7 +20,7 @@ export default function LoginScreen() {
   const handleLogin = async () => {
     try {
         await auth.signInWithEmailAndPassword(email, password);
-        router.push('/(tabs)/home'); // Cambia la ruta a '/home'
+        router.push('/(tabs)/home'); 
     } catch (err) {
         if (err instanceof Error) {
             setError(err.message);
@@ -43,12 +42,6 @@ useEffect(() => {
     SplashScreen.hideAsync();
   });
 }, []);
-
-
-
-
-
-
 
 
 
@@ -76,10 +69,8 @@ if (!fontsLoaded) return null;
     router.push('/inicio');
   };
 
-  
-
   return (
-    <View  onLayout={onLayout} style={styles.loginContainer}>
+    <View onLayout={onLayout} style={styles.loginContainer}>
       <StatusBar style="light" backgroundColor="#121532" />
       <Stack.Screen options={{ headerShown: false }} />
       <LinearGradient
@@ -89,7 +80,7 @@ if (!fontsLoaded) return null;
         style={styles.box}
       >
         <View style={{ width: 100, height: 100, backgroundColor: "#264a71", position: "absolute" }}></View>
-        <View  style={{ flex: 1, width: "100%", height: "100%" }}>
+        <ScrollView contentContainerStyle={{ flex: 1, width: "100%", height: "100%" }}>
           <View style={styles.labelT}>
             <Text style={styles.title}>Iniciar Sesión</Text>
           </View>
@@ -112,7 +103,7 @@ if (!fontsLoaded) return null;
                   secureTextEntry
                 />
                 {error ? <Text style={styles.errorText}>{error}</Text> : null}
-                <TouchableOpacity onPress={amonos}>
+                <TouchableOpacity onPress={amonos2}>
                   <Text style={styles.loginButton}>
                     Iniciar<EventIcon colorI={"#fff"} icon="arrowright" size={24} />
                   </Text>
@@ -123,7 +114,7 @@ if (!fontsLoaded) return null;
               </Pressable>
             </View>
           </BlurView>
-        </View>
+        </ScrollView>
       </LinearGradient>
     </View>
   )
@@ -219,3 +210,4 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
 });
+
