@@ -4,6 +4,8 @@ import Notifications from "../assets/SVG/Notifications.svg";
 import Stress from "../assets/SVG/Stress.svg";
 import Question from "../assets/SVG/Questioning.svg";
 import { useFonts } from 'expo-font';
+import { Circle } from "@/components/Figuras/Figuras";
+import Back1 from "../assets/SVG/Back1";
 import * as SplashScreen from 'expo-splash-screen';
 import { Inter_600SemiBold } from "@expo-google-fonts/inter";
 import { useRouter } from 'expo-router';
