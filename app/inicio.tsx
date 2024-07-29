@@ -1,171 +1,235 @@
-import { View,Text,ScrollView,StyleSheet,TouchableHighlight,Pressable, useWindowDimensions, Image} from "react-native";
+import { View, Text, ScrollView, StyleSheet, Image, useWindowDimensions, Pressable } from "react-native";
 import React, { useEffect, useCallback, useState } from "react";
-import { Circle } from "@/components/Figuras/Figuras";
-import Back1 from "../assets/SVG/Back1.svg";
-import {useFonts} from 'expo-font';
+import Notifications from "../assets/SVG/Notifications.svg";
+import Stress from "../assets/SVG/Stress.svg";
+import Question from "../assets/SVG/Questioning.svg";
+import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
-import {Inter_600SemiBold} from "@expo-google-fonts/inter";
-import EventIcon from "@/components/EventComponents/EventIcon";
-import Box from "@/components/Main_Web/Box";
+import { Inter_600SemiBold } from "@expo-google-fonts/inter";
 import { useRouter } from 'expo-router';
-import { Stack } from "expo-router";
 import { MotiView } from "moti";
-import Animated, { useSharedValue, useAnimatedStyle, withTiming, Easing } from 'react-native-reanimated';
 
-
-
-
-
-
-export default function(){
+export default function() {
     const router = useRouter();
-
     const [fontsLoaded] = useFonts({
-        SpaceMono: require("../assets/fonts/SpaceMono.ttf"),
         Inter_600SemiBold,
     });
-    
+
     useEffect(() => {
         async function prepare() {
-             SplashScreen.preventAutoHideAsync
-            
+            await SplashScreen.preventAutoHideAsync();
         }
         prepare();
-    }, [])
+    }, []);
 
-   
-    
-
-    const onLayout = useCallback(async() => {
-        if(fontsLoaded){
+    const onLayout = useCallback(async () => {
+        if (fontsLoaded) {
             await SplashScreen.hideAsync();
         }
-    }, [fontsLoaded])
+    }, [fontsLoaded]);
 
     if (!fontsLoaded) return null;
 
     const { width, height } = useWindowDimensions();
+    const isSmallScreen = width < 600;
 
-    //Indice para las tarjetas
-    const [currentBox, setCurrentBox] = useState(0);
-    const [direction, setDirection] = useState('next');
-
-    const nextBox = () => {
-        setCurrentBox((prevIndex) => (prevIndex + 1) % boxes.length);
-        setDirection('next');
-        
-      }
-      const previousBox = () => {
-        setCurrentBox((prevIndex) => (prevIndex - 1 + boxes.length) % boxes.length);
-        setDirection('prev');
-      }
-     
-
-    const boxes = [
-        //PRIMERA BOX
-        <Box key="0" index={0} currentIndex={currentBox} direction={direction}>
-
-            <View style={{padding:"1%", width:"50%", alignSelf:"center",alignItems:"center", justifyContent:"space-around", }}>
-                <Text style={{ justifyContent:"center" ,fontSize: ((height * 0.06)), fontFamily:"Inter_600SemiBold"}}>Afraid of letting alone your house?</Text>
-            </View>
-            <View style={{padding:"1%", width:"50%", alignSelf:"center",alignItems:"center", justifyContent:"space-around", }}>
-                <Text style={{ justifyContent:"center" ,fontSize: ((height * 0.03)), fontFamily:"Inter_600SemiBold"}}>Alarme will be your companion</Text>
-            </View>
-            
-
-        </Box>,
-        //SEGUNDA BOX
-        <Box key="1" index={1} currentIndex={currentBox} direction={direction}>
-                <Text>aaaaaaaa</Text>
-
-                
-        </Box>,
-        
-      ];
-    
-      
-
-
-    //const [backgroundColor, setBackgroundColor] = useState("#00000000");
-     const [isHoveredArrowL, setIsHoveredArrowL] = useState(false);
-     const [isHoveredArrowR, setIsHoveredArrowR] = useState(false);
-
-   
-
-    
-
-
-
-     const amonos = () => {
-        router.push('');
-      };
-
-    return(
-        <View style={{flex:1}} onLayout={onLayout}>
-            <View style={{position: 'absolute', zIndex:-1, width:width, height:height}}>
-                
-                <View style={{backgroundColor:'#121532', width:"100%", height:"34%", zIndex:-1,}}>
-                    <Circle style={{width:180, height:180, backgroundColor:"#00000030", marginLeft:width * 0.7, marginTop:height * 0.01, }} />
-                </View>
-                <Back1   zindex={0} position={"absolute"} width={width} height={height} ></Back1>
-                
-                
-                
-
-
-
-            </View>
-            
-            
-
-            <ScrollView style={{ flex: 1,  zIndex:1, }}>
-                <MotiView from={{ translateY: "-30%"}} animate={{translateY: 0}} transition={{type: 'spring',duration: 3000,
-          }}
-                 style={{ flexDirection:"row",height: height * 0.1, justifyContent:"space-around", padding:20, marginHorizontal:width * 0.06,marginTop:height * 0.03, }}>
-                    <View >
-                        <Text style={{fontFamily:"Inter_600SemiBold",width:width * 0.15, fontSize: ((height * 0.03)), color:"#fff", }}>Alarmamela</Text>
-                    </View>
-                    <View style={{flexDirection:"row", justifyContent:"space-between"}}>
-                        <Pressable onPress={amonos}>
-                            <Text style={{fontFamily:"Inter_600SemiBold",fontSize: ((height * 0.03)), color:"#fff", marginHorizontal:width * 0.01}}>Log in</Text>
-                        </Pressable>
-                        
-                        <Text style={{fontFamily:"Inter_600SemiBold",fontSize: ((height * 0.03)), color:"#fff", marginHorizontal:width * 0.01}}>Register</Text>
-                    </View> 
+    return (
+        <View style={{ flex: 1 }} onLayout={onLayout}>
+            <Image style={styles.backgroundImage} source={require("../assets/images/Imagenes/F1.jpg")} />
+            <MotiView style={styles.header}>
+                <MotiView style={styles.leftHeader}>
+                    <Text style={styles.headerText}>Alarme</Text>
                 </MotiView>
-                <View style={{width: width * 0.8, height: height * 0.7, marginTop: height * 0.2,position:"absolute", zIndex: 1,flexDirection:"row", borderRadius:15, backgroundColor: "#00000000", alignSelf:"center", }}>
-                    <Pressable onPress={previousBox}   onHoverIn={() => setIsHoveredArrowL(true) } onHoverOut={() => setIsHoveredArrowL(false)}  style={({ pressed }) => [{backgroundColor: pressed ? 'blue' : isHoveredArrowL ? '#ffffff40' : '#00000000',},styles.arrowButtonL,]} >
-                        <EventIcon icon={"caretleft"} size={28} colorI={"white"}/>
+                <MotiView style={styles.rightHeader}>
+                    <Pressable><Text style={styles.headerText}>Log in</Text></Pressable>
+                    
+                    <Text style={styles.headerText}>Sign in</Text>
+                    <Text style={styles.headerText}>About</Text>
+                </MotiView>
+            </MotiView>
+            <MotiView style={styles.mainContent}>
+                <ScrollView>
+                    <View>
+                        <MotiView style={[styles.mainMessage, ]}>
+                            <View>
+                                <Text style={[styles.largeText,{width: isSmallScreen ? width : width*0.6}]}>Afraid of letting your home alone?</Text>
+                                <Text style={styles.mediumText}>It is time to relax a bit.</Text>
+                            </View>
+                            <Stress style={[styles.stressIcon,{width: isSmallScreen ? '100%' : width*0.3},]} />
+                        </MotiView>
+                        <MotiView style={styles.secondaryMessage}>
+                            <View>
+                                <View style={isSmallScreen ? styles.columnLayout : styles.rowLayout}>
+                                    <Notifications style={{ width: isSmallScreen ? '100%' : 750 }} />
+                                    <View>
+                                        <Text style={[styles.mainText, { width: width * 0.6 }]}>
+                                            With <Text style={styles.highlightedText}>Alarme</Text> you can.
+                                        </Text>
+                                        <Text style={[styles.subText, { width: width * 0.6 }]}>
+                                            Manage your home security with a 
+                                            <Text style={styles.highlightedText}> simple</Text> app
+                                        </Text>
+                                    </View>
+                                </View>
+                            </View>
+                        </MotiView>
+
+                        <MotiView style={styles.container3}>
+                            <View>
+                                <View style={isSmallScreen ? styles.columnLayout : styles.rowLayout}>
+                                
+                                    <Text style={[styles.container3Text, {width: isSmallScreen ? width*0.9 : width*0.4  }]}> But what is alarme?</Text>
+                                    <Question style={{ width: isSmallScreen ? '100%' : 750 }}/>
+                                    
+                                    <View>
+                                        
+                                        <Text style={[styles.container3Text2, {width: isSmallScreen ? width*0.9 : width*0.4  }]}>
+                                        <Text style={styles.highlightedText}>Alarme</Text>  is a service designed to monitor and protect the 
+                                        integrity of your home in a simple and efficient way. 
+                             
+                                            
+                                        </Text>
+                                    </View>
+                                </View>
+                            </View>
+                        </MotiView>
                         
-                    </Pressable>
-                    <Pressable onPress={nextBox} onHoverIn={() => setIsHoveredArrowR(true) } onHoverOut={() => setIsHoveredArrowR(false)}  style={({ pressed }) => [{backgroundColor: pressed ? 'blue' : isHoveredArrowR ? '#ffffff40' : '#00000000',},styles.arrowButtonR,]} >
-                    <EventIcon icon={"caretright"} size={28} colorI={"white"}/>
-                        
-                </Pressable>
-
-                </View>
-                
-                {boxes.map((box, index) => (
-                    <Box key={index} index={index} currentIndex={currentBox} direction={direction}>
-                    {box.props.children}
-                    </Box>
-                ))}
-
-                
-
-            </ScrollView>
-            
+                    </View>
+                </ScrollView>
+            </MotiView>
         </View>
-    )
+    );
 }
 
 const styles = StyleSheet.create({
-    arrowButtonR:{
-        borderRadius:25, position:"absolute", alignSelf:"center", right:"-7%",
-
+    container3:{
+        paddingHorizontal: 30,
+        paddingVertical:45,
+        backgroundColor: "#ffffff99",
     },
-    arrowButtonL:{
-        borderRadius:25, position:"absolute", alignSelf:"center", left:"-7%", 
-
-    }
-})
+    container3Text:{
+        textAlign: 'center',
+        padding: 30,
+        fontSize: 64,
+        textShadowColor: '#000',
+        textShadowOffset: { width: 1, height: 1 },
+        textShadowRadius: 5,
+        fontFamily: 'Inter_600SemiBold',
+        color: '#000',
+    },
+    container3Text2:{
+        textAlign: 'center',
+        padding: 30,
+        fontSize: 32,
+        textShadowColor: '#000',
+        textShadowOffset: { width: 1, height: 1 },
+        textShadowRadius: 5,
+        fontFamily: 'Inter_600SemiBold',
+        color: '#fff',
+    },
+    backgroundImage: {
+        flex: 1,
+        position: "absolute",
+        zIndex: -1,
+    },
+    header: {
+        width: '100%',
+        flexDirection: 'row',
+    },
+    leftHeader: {
+        width: "50%",
+        paddingVertical: 10,
+        paddingHorizontal: 20,
+        backgroundColor: "#000000",
+    },
+    rightHeader: {
+        width: "50%",
+        paddingVertical: 10,
+        paddingHorizontal: 20,
+        backgroundColor: "#000000",
+        flexDirection: "row",
+        justifyContent: "space-around",
+    },
+    headerText: {
+        fontSize: 24,
+        fontFamily: "Inter_600SemiBold",
+        color: "#fff",
+    },
+    mainContent: {
+        flex: 1,
+        backgroundColor: "#00000099",
+        width: '100%',
+    },
+    mainMessage: {
+        flex: 1,
+        alignItems: "center",
+        margin: 30,
+        flexWrap: "wrap",
+        flexBasis: "auto",
+        flexDirection: "row",
+    },
+    largeText: {
+        fontSize: 60,
+        
+        textShadowColor: "#000",
+        textShadowOffset: { width: 1, height: 1 },
+        textShadowRadius: 5,
+        fontFamily: "Inter_600SemiBold",
+        color: "#fff",
+    },
+    mediumText: {
+        padding: 30,
+        fontSize: 32,
+        textShadowColor: "#000",
+        textShadowOffset: { width: 1, height: 1 },
+        textShadowRadius: 5,
+        fontFamily: "Inter_600SemiBold",
+        color: "#ffffff80",
+    },
+    stressIcon: {
+        width: "45%",
+    },
+    secondaryMessage: {
+        marginTop: 50,
+        paddingHorizontal: 30,
+        paddingVertical:45,
+        backgroundColor: "#00000090",
+    },
+    rowLayout: {
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    columnLayout: {
+        flexDirection: 'column',
+        alignItems: 'center',
+    },
+    mainText: {
+        textAlign: 'center',
+        padding: 30,
+        fontSize: 64,
+        textShadowColor: '#000',
+        textShadowOffset: { width: 1, height: 1 },
+        textShadowRadius: 5,
+        fontFamily: 'Inter_600SemiBold',
+        color: '#ffffff',
+    },
+    highlightedText: {
+        textAlign: 'center',
+        fontSize: 60,
+        textShadowColor: '#000',
+        textShadowOffset: { width: 1, height: 1 },
+        textShadowRadius: 5,
+        fontFamily: 'Inter_600SemiBold',
+        color: '#2ad',
+    },
+    subText: {
+        textAlign: 'center',
+        padding: 30,
+        fontSize: 32,
+        textShadowColor: '#000',
+        textShadowOffset: { width: 1, height: 1 },
+        textShadowRadius: 5,
+        fontFamily: 'Inter_600SemiBold',
+        color: '#ffffff',
+    },
+});
