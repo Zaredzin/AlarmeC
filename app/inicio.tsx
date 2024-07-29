@@ -52,10 +52,11 @@ export default function() {
             <MotiView style={styles.mainContent}>
                 <ScrollView>
                     <View>
-                        <MotiView style={[styles.mainMessage, ]}>
-                            <View>
-                                <Text style={[styles.largeText,{width: isSmallScreen ? width : width*0.6}]}>Afraid of letting your home alone?</Text>
-                                <Text style={styles.mediumText}>It is time to relax a bit.</Text>
+                        <MotiView style={[styles.mainMessage]}>
+
+                            <View style={[styles.conteiner111]}>
+                            <Text style={[styles.largeText,{width: isSmallScreen ? width : width*0.6}]}>Afraid of letting your home alone?</Text>
+                                <Text style={[styles.mediumText,{width: isSmallScreen ? width : width*0.6}]}>Protect your home and business from invisible air pollutants, fires, and gas leaks with AlarMe. Our cutting-edge solution combines IoT devices, a mobile app, and a web platform to provide real-time air quality monitoring and instant alerts. With AlarMe, you can breathe easy, knowing that your environment's air quality is constantly monitored and managed.</Text>
                             </View>
                             <Stress style={[styles.stressIcon,{width: isSmallScreen ? '100%' : width*0.3},]} />
                         </MotiView>
@@ -104,6 +105,12 @@ export default function() {
 }
 
 const styles = StyleSheet.create({
+    conteiner111:{
+        //flexDirection: 'row',
+        //borderWidth: 2,
+        width: "60%",
+        margin: 40
+    },
     container3:{
         paddingHorizontal: 30,
         paddingVertical:45,
@@ -165,6 +172,7 @@ const styles = StyleSheet.create({
     mainMessage: {
         flex: 1,
         alignItems: "center",
+        justifyContent: "flex-start",
         margin: 30,
         flexWrap: "wrap",
         flexBasis: "auto",
@@ -172,7 +180,6 @@ const styles = StyleSheet.create({
     },
     largeText: {
         fontSize: 60,
-        
         textShadowColor: "#000",
         textShadowOffset: { width: 1, height: 1 },
         textShadowRadius: 5,
@@ -180,6 +187,9 @@ const styles = StyleSheet.create({
         color: "#fff",
     },
     mediumText: {
+        flex: 1,
+        marginLeft: 16,
+        width: "100%",
         padding: 30,
         fontSize: 32,
         textShadowColor: "#000",
@@ -187,6 +197,7 @@ const styles = StyleSheet.create({
         textShadowRadius: 5,
         fontFamily: "Inter_600SemiBold",
         color: "#ffffff80",
+        textAlign: "justify",
     },
     stressIcon: {
         width: "45%",
