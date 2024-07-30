@@ -3,6 +3,7 @@ import React, { useEffect, useCallback, useState } from "react";
 import Notifications from "../assets/SVG/Notifications.svg";
 import Stress from "../assets/SVG/Stress.svg";
 import Question from "../assets/SVG/Questioning.svg";
+import Contact from "../assets/SVG/Contact.svg";
 import { useFonts } from 'expo-font';
 import { Circle } from "@/components/Figuras/Figuras";
 import Back1 from "../assets/SVG/Back1";
@@ -10,6 +11,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import { Inter_600SemiBold } from "@expo-google-fonts/inter";
 import { useRouter } from 'expo-router';
 import { MotiView } from "moti";
+import { Directions } from "react-native-gesture-handler";
 
 export default function() {
     const router = useRouter();
@@ -40,7 +42,7 @@ export default function() {
             <Image style={styles.backgroundImage} source={require("../assets/images/Imagenes/F1.jpg")} />
             <MotiView style={styles.header}>
                 <MotiView style={styles.leftHeader}>
-                    <Text style={styles.headerText}>Alarme</Text>
+                    <Text style={styles.headerText}>AlarMe</Text>
                 </MotiView>
                 <MotiView style={styles.rightHeader}>
                     <Pressable><Text style={styles.headerText}>Log in</Text></Pressable>
@@ -55,8 +57,8 @@ export default function() {
                         <MotiView style={[styles.mainMessage]}>
 
                             <View style={[styles.conteiner111]}>
-                            <Text style={[styles.largeText,{width: isSmallScreen ? width : width*0.6}]}>Afraid of letting your home alone?</Text>
-                                <Text style={[styles.mediumText,{width: isSmallScreen ? width : width*0.6}]}>Protect your home and business from invisible air pollutants, fires, and gas leaks with AlarMe. Our cutting-edge solution combines IoT devices, a mobile app, and a web platform to provide real-time air quality monitoring and instant alerts. With AlarMe, you can breathe easy, knowing that your environment's air quality is constantly monitored and managed.</Text>
+                            <Text style={[styles.largeText,{width: isSmallScreen ? width*0.8 : width*0.6}]}>Afraid of letting your home alone?</Text>
+                                <Text style={[styles.mediumText,{width: isSmallScreen ? width*0.8 : width*0.6}]}>Protect your home and business from invisible air pollutants, fires, and gas leaks with AlarMe. Our cutting-edge solution combines IoT devices, a mobile app, and a web platform to provide real-time air quality monitoring and instant alerts. With AlarMe, you can breathe easy, knowing that your environment's air quality is constantly monitored and managed.</Text>
                             </View>
                             <Stress style={[styles.stressIcon,{width: isSmallScreen ? '100%' : width*0.3},]} />
                         </MotiView>
@@ -65,13 +67,13 @@ export default function() {
                                 <View style={isSmallScreen ? styles.columnLayout : styles.rowLayout}>
                                     <Notifications style={{ width: isSmallScreen ? '100%' : 750 }} />
                                     <View>
-                                        <Text style={[styles.mainText, { width: width * 0.6 }]}>
-                                            With <Text style={styles.highlightedText}>Alarme</Text> you can.
+                                        <Text style={[styles.mainText, {width: isSmallScreen ? width : width*0.6}]}>
+                                            AlarMe <Text style={styles.highlightedText}>Key</Text> features
                                         </Text>
-                                        <Text style={[styles.subText, { width: width * 0.6 }]}>
-                                            Manage your home security with a 
-                                            <Text style={styles.highlightedText}> simple</Text> app
-                                        </Text>
+                                        <Text style={styles.medText}>Real-Time Monitoring</Text><Text style={[styles.smallText,{width: isSmallScreen ? width : width*0.6}]}>IoT devices equipped with MQ2, MQ135, and DHT11 sensors continuously track air quality, temperature, and potential gas leaks.</Text>
+                                        <Text style={styles.medText}>Instant Alerts</Text><Text style={[styles.smallText,{width: isSmallScreen ? width : width*0.6}]}>Receive immediate notifications on your mobile app when air quality thresholds are exceeded or gas leaks are detected.</Text>
+                                        <Text style={styles.medText}>Smart Control</Text><Text style={[styles.smallText,{width: isSmallScreen ? width : width*0.6}]}>Automatically open windows or take recommended actions to improve air quality and reduce risks.</Text>
+                                        <Text style={styles.medText}>Historical Data</Text><Text style={[styles.smallText,{width: isSmallScreen ? width : width*0.6}]}>Access detailed air quality records and trends through our user-friendly web platform.</Text>
                                     </View>
                                 </View>
                             </View>
@@ -80,23 +82,34 @@ export default function() {
                         <MotiView style={styles.container3}>
                             <View>
                                 <View style={isSmallScreen ? styles.columnLayout : styles.rowLayout}>
-                                
-                                    <Text style={[styles.container3Text, {width: isSmallScreen ? width*0.9 : width*0.4  }]}> But what is alarme?</Text>
+                                    <Text style={[styles.container3Text, {width: isSmallScreen ? width*0.9 : width*0.4  }]}>Why Choose AlarMe?</Text>
                                     <Question style={{ width: isSmallScreen ? '100%' : 750 }}/>
-                                    
                                     <View>
-                                        
                                         <Text style={[styles.container3Text2, {width: isSmallScreen ? width*0.9 : width*0.4  }]}>
-                                        <Text style={styles.highlightedText}>Alarme</Text>  is a service designed to monitor and protect the 
+                                        <Text style={styles.highlightedText}>AlarMe</Text>  is a service designed to monitor and protect the 
                                         integrity of your home in a simple and efficient way. 
-                             
-                                            
                                         </Text>
                                     </View>
                                 </View>
                             </View>
                         </MotiView>
-                        
+
+                        <MotiView style={[styles.container3, {backgroundColor:"#00000000"}]}>
+                            <View>
+                                <View style={isSmallScreen ? styles.columnLayout : styles.rowLayout}>
+                                    <Contact style={{ width: isSmallScreen ? '100%' : 600}}/>
+                                    <View>
+                                    <Text style={[styles.container3Text2, {width: isSmallScreen ? width*0.9 : width*0.4  }]}>
+                                        <Text style={styles.highlightedText}>Join</Text> the AlarMe Family
+                                        </Text>
+                                        <Text style={[styles.smallText,{width: isSmallScreen ? width : width*0.6}]}>Don't wait until it's too late. Invest in the safety and well-being of your home and business with AlarMe. Experience the peace of mind that comes with knowing you're protected from invisible dangers.</Text>
+                                        <Text style={[styles.smallText, {width: isSmallScreen ? width : width*0.6  }]}>
+                                        <Text style={[styles.highlightedText,{fontSize: 38}]}>Order Now</Text> and take the first step towards a safer, healthier environment.
+                                        </Text>
+                                    </View>
+                                </View>
+                            </View>
+                        </MotiView>
                     </View>
                 </ScrollView>
             </MotiView>
@@ -115,6 +128,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 30,
         paddingVertical:45,
         backgroundColor: "#ffffff99",
+        //flexDirection: "row"
     },
     container3Text:{
         textAlign: 'center',
@@ -188,10 +202,23 @@ const styles = StyleSheet.create({
     },
     mediumText: {
         flex: 1,
+        
+        width: "100%",
+        paddingVertical: 30,
+        fontSize: 32,
+        textShadowColor: "#000",
+        textShadowOffset: { width: 1, height: 1 },
+        textShadowRadius: 5,
+        fontFamily: "Inter_600SemiBold",
+        color: "#ffffff80",
+        textAlign: "justify",
+    },
+    smallText: {
+        flex: 1,
         marginLeft: 16,
         width: "100%",
         padding: 30,
-        fontSize: 32,
+        fontSize: 26,
         textShadowColor: "#000",
         textShadowOffset: { width: 1, height: 1 },
         textShadowRadius: 5,
@@ -244,5 +271,14 @@ const styles = StyleSheet.create({
         textShadowRadius: 5,
         fontFamily: 'Inter_600SemiBold',
         color: '#ffffff',
+    },
+    medText: {
+        textAlign: 'center',
+        fontSize: 38,
+        textShadowColor: '#000',
+        textShadowOffset: { width: 1, height: 1 },
+        textShadowRadius: 5,
+        fontFamily: 'Inter_600SemiBold',
+        color: '#2ad',
     },
 });

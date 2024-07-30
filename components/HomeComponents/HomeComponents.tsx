@@ -29,13 +29,13 @@ export function HomeTriggerView({triggerName, action}){
   return (
     <View   style={Platform.OS === 'web' ? styles.triggerContainerWeb  : styles.triggerContainer}    >
       <Text style={styles.triggerContainerText}>{triggerName}</Text>
-      <TouchableOpacity
+      <Pressable
         style={[styles.triggerButton, { backgroundColor }]}
         onPress={toggleAction} // Cambiar el estado al presionar el botón
       >
         <TriggerIcon icon={icon} size={34} colorI={'#fff'} />
         <Text style={styles.iconText}>{buttonText}</Text>
-      </TouchableOpacity>
+      </Pressable>
     </View>
   );
 }

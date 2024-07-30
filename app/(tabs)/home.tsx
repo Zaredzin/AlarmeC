@@ -136,7 +136,7 @@ export default function HomePage() {
                 <Text style={styles.Title}>No se han registrado eventos</Text>
             </BlurView>
             <View style={[styles.containerContainer, { backgroundColor: "#00000000" }]}>
-                <TouchableOpacity onPress={toggleMenu} style={[styles.roomButton, { flexDirection: "row" }]}>
+                <Pressable onPress={toggleMenu} style={[styles.roomButton, { flexDirection: "row" }]}>
                     <LinearGradient colors={['#164b6a', '#0B2447']}
                         start={{ x: 0, y: 0 }}
                         end={{ x: 1, y: 1 }}
@@ -150,7 +150,7 @@ export default function HomePage() {
                             </View>
                         </View>
                     </LinearGradient>
-                </TouchableOpacity>
+                </Pressable>
                 {showMenu && <RoomMenu rooms={Object.keys(roomData.Habitaciones)} handleRoomPress={handleRoomPress} />}
                 {selectedRoom && (
                     <View style={styles.container2}>
