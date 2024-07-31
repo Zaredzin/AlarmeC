@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Text, View, Pressable, StyleSheet, ScrollView, SafeAreaView, TouchableOpacity, Platform, useWindowDimensions } from 'react-native';
-import { Stack } from 'expo-router';
+import { Stack, useRouter } from 'expo-router';  // Asegúrate de importar useRouter
 import EventIcon from '@/components/EventComponents/EventIcon';
 import { LinearGradient } from 'expo-linear-gradient';
 import IndexIcon from "@/components/EventComponents/IndexIcon";
@@ -14,6 +14,7 @@ import { Inter_600SemiBold } from "@expo-google-fonts/inter";
 import { MotiView } from 'moti';
 import { useFonts } from "expo-font";
 import * as SplashScreen from 'expo-splash-screen';
+import { auth } from '../fireBase';  // Asegúrate de importar el módulo auth desde Firebase
 
 const initialRoomData = {
     Habitaciones: {
@@ -63,6 +64,7 @@ export default function HomePage() {
     const [showMenu, setShowMenu] = useState(false);
     const [selectedRoom, setSelectedRoom] = useState(Object.keys(initialRoomData.Habitaciones)[0]);
     const [roomData, setRoomData] = useState(initialRoomData);
+    const router = useRouter();  // Inicializa useRouter
 
     const toggleMenu = () => {
         setShowMenu(!showMenu);
@@ -128,6 +130,15 @@ export default function HomePage() {
 
     if (!fontsLoaded) return null;
 
+    const handleLogout = async () => {
+        try {
+            await auth.signOut();  // Cierra la sesión con Firebase
+            router.push('/');  // Redirige a la página de inicio
+        } catch (error) {
+            console.error('Error al cerrar sesión:', error);
+        }
+    };
+
     return (
         <View onLayout={onLayout} style={{ backgroundColor: "#101727", width: "100%", height: "100%" }}>
             <StatusBar style="light" backgroundColor="#121532" />
@@ -184,10 +195,13 @@ export default function HomePage() {
                     </View>
                 )}
             </View>
+            {/* Botón de logout */}
+            <Pressable onPress={handleLogout} style={styles.logoutButton}>
+                <Text style={styles.logoutText}>Logout</Text>
+            </Pressable>
         </View>
     );
 }
-
 
 const styles = StyleSheet.create ({
     
@@ -213,6 +227,22 @@ const styles = StyleSheet.create ({
         color:"white",
         textAlign: 'center',
         fontFamily:"Inter_600SemiBold"
+    },
+    logoutButton: {
+        position: 'absolute',
+        bottom: 20,
+        right: 20,
+        backgroundColor: '#e74c3c', // Color de fondo del botón
+        paddingVertical: 10,
+        paddingHorizontal: 20,
+        borderRadius: 12,
+        elevation: 5,
+    },
+    logoutText: {
+        color: 'white',
+        fontSize: 16,
+        fontFamily: 'Inter_600SemiBold',
+        textAlign: 'center',
     },
     line:{
         alignSelf:"center",
