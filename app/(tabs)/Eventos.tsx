@@ -219,6 +219,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderRadius: 15,
     flex: 1,
+    alignSelf:"center"
   },
   dayContainer: {
     flexDirection: "row",
