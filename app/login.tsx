@@ -30,7 +30,6 @@ export default function LoginScreen() {
     }
 };
 
-
 useEffect(() => {
   SplashScreen.preventAutoHideAsync();
 

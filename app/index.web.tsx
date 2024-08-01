@@ -51,7 +51,6 @@ export default function() {
                     <Pressable onPress={handleLoginPress}>
                         <Text style={styles.headerText}>Log in</Text>
                     </Pressable>
-                    <Text style={styles.headerText}>Sign in</Text>
                     <Text style={styles.headerText}>About</Text>
                 </MotiView>
             </MotiView>
