@@ -103,7 +103,7 @@ if (!fontsLoaded) return null;
                   secureTextEntry
                 />
                 {error ? <Text style={styles.errorText}>{error}</Text> : null}
-                <TouchableOpacity onPress={amonos}>
+                <TouchableOpacity onPress={handleLogin}>
                   <Text style={styles.loginButton}>
                     Iniciar<EventIcon colorI={"#fff"} icon="arrowright" size={24} />
                   </Text>
