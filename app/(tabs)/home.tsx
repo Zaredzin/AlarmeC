@@ -143,9 +143,6 @@ export default function HomePage() {
         <View onLayout={onLayout} style={{ backgroundColor: "#101727", width: "100%", height: "100%" }}>
             <StatusBar style="light" backgroundColor="#121532" />
             <Stack.Screen options={{ headerShown: false }} />
-            <BlurView style={styles.container1}>
-                <Text style={styles.Title}>No se han registrado eventos</Text>
-            </BlurView>
             <View style={[styles.containerContainer, { backgroundColor: "#00000000" }]}>
                 <Pressable onPress={toggleMenu} style={[styles.roomButton, { flexDirection: "row" }]}>
                     <LinearGradient colors={['#164b6a', '#0B2447']}

@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import { Pressable, Text, View, ScrollView, useWindowDimensions, Platform } from "react-native";
 import { Stack } from "expo-router";
 import { EventDay, EventMonth, EventView } from "@/components/EventComponents/EventComponents";
@@ -5,65 +6,74 @@ import { StyleSheet } from "react-native";
 import EventIcon from "@/components/EventComponents/EventIcon";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { BlurView } from "expo-blur";
-import {Calendar} from 'react-native-calendars';
-import { Inter_400Regular } from "@expo-google-fonts/inter";
+import { Calendar } from 'react-native-calendars';
+import { firestore, auth } from '../fireBase'; // Importar firestore y auth desde la configuración
 
-
-import React, { useState } from "react";
-
-export default function () {
-
+export default function Eventos() {
   const { width, height } = useWindowDimensions();
-  const eventData = {
-    June: {
-      '11': [
-        { time: '10:00 am', description: 'The humidity level is lower than expected.', icon: 'water' },
-        { time: '02:00 pm', description: 'Gas levels are within normal range.', icon: 'gas' },
-      ],
-      '24': [
-        { time: '09:00 am', description: 'The humidity level is lower than expected.', icon: 'water' },
-        { time: '02:00 pm', description: 'Gas levels are within normal range.', icon: 'gas' },
-      ],
-      '27': [
-        { time: '09:00 am', description: 'The humidity level is lower than expected.', icon: 'water' },
-        { time: '02:00 pm', description: 'Gas levels are within normal range.', icon: 'gas' },
-      ],
-    },
-    July: {
-      '19': [
-        { time: '10:00 am', description: 'The humidity level is lower than expected.', icon: 'water' },
-        { time: '02:00 pm', description: 'Gas levels are within normal range.', icon: 'gas' },
-      ],
-      '20': [
-        { time: '09:00 am', description: 'The humidity level is lower than expected.', icon: 'water' },
-        { time: '02:00 pm', description: 'Gas levels are within normal range.', icon: 'gas' },
-      ],
-      '21': [
-        { time: '09:00 am', description: 'The humidity level is lower than expected.', icon: 'water' },
-        { time: '02:00 pm', description: 'Gas levels are within normal range.', icon: 'gas' },
-        { time: '09:00 am', description: 'The humidity level is lower than expected.', icon: 'water' },
-        { time: '02:00 pm', description: 'Gas levels are within normal range.', icon: 'gas' },
-        { time: '09:00 am', description: 'The humidity level is lower than expected.', icon: 'water' },
-        { time: '02:00 pm', description: 'Gas levels are within normal range.', icon: 'gas' },
-        { time: '09:00 am', description: 'The humidity level is lower than expected.', icon: 'water' },
-        { time: '02:00 pm', description: 'Gas levels are within normal range.', icon: 'gas' },
-      ],
-    },
-    
-  };
-
   const [selectedDate, setSelectedDate] = useState(null);
+  const [eventData, setEventData] = useState({});
+  const [loading, setLoading] = useState(true);
 
- const handleDayPress = (day) => {
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const user = auth.currentUser;
+        if (!user) {
+          throw new Error('No user is currently signed in');
+        }
+
+        const userId = user.uid;
+        const userCollectionRef = firestore.collection(userId);
+        const documentsSnapshot = await userCollectionRef.get();
+
+        const events = {};
+
+        documentsSnapshot.forEach(doc => {
+          const data = doc.data();
+          const { Day, Description, Icon, Month, Year, time } = data;
+          const monthName = Month;
+
+          if (!events[monthName]) {
+            events[monthName] = {};
+          }
+          if (!events[monthName][Day]) {
+            events[monthName][Day] = [];
+          }
+          events[monthName][Day].push({ time, description: Description, icon: Icon });
+        });
+
+        setEventData(events);
+      } catch (error) {
+        console.error('Error fetching user events from Firestore:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        fetchEvents();
+      } else {
+        setLoading(false);
+        console.log('No user is signed in');
+      }
+    });
+
+    // Cleanup subscription on unmount
+    return () => unsubscribe();
+  }, []);
+
+  const handleDayPress = (day) => {
     const { dateString, day: dayOfMonth } = day;
     const [year, month, dayNumber] = dateString.split('-');
     const monthName = new Date(year, month - 1, dayNumber).toLocaleString('default', { month: 'long' });
     const dayEvents = eventData[monthName]?.[dayNumber] || [];
     setSelectedDate({ date: dateString, day: dayOfMonth, events: dayEvents });
   };
-//Tema del calendario
-  const calendarTheme = Platform.select( {
-    android:{
+
+  const calendarTheme = Platform.select({
+    android: {
       backgroundColor: '#101727',
       calendarBackground: '#101727',
       textSectionTitleColor: 'white',
@@ -89,7 +99,7 @@ export default function () {
       textMonthFontSize: 16,
       textDayHeaderFontSize: 16,
     },
-    web:{
+    web: {
       backgroundColor: '#101727',
       calendarBackground: '#101727',
       textSectionTitleColor: 'white',
@@ -115,58 +125,53 @@ export default function () {
       textMonthFontSize: 16,
       textDayHeaderFontSize: 16,
     },
-    
-    
   });
-
-
-
-
 
   return (
     <View style={{ backgroundColor: "#101727", width: "100%", height: "100%" }}>
-    <Stack.Screen
-
-      options={{ headerShown: false }}
-    />
-      <BlurView style={styles.monthView}>
-        <EventMonth month={"Events"} />
-      </BlurView>
-      <View style={styles.containerContainer}>
-        <View style={styles.mainContainer}>
-          <View style={Platform.OS === 'web' ? {height: height*0.5, width: width* 0.65}  : {height:"63%"}}>
-            <Calendar  theme={calendarTheme}
-              onDayPress={handleDayPress}
-              markedDates={{
-                [selectedDate?.date]: { selected: true, selectedColor: 'blue' },
-              }}
-          />
-          </View>
-          
-          {selectedDate ? (
-            <>
-              
-              <View style={styles.scrollContainer}>
-                <ScrollView style={{ flex: 1 }}>
-                  {selectedDate.events.length > 0 ? (
-                    selectedDate.events.map((event, index) => (
-                      <EventView key={index} time={event.time} description={event.description} icon={event.icon} />
-                    ))
-                  ) : (
-                    <Text style={styles.noEventsText}>No hay eventos registrados para esta fecha.</Text>
-                  )}
-                </ScrollView>
+      <Stack.Screen options={{ headerShown: false }} />
+      {loading ? (
+        <Text style={styles.noEventsText}>Loading...</Text>
+      ) : (
+        <>
+          <BlurView style={styles.monthView}>
+            <EventMonth month={"Events"} />
+          </BlurView>
+          <View style={styles.containerContainer}>
+            <View style={styles.mainContainer}>
+              <View style={Platform.OS === 'web' ? { height: height * 0.5, width: width * 0.65 } : { height: "63%" }}>
+                <Calendar
+                  theme={calendarTheme}
+                  onDayPress={handleDayPress}
+                  markedDates={{
+                    [selectedDate?.date]: { selected: true, selectedColor: 'blue' },
+                  }}
+                />
               </View>
-            </>
-          ) : (
-            <Text style={styles.noEventsText}>Seleccione una fecha para ver eventos.</Text>
-          )}
-        </View>
-      </View>
+              {selectedDate ? (
+                <>
+                  <View style={styles.scrollContainer}>
+                    <ScrollView style={{ flex: 1 }}>
+                      {selectedDate.events.length > 0 ? (
+                        selectedDate.events.map((event, index) => (
+                          <EventView key={index} time={event.time} description={event.description} icon={event.icon} />
+                        ))
+                      ) : (
+                        <Text style={styles.noEventsText}>No hay eventos registrados para esta fecha.</Text>
+                      )}
+                    </ScrollView>
+                  </View>
+                </>
+              ) : (
+                <Text style={styles.noEventsText}>Seleccione una fecha para ver eventos.</Text>
+              )}
+            </View>
+          </View>
+        </>
+      )}
     </View>
   );
 }
-
 
 const styles = StyleSheet.create({
   noEventsText: {
