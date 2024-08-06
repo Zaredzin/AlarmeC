@@ -1,6 +1,7 @@
+// home.tsx
 import React, { useState, useEffect, useCallback } from 'react';
 import { Text, View, Pressable, StyleSheet, ScrollView, SafeAreaView, TouchableOpacity, Platform, useWindowDimensions } from 'react-native';
-import { Stack, useRouter } from 'expo-router';  // Asegúrate de importar useRouter
+import { Stack, useRouter } from 'expo-router';
 import EventIcon from '@/components/EventComponents/EventIcon';
 import { LinearGradient } from 'expo-linear-gradient';
 import IndexIcon from "@/components/EventComponents/IndexIcon";
@@ -14,47 +15,22 @@ import { Inter_600SemiBold } from "@expo-google-fonts/inter";
 import { MotiView } from 'moti';
 import { useFonts } from "expo-font";
 import * as SplashScreen from 'expo-splash-screen';
-import { auth } from '../fireBase';  // Asegúrate de importar el módulo auth desde Firebase
+import { auth } from '../fireBase';
+import { database } from '../fireBase';  // Asegúrate de que esta ruta sea correcta
+import { ref, onValue } from 'firebase/database';
 
 const initialRoomData = {
     Habitaciones: {
         Cocina: {
             sensors: {
-                temperature: '27°',
-                oxygenLevel: '71%',
-                humidityLevel: '65%',
-                gasLevel: '65%',
+                temperature: '0°',
+                oxygenLevel: '0%',
+                humidityLevel: '0%',
+                gasLevel: '0%',
             },
             triggers: [
-                { name: 'Puerta este', action: true },
-                { name: 'Puerta oeste', action: false },
-                { name: 'Ventana oeste', action: false },
-                { name: 'Puerta oeste', action: false },
-                { name: 'Ventana oeste', action: false },
-            ],
-        },
-        Taller: {
-            sensors: {
-                temperature: '25°',
-                oxygenLevel: '75%',
-                humidityLevel: '60%',
-                gasLevel: '60%',
-            },
-            triggers: [
-                { name: 'Puerta', action: true },
-                { name: 'Ventilador', action: false },
-            ],
-        },
-        Pito: {
-            sensors: {
-                temperature: '25°',
-                oxygenLevel: '75%',
-                humidityLevel: '60%',
-                gasLevel: '60%',
-            },
-            triggers: [
-                { name: 'Puerta', action: true },
-                { name: 'Ventilador', action: false },
+                { name: 'Puerta', action: false },
+                { name: 'Ventana', action: false },
             ],
         },
     }
@@ -62,9 +38,9 @@ const initialRoomData = {
 
 export default function HomePage() {
     const [showMenu, setShowMenu] = useState(false);
-    const [selectedRoom, setSelectedRoom] = useState(Object.keys(initialRoomData.Habitaciones)[0]);
+    const [selectedRoom, setSelectedRoom] = useState('Cocina');
     const [roomData, setRoomData] = useState(initialRoomData);
-    const router = useRouter();  // Inicializa useRouter
+    const router = useRouter();
 
     const toggleMenu = () => {
         setShowMenu(!showMenu);
@@ -86,36 +62,27 @@ export default function HomePage() {
             SplashScreen.hideAsync();
         });
 
-        // WebSocket setup
-        const ws = new WebSocket('ws://192.168.1.70:8080');
-
-        ws.onopen = () => {
-            console.log('WebSocket connection opened');
-        };
-
-        ws.onmessage = (event) => {
-            const data = JSON.parse(event.data);
-            if (data.room && data.sensors) {
-                setRoomData((prevData) => ({
-                    ...prevData,
+        // Obtener datos de Firebase
+        const roomRef = ref(database, 'Cocina');
+        onValue(roomRef, (snapshot) => {
+            const data = snapshot.val();
+            if (data) {
+                setRoomData((prevState) => ({
                     Habitaciones: {
-                        ...prevData.Habitaciones,
-                        [data.room]: {
-                            ...prevData.Habitaciones[data.room],
-                            sensors: data.sensors,
+                        ...prevState.Habitaciones,
+                        Cocina: {
+                            ...prevState.Habitaciones.Cocina,
+                            sensors: {
+                                temperature: data.temperature + '°',
+                                oxygenLevel: data.airQuality + '%',
+                                humidityLevel: data.humidity + '%',
+                                gasLevel: data.gasConcentration + '%',
+                            }
                         }
                     }
                 }));
             }
-        };
-
-        ws.onclose = () => {
-            console.log('WebSocket connection closed');
-        };
-
-        return () => {
-            ws.close();
-        };
+        });
     }, []);
 
     const [fontsLoaded] = useFonts({
@@ -132,8 +99,8 @@ export default function HomePage() {
 
     const handleLogout = async () => {
         try {
-            await auth.signOut();  // Cierra la sesión con Firebase
-            router.push('/');  // Redirige a la página de inicio
+            await auth.signOut();
+            router.push('/');
         } catch (error) {
             console.error('Error al cerrar sesión:', error);
         }
@@ -198,7 +165,8 @@ export default function HomePage() {
             </Pressable>
         </View>
     );
-}
+};
+
 
 const styles = StyleSheet.create ({
     
