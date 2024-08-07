@@ -1,4 +1,3 @@
-// home.tsx
 import React, { useState, useEffect, useCallback } from 'react';
 import { Text, View, Pressable, StyleSheet, ScrollView, SafeAreaView, TouchableOpacity, Platform, useWindowDimensions } from 'react-native';
 import { Stack, useRouter } from 'expo-router';
@@ -17,7 +16,7 @@ import { useFonts } from "expo-font";
 import * as SplashScreen from 'expo-splash-screen';
 import { auth } from '../fireBase';
 import { database } from '../fireBase';  // Asegúrate de que esta ruta sea correcta
-import { ref, onValue } from 'firebase/database';
+import { ref, onValue, update } from 'firebase/database';
 
 const initialRoomData = {
     Habitaciones: {
@@ -85,6 +84,15 @@ export default function HomePage() {
         });
     }, []);
 
+    const toggleAccessState = (access) => {
+        const accessRef = ref(database, `Accesos/${access}`);
+        onValue(accessRef, (snapshot) => {
+            const currentState = snapshot.val();
+            const newState = currentState === 1 ? 0 : 1;
+            update(ref(database, 'Accesos'), { [access]: newState });
+        });
+    };
+
     const [fontsLoaded] = useFonts({
         Inter_600SemiBold,
     });
@@ -150,14 +158,18 @@ export default function HomePage() {
                     </View>
                 )}
                 {selectedRoom && (
-                    <View style={Platform.OS === 'web' ? { height: height * 0.5, width: width * 0.65 } : styles.container3}>
-                        <ScrollView>
-                            {roomData.Habitaciones[selectedRoom].triggers.map((trigger, index) => (
-                                <HomeTriggerView key={index} triggerName={trigger.name} action={trigger.action} />
-                            ))}
-                        </ScrollView>
-                    </View>
-                )}
+                <View style={Platform.OS === 'web' ? { height: height * 0.5, width: width * 0.65 } : styles.container3}>
+                    <ScrollView>
+                        {roomData.Habitaciones[selectedRoom].triggers.map((trigger, index) => (
+                    <HomeTriggerView
+                    key={index}
+                    triggerName={trigger.name}
+                    action={trigger.action}
+                    />
+                ))}
+        </ScrollView>
+    </View>
+)}
             </View>
             {/* Botón de logout */}
             <Pressable onPress={handleLogout} style={styles.logoutButton}>
