@@ -4,7 +4,7 @@ import { Stack } from 'expo-router';
 import React, { useState, useEffect } from 'react';
 import TriggerIcon from '../indexComponents/TriggerIcon';
 import { Inter_600SemiBold } from "@expo-google-fonts/inter";
-import { MotiView, ScrollView } from 'moti';
+import { MotiView, ScrollView } from 'moti'; 
 import { database } from '../../app/fireBase'; 
 import { ref, set } from 'firebase/database';
 
